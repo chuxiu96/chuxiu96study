@@ -1,0 +1,1367 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>h5_css3笔记</title>
+    <base href="#" target="_blank">
+    <style>
+        table, 
+        tr, 
+        th,
+        td {
+            border: 2px solid gray;
+            border-collapse: collapse;
+            border-radius: 5px;
+            text-align: center;
+        }
+        h3 {
+            font-weight: normal;
+            color: crimson ;
+        }
+        a {
+            color: tomato;
+            text-decoration: none;
+        }
+        strong  {
+            font-size: 24;
+            color: cornflowerblue;
+        }
+        a:hover {
+            text-decoration: underline;
+            color: aliceblue;
+            background-color: tomato;
+        }
+    </style>
+</head>
+
+<body>
+    <hr>
+    <p>
+        <h3>什么是 html5 </h3>
+        <ul>
+            <li>HTML5 是最新的 HTML 标准。</li>
+            <li>HTML5 是专门为承载丰富的 web 内容而设计的，并且无需额外插件。</li>
+            <li>HTML5 拥有新的语义、图形以及多媒体元素。</li>
+            <li>HTML5 提供的新元素和新的 API 简化了 web 应用程序的搭建。</li>
+            <li>HTML5 是跨平台的，被设计为在不同类型的硬件（PC、平板、手机、电视机等等）之上运行。</li>
+        </ul>
+        <h3>HTML5 新特性</h3>
+        <ul>
+            <li>新的语义元素，比如 &lt;header>, &lt;footer>, &lt;article>, and &lt;section>。</li>
+            <li>新的表单控件，比如数字、日期、时间、日历和滑块。</li>
+            <li>强大的图像支持（借由 &lt;canvas> 和 &lt;svg>）</li>
+            <li>强大的多媒体支持（借由 &lt;video> 和 &lt;audio>）</li>
+            <li>强大的新 API，比如用本地存储取代 cookie。</li>
+        </ul>
+        <h3>HTML5 新增语义标签</h3>
+        <ul>
+            <li>&lt;header> —— 定义文档或节的页眉。</li>
+            <li>&lt;nav> —— 定义文档内的导航链接。</li>
+            <li>&lt;article>  —— 定义文档内的文章。</li>
+            <li>&lt;section> —— 定义文档中的节。</li>
+            <li>&lt;aside> —— 定义页面内容之外的内容。</li>
+            <li>&lt;footer> —— 定义文档或节的页脚。</li>
+        </ul>
+        注意： <br>
+        1、语义化标准主要针对搜索引擎 <br>
+        2、ie9中，需转化为块级元素（所有浏览器，包括旧的和最新的，对无法识别的元素会作为内联元素自动处理。） <br>
+        3、移动端更喜欢用这些标签（移动端没兼容性问题） <br>
+        <h2>HTML5 新元素</h2>
+        <h3>html5 图形</h3>
+        <table>
+            <tr>
+                <th>标签</th>
+                <th>说明</th>
+                <th>实例</th>
+                <th>Tips</th>
+            </tr>
+            <tr>
+                <td>canvas</td>
+                <td>使用 JavaScript 在网页上绘制图像。canvas 拥有多种绘制路径、矩形、圆形、字符以及添加图像的方法。</td>
+                <td><pre>
+                    
+                </pre></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td><pre>
+
+                </pre></td>
+                <td></td>
+            </tr>
+        </table>
+    </p>
+    <hr>
+    <p>
+        <h3>html5 媒体</h3>
+        <h4>
+            <a href="https://www.w3school.com.cn/html/html_media.asp">视频格式</a>
+        </h4>
+        视频：mp4
+        音频：mp3（压缩） wave（无压缩）
+        <table>
+            <tr>
+                <th>标签</th>
+                <th>说明</th>
+                <th>实例</th>
+                <th>Tips</th>
+            </tr>
+            <tr>
+                <td>video</td>
+                <td>在 HTML 页面中嵌入视频元素</td>
+                <td><pre>
+                    &lt;video src="videos/教育部.mp4" width="20%" height="10%" controls></video>
+                    &lt;video width="400px" height="300px" controls>
+                        &lt;source src="videos/教育部.mp4" type="video/mp4">
+                        &lt;source src="videos/教育部.ogg" type="video/ogg">
+                        您的浏览器看不了视频
+                    &lt;/video>
+                </pre></td>
+                <td>可选属性：
+                    <ul>
+                        <li>src - 	要播放的视频的 URL</li>
+                        <li>heigiht - 	设置视频播放器的高度</li>
+                        <li>width - 设置视频播放器的宽度</li>
+                        <li>controls - 向用户显示控件，比如播放按钮</li>
+                        <li>autoplay - 视频在就绪后马上播放</li>
+                        <li>muted - 视频的音频输出为静音</li>
+                        <li>loop - 当媒介文件完成播放后再次开始播放</li>
+                        <li>poster - 视频正在下载时显示的图像，直到用户点击播放按钮</li>
+                        <li>preload - 视频在页面加载时进行加载，并预备播放。如果使用 "autoplay"，则忽略该属性</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td>audio</td>
+                <td></td>
+                <td><pre>
+                    &lt;audio controls>
+                        &lt;source src="horse.ogg" type="audio/ogg">
+                        &lt;source src="horse.mp3" type="audio/mpeg">
+                        您的浏览器不支持 audio 元素。
+                      &lt;/audio>
+                </pre></td>
+                <td>可选属性：
+                    <ul>
+                        <li>src - 	规定音频文件的 URL</li>
+                        <li>controls - 向用户显示控件，比如播放按钮</li>
+                        <li>autoplay - 音频在就绪后马上播放</li>
+                        <li>muted - 音频输出为静音</li>
+                        <li>loop - 当媒介文件完成播放后再次开始播放</li>
+                        <li>preload - 当网页加载时，音频是否默认被加载以及如何被加载</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td>object</td>
+                <td>定义 HTML 文档中的嵌入式对象</td>
+                <td><pre>
+                    &lt;object width="100%" height="500px" data="snippet.html"></object>
+                </pre></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>embed</td>
+                <td>也可定义了 HTML 文档中的嵌入式对象。</td>
+                <td><pre>
+                    &lt;embed src="audi.jpeg">
+                </pre></td>
+                <td>请注意，embed 元素没有结束标记。它无法包含替代文本。<br>
+                    embed 元素也可用于在 HTML 中包含 HTML</td>
+            </tr>
+        </table>
+    </p>
+    <hr>
+    <p>
+        <h3>HTML5 input 类型</h3>
+        <table>
+            <tr>
+                <td>input type="number"</td>
+                <td>用于应该包含数字值的输入字段</td>
+                <td><pre>
+                    &lt;form>
+                        Quantity (between 1 and 5):
+                        &lt;input type="number" name="quantity" min="1" max="5">
+                    &lt;/form>
+                </pre></td>
+                <td>限制属性：min max </td>
+            </tr>
+            <tr>
+                <td>input type="date"</td>
+                <td>用于应该包含日期的输入字段。</td>
+                <td><pre>
+                    &lt;form>
+                        Birthday:
+                        &lt;input type="date" name="bday" min="1996-01-02" max="2022-12-31">
+                    &lt;/form>
+                </pre></td>
+                <td>根据浏览器支持，日期选择器会出现输入字段中。<br> 
+                    限制属性： min max
+                </td>
+            </tr>
+            <tr>
+                <td>input type="month"</td>
+                <td>允许用户选择月份和年份</td>
+                <td><pre>
+                    &lt;form>
+                        Birthday (month and year):
+                        &lt;input type="month" name="bdaymonth">
+                    &lt;/form>
+                </pre></td>
+                <td>根据浏览器支持，日期选择器会出现输入字段中。</td>
+            </tr>
+            <tr>
+                <td>input type="week"</td>
+                <td>允许用户选择周和年份</td>
+                <td><pre>
+                    &lt;form>
+                        Select a week:
+                        &lt;input type="week" name="week_year">
+                    &lt;/form>
+                </pre></td>
+                <td>根据浏览器支持，日期选择器会出现输入字段中。</td>
+            </tr>
+            <tr>
+                <td>input type="time"</td>
+                <td>允许用户选择时间（无时区）</td>
+                <td><pre>
+                    &lt;form>
+                        Select a time:
+                        &lt;input type="time" name="usr_time">
+                    &lt;/form>
+                </pre></td>
+                <td>根据浏览器支持，时间选择器会出现输入字段中。</td>
+            </tr>
+            <tr>
+                <td>input type="datetime"</td>
+                <td>允许用户选择日期和时间（有时区、需要用户文本输入）</td>
+                <td><pre>
+                    &lt;form>
+                        Birthday (date and time):
+                        &lt;input type="datetime" name="bdaytime">
+                    &lt;/form>
+                </pre></td>
+                <td>根据浏览器支持，日期选择器会出现输入字段中。</td>
+            </tr>
+            <tr>
+                <td>input type="datetime-local"</td>
+                <td>允许用户选择日期和时间（无时区）</td>
+                <td><pre>
+                    &lt;form>
+                        Birthday (date and time):
+                        &lt;input type="datetime-local" name="bdaytime">
+                    &lt;/form>
+                </pre></td>
+                <td>根据浏览器支持，日期选择器会出现输入字段中。</td>
+            </tr>
+            <tr>
+                <td>input type="color"</td>
+                <td>用于应该包含颜色的输入字段。</td>
+                <td><pre>
+                    &lt;form>
+                        Select your favorite color:
+                        &lt;input type="color" name="favcolor">
+                    &lt;/form>
+                </pre></td>
+                <td>根据浏览器支持，颜色选择器会出现输入字段中。</td>
+            </tr>
+            <tr>
+                <td>input type="range"</td>
+                <td>用于应该包含一定范围内的值的输入字段</td>
+                <td><pre>
+                    &lt;form>
+                        &lt;input type="range" name="points" min="0" max="10">
+                    &lt;/form>
+                </pre></td>
+                <td>根据浏览器支持，输入字段能够显示为滑块控件。</td>
+            </tr>
+            <tr>
+                <td>input type="email"</td>
+                <td>用于应该包含电子邮件地址的输入字段。</td>
+                <td><pre>
+                    &lt;form>
+                        E-mail:
+                        &lt;input type="email" name="email">
+                      &lt;/form>
+                </pre></td>
+                <td>根据浏览器支持，能够在被提交时自动对电子邮件地址进行验证。<br>
+                    某些智能手机会识别 email 类型，并在键盘增加 ".com" 以匹配电子邮件输入
+                </td>
+            </tr>
+            <tr>
+                <td>input type="search"</td>
+                <td>用于搜索字段（搜索字段的表现类似常规文本字段）</td>
+                <td><pre>
+                    &lt;form>
+                        Search Google:
+                        &lt;input type="search" name="googlesearch">
+                    &lt;/form>
+                </pre></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>input type="tel"</td>
+                <td>用于应该包含电话号码的输入字段。</td>
+                <td><pre>
+                    &lt;form>
+                        Telephone:
+                        &lt;input type="tel" name="usrtel">
+                    &lt;/form>
+                </pre></td>
+                <td>目前只有 Safari 8 支持 tel 类型。</td>
+            </tr>
+            <tr>
+                <td>input type="url"</td>
+                <td>用于应该包含 URL 地址的输入字段。</td>
+                <td><pre>
+                    &lt;form>
+                        Add your homepage:
+                        &lt;input type="url" name="homepage">
+                    &lt;/form>
+                </pre></td>
+                <td>根据浏览器支持，在提交时能够自动验证 url 字段。
+                    某些智能手机识别 url 类型，并向键盘添加 ".com" 以匹配 url 输入。
+                </td>
+            </tr>
+        </table>
+    </p>
+    <hr>
+    <p>
+        <h3>HTML5 新增form属性</h3>
+        <table>
+            <tr>
+                <td>属性</td>
+                <td>值</td>
+                <td>说明</td>
+            </tr>
+            <tr>
+                <td>required</td>
+                <td>required</td>
+                <td>内容不能为空</td>
+            </tr>
+            <tr>
+                <td>placeholder</td>
+                <td>提示文本</td>
+                <td>表单提示文本，存在默认值则不显示 <br>
+                    可以通过伪元素修改 input::placeholder
+                </td>
+            </tr>
+            <tr>
+                <td>autofocus</td>
+                <td>autofocus</td>
+                <td>自动聚焦属性，页面加载完成，光标自动聚焦到指定表单</td>
+            </tr>
+            <tr>
+                <td>autocomplete</td>
+                <td>off / on</td>
+                <td>当用户在字段开始键入时，浏览器基于以前键入过的值，应该显示出在字段中填写的选项 <br>
+                    默认已经打开 <br>
+                    需要放在 form 内，同时加上 name 属性，同时成功提交
+                </td>
+            </tr>
+            <tr>
+                <td>multiple</td>
+                <td>multiple</td>
+                <td>可以多选文件提交</td>
+            </tr>
+        </table>
+    </p>
+    <hr>
+    <p>
+        <h1>CSS3 新特性</h1>
+    </p>
+    <hr>
+    <strong>新增选择器：跟便捷、自由的选择目标元素</strong>
+    <ul>
+        <li>属性选择器</li>
+        <li>结构伪类选择器</li>
+        <li>伪元素选择器</li>
+        类选择器、属性选择器、伪类选择器 ， 权重为 10 
+    </ul>
+    <p>
+        <h3>属性选择器</h3>
+        为带有特定属性的 HTML 元素设置样式 <br>
+        <table>
+            <tr>
+                <td>选择符</td>
+                <td>简介</td>
+                <td>实例</td>
+            </tr>
+            <tr>
+                <td>element[attribute] </td>
+                <td>选取带有指定属性的元素。</td>
+                <td><pre>
+                    a[target] {
+                        background-color: yellow;
+                      }
+                </pre></td>
+            </tr>
+            <tr>
+                <td>element[attribute="value"] 【重要！】 </td>
+                <td>选取带有指定属性和值的元素。</td>
+                <td><pre>
+                    a[target="_blank"] { 
+                        background-color: yellow;
+                      }
+                </pre></td>
+            </tr>
+            <tr>
+                <td>[attribute~="value"]</td>
+                <td>选取属性值 包含 指定词的元素。</td>
+                <td><pre>
+                    [title~="flower"] {
+                        border: 5px solid yellow;
+                      }
+                </pre></td>
+            </tr>
+            <tr>
+                <td>[attribute|="value"] </td>
+                <td>选取 指定属性 以 指定值开头 的元素</td>
+                <td><pre>
+                    [class|="top"] {
+                        background: yellow;
+                      }
+                    值 必须是完整或单独的单词, 如： topcontent不算
+                </pre></td>
+            </tr>
+            <tr>
+                <td> [attribute^="value"]  </td>
+                <td>选取 指定属性 以 指定值开头 的元素。</td>
+                <td><pre>
+                    [class^="top"] {
+                        background: yellow;
+                      }
+                      值 不必是完整单词！, 如： topcontent也算
+                </pre></td>
+            </tr>
+            <tr>
+                <td> [attribute$="value"]  </td>
+                <td>选取 指定属性 以 指定值结尾 的元素。</td>
+                <td><pre>
+                    [class$="test"] {
+                        background: yellow;
+                      }
+                      值 不必是完整单词！, 如： mytest也算
+                </pre></td>
+            </tr>
+            <tr>
+                <td>  [attribute*="value"] </td>
+                <td>选取 属性值 包含指定词 的元素。</td>
+                <td><pre>
+                    [class*="te"] {
+                        background: yellow;
+                      }
+                      值 不必是完整单词
+                </pre></td>
+            </tr>
+        </table>
+        <h3>结构伪类选择器</h3>
+        根据文档结构来选择元素，常用于根据父级选择里面的子元素 <br>
+        <strong>伪类选择器分类</strong>
+        <ul>
+            <li>状态类： :link :visited :hover :active  :focus </li>
+            <li>结构类： :first-child  :last-child  :nth-child  :nth-of-type</li>
+            <li>表单类： :checked  :disabled  :vaild  :required</li>
+            <li>语言类： :dir  :lang</li>
+        </ul>
+        CSS类选择器:伪类选择器  <br>
+        例如： <br>
+        a:hover <br>
+        p:first-child <br>
+        <br>
+        <table>
+            <tr>
+                <td>选择符</td>
+                <td>简介</td>
+            </tr>
+            <tr>
+                <td>son element:first-child</td>
+                <td>匹配父元素中的第一个子元素</td>
+            </tr>
+            <tr>
+                <td>son element:last-child</td>
+                <td>匹配父元素中的最后一个子元素</td>
+            </tr>
+            <tr>
+                <td>son element:nth-child(n)</td>
+                <td>匹配父元素中的第 n 个子元素</td>
+            </tr>
+            <tr>
+                <td>element:first-of-type</td>
+                <td>指定类型e的第一个</td>
+            </tr>
+            <tr>
+                <td>element:last-of-type</td>
+                <td>指定类型e的最后一个</td>
+            </tr>
+            <tr>
+                <td>element:nth-of-type(n)</td>
+                <td>指定类型e的第 n 个</td>
+            </tr>
+        </table> <br>
+        <strong>nth-child（n）</strong>
+        <ul>
+            <li style="color:red">n 可以是数字，关键字和公式</li>
+            <li> n 如果是数字，就是选择第n个子元素，里面数字从1开始…</li>
+            <li> n 可以是 [关键字] ：[ 奇 odd / 偶 even ] ；</li>
+            <li> n 可以是 [公式] ： 常见公式如下： <br>
+                如果 n 是公式，则从0开始计算，第0个元素和超出元素会被忽略。 全选
+                <table>
+                    <tr>
+                        <td>公式</td>
+                        <td>取值</td>
+                    </tr>
+                    <tr>
+                        <td>2n</td>
+                        <td>偶数</td>
+                    </tr>
+                    <tr>
+                        <td>2n+1</td>
+                        <td>奇数</td>
+                    </tr>
+                    <tr>
+                        <td>5n</td>
+                        <td>5 10 15 ……</td>
+                    </tr>
+                    <tr>
+                        <td>n</td>
+                        <td>5~最后一个（包含第5个）</td>
+                    </tr>
+                    <tr>
+                        <td>-n+5</td>
+                        <td>前五个（包含第5个）</td>
+                    </tr>
+                </table>
+            </li>
+        </ul>
+       nth-child(n) 选择特性： <br>
+       1、执行时会把所有子盒子排列序号 <br>
+       2、先选定 n ，在看类选择器是否匹配，不匹配则不选 <br> <br>
+       nth-fo-type（n）选择特性： <br>
+       1、执行时只会把指定type的盒子排列序号 <br>
+       2、再选定n <br> <br>
+       <strong>小结</strong>
+       <ul>
+           <li>结构伪类选择器一般用于选择父级里面的第几个子级</li>
+           <li>nth-child 对父元素中所有子元素排序，先找第 n 个子元素，再看与类选择器是否匹配</li>
+           <li>nth-of-type 对父元素中指定子元素排序，先匹配类选择器，再找第n个子元素</li>
+           <li>无序列表中， nth-child 更多（都是li）</li>
+           <li>类选择器、属性选择器、伪类选择器，权重都为10</li>
+       </ul>
+    </p>
+    <hr>
+    <p>
+        <h3>伪元素选择器</h3>
+        设置元素指定部分的样式。 <br>
+        例如，它可用于：
+        <ul>
+            <li>设置元素的首字母、首行的样式</li>
+            <li>在元素的内容之前或之后插入内容</li>
+        </ul>
+        在 CSS3 中，双冒号取代了伪元素的单冒号表示法。这是 W3C 试图区分伪类和伪元素的尝试。<br><br>
+        注意
+        <ul>
+            <li>before和after创建一个元素，但是属于行内元素</li>
+            <li>新创建的元素在文档中找不到，称之为 伪元素 </li>
+            <li> before 和 after 必须有 content 属性</li>
+            <li>伪元素选择器和标签选择器一样，权重为 1 </li>
+        </ul>
+        
+        <table>
+            <tr>
+                <th>选择符</th>
+                <th>简介</th>
+                <th>实例</th>
+            </tr>
+            <tr>
+                <td>::before</td>
+                <td>在元素内部的前面插入内容</td>
+                <td><pre>
+            p::before {
+            content:url(图片/图1.png)
+            }
+                </pre></td>
+            </tr>
+            <tr>
+                <td>::after</td>
+                <td>在元素内部的后面插入内容</td>
+                <td><pre>
+            p::after {
+            content:url(图片/图1.png)
+            }
+                </pre></td>
+            </tr>
+            <tr>
+                <td>::firstline</td>
+                <td>用于向文本的首行添加特殊样式。 <br> 
+                只能应用于块级元素</td>
+                <td><pre>
+        p::first-line {
+        color: red;
+}
+                </pre></td>
+            </tr>
+            <tr>
+                <td>::first-letter</td>
+                <td>用于向文本的首字母添加特殊样式 <br>
+                只能应用于块级元素</td>
+                <td><pre>
+        p::first-letter {
+        color: red;
+}
+                </pre></td>
+            </tr>
+            <tr>
+                <td>::selection</td>
+                <td>伪元素匹配用户选择的元素部分(光标拖选的部分)。</td>
+                <td><pre>
+    ::selection {
+        color: blue;
+        background-color: pink;
+    }
+                </pre></td>
+            </tr>
+        </table>
+    </p>
+    <hr>
+    <p>
+        <h3>字体图标 iconfont</h3>
+        字体图标为前端工程师提供了一种方便高效的图标使用方法， <strong>展示的是图标，本质属于字体</strong>
+        优点：
+        <ul>
+            <li>轻量级：一旦加载，马上渲染出来，减少服务器请求</li>
+            <li>灵活性：本质是文字，随意改变颜色、大小、透明效果、旋转</li>
+            <li>兼容性：几乎支持所有浏览器</li>
+        </ul>
+        但不能替代精灵技术，只是对工作中图标部分技术的提高和优化    <br> <br>
+        <h4>字体图标的使用</h4>
+        1、字体图标的下载   <br>
+            推荐下载网站：  <br>
+            icomoon字库         [ http://icomoon.io ]   <br>
+            阿里iconfont字库    [ http://iconfont.cn ]  <br><br>
+        2、字体图标的引入   <br>
+            font文件夹放在网页文档同级目录 <br>
+            icomoon：<pre>&lt;link rel="stylesheet" href="icomoon\style.css" /> <br> 
+span {
+    font-family: icomoon;
+}</pre>
+            阿里：<pre>&lt;link rel="stylesheet" href="fonts\iconfont.css"></pre>  
+            注意： ::after 引用时：&amp;#xe6c3; 变为 \e6c3  <br><br>
+        3、字体图标的追加
+    </p>
+    <hr>
+    <p>
+        <h3>CSS3 transition 过渡</h3>
+        CSS 过渡允许您在给定的时间内平滑地改变属性值 <br>
+        如需创建过渡效果，必须明确两件事：
+        <ul>
+            <li>您要添加效果的 CSS 属性(默认为0,，不设置则没效果)</li>
+            <li>效果的持续时间(默认为0,，不设置则没效果)</li>
+        </ul>
+        指定的 CSS 属性（width）值发生变化时，将开始过渡效果。
+        <table>
+            <tr>
+                <th>属性</th>
+                <th>简介</th>
+                <th>实例</th>
+            </tr>
+            <tr>
+                <td>transition</td>
+                <td>也是简写属性 <br> transition:要过渡属性（所有可写all） 过渡时间（必须） 运动曲线 延迟触发时间</td>
+                <td><pre>
+                    .father {
+                        width: 300px;
+                        height: 200px;
+                        background-color: pink;
+                        transition: width 1s, height 1s;
+                    }
+                    .father:hover {
+                        width: 350px;
+                        height: 250px;
+                    }
+                </pre></td>
+            </tr>
+            <tr>
+                <td>transition-timing-function</td>
+                <td>规定过渡效果的速度曲线。<br>
+                属性：
+                <ul>
+                    <li>ease - 规定过渡效果，先缓慢地开始，然后加速，然后缓慢地结束（默认）</li>
+                    <li>linear - 规定从开始到结束具有相同速度的过渡效果</li>
+                    <li>ease-in -规定缓慢开始的过渡效果</li>
+                    <li>ease-out - 规定缓慢结束的过渡效果</li>
+                    <li>ease-in-out - 规定开始和结束较慢的过渡效果</li>
+                    <li>cubic-bezier(n,n,n,n) - 允许您在三次贝塞尔函数中定义自己的值</li>
+                </ul>
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>transition-delay</td>
+                <td>规定过渡效果启动前的延迟（以秒计）</td>
+                <td><pre>
+                    div {
+                        transition-delay: 1s;
+                      }
+                </pre></td>
+            </tr>
+            <tr>
+                <td>transition-duration</td>
+                <td>规定过渡效果要持续多少秒或毫秒。</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>transition-property</td>
+                <td>规定过渡效果所针对的 CSS 属性的名称。</td>
+                <td></td>
+            </tr>
+        </table>
+    </p>
+    <hr>
+    <p>
+        <h3>CSS 2D 转换</h3>
+        CSS 转换（transforms）允许您移动、旋转、缩放和倾斜元素。
+        <table>
+            <tr>
+                <th>属性</th>
+                <th>简介</th>
+                <th>实例</th>
+            </tr>
+            <tr>
+                <td>translate()</td>
+                <td>从其当前位置移动元素（根据为 X 轴和 Y 轴指定的参数）。 <br>百分比是基于盒子自身</td>
+                <td><pre>
+                    div {
+                        transform: translate(50px, 100px);
+                      }
+                </pre></td>
+            </tr>
+            <tr>
+                <td>rotate()</td>
+                <td>根据给定的角度顺时针或逆时针旋转元素</td>
+                <td><pre>
+                    div {
+                        transform: rotate(-20deg);
+                      }
+                </pre></td>
+            </tr>
+            <tr>
+                <td>scale()</td>
+                <td>增加或减少元素的大小（根据给定的宽度和高度参数）。 <br> 不会影响其他盒子，且可以设置缩放中心点</td>
+                <td><pre>
+                    div {
+                        transform: scale(0.5, 0.5);
+                      }
+                </pre></td>
+            </tr>
+            <tr>
+                <td>scaleX()</td>
+                <td>增加或减少元素的宽度。</td>
+                <td><pre>
+                    div {
+                        transform: scaleX(2);
+                      }
+                </pre></td>
+            </tr>
+            <tr>
+                <td>scaleY()</td>
+                <td>增加或减少元素的高度。</td>
+                <td><pre>
+                    div {
+                        transform: scaleY(0.5);
+                      }
+                </pre></td>
+            </tr>
+            <tr>
+                <td>skew()</td>
+                <td>使元素沿 X 轴和 Y 轴倾斜给定角度。<br>如果未指定第二个参数，则值为零。</td>
+                <td><pre>
+                    div {
+                        transform: skewX(20deg);
+                      }
+                </pre></td>
+            </tr>
+            <tr>
+                <td>skewX()</td>
+                <td>使元素沿 X 轴倾斜给定角度。</td>
+                <td><pre>
+                    div {
+                        transform: skewX(20deg);
+                      }
+                </pre></td>
+            </tr>
+            <tr>    
+                <td>matrix()</td>
+                <td>把所有 2D 变换方法组合为一个。 <br> 参数如下：matrix(scaleX(),skewY(),skewX(),scaleY(),translateX(),translateY())</td>
+                <td><pre>
+                    
+                </pre></td>
+            </tr>
+            <tr>
+                <td>transform-origin</td>
+                <td>允许你改变被转换元素的位置。</td>
+                <td>默认值 	50% 50% </td>
+            </tr>
+        </table>
+        <h4>2D 转换 综合写法</h4>
+        <ul>
+            <li>同时使用多个转换，格式:<strong>transform:translate() rotate() scale()</strong>等</li>
+            <li>其顺序会影响转换的效果。（先旋转会改变坐标轴方向）</li>
+            <li>位移放在最前</li>
+        </ul>
+    </p>
+    <hr>
+    <p>
+        <h3>CSS 动画</h3>
+        CSS 可实现 HTML 元素的动画效果，而不使用 JavaScript 或 Flash！
+        <h5>什么是 CSS 动画？</h5>
+        <ul>
+            <li>动画使元素逐渐从一种样式变为另一种样式。</li>
+            <li>您可以随意更改任意数量的 CSS 属性。</li>
+            <li>如需使用 CSS 动画，您必须首先为动画指定一些关键帧。</li>
+            <li>关键帧包含元素在特定时间所拥有的样式。</li>
+        </ul>
+        <h5>如何使用</h5>
+        <ul>
+            <li><strong>先定义动画 @keyframes name</strong></li>
+            <li><strong>再调用动画 animation-name + animation-duration</strong></li>
+        </ul>
+        <h5>@keyframes 规则</h5>
+        <ul>
+            <li>在 @keyframes 规则中指定了 CSS 样式，动画将在特定时间逐渐从当前样式更改为新样式。</li>
+            <li>要使动画生效，必须将动画绑定到某个元素。</li>
+            <li> animation-duration 属性定义需要多长时间才能完成动画,默认为0s，<strong>必须指定，否则动画不发生</strong></li>
+            <li>关键字 "from" 和 "to"（代表 0％（开始）和 100％（完成））</li>
+            <li>可以使用百分比值:0% 25% 50% 100%</li>
+        </ul>
+        代码示例：
+        <pre>
+            div {
+                width: 250px;
+                height: 34px;
+                border: 2px solid palegreen;
+                background-color: aqua;
+                transition: all .7s;
+                animation-name: text;
+                animation-duration: 3s;
+            }
+            @keyframes text {
+                from {
+                    background-color: aqua;
+                    float: left;
+                }
+                25% {
+                    background-color: blueviolet;
+                    float: right;
+                }
+                50% {
+                    background-color: rgb(21, 171, 118);
+                    float: right;
+                }
+                to {
+                    background-color: rgb(222, 101, 30);
+                    float: left;
+                }
+            }
+            或
+            div {
+                width: 250px;
+                height: 34px;
+                border: 2px solid palegreen;
+                background-color: aqua;
+                transition: all .7s;
+                animation-name: text;
+                animation-duration: 3s;
+            }
+            @keyframes text {
+                0% {
+                    background-color: aqua;
+                    float: left;
+                }
+                25% {
+                    background-color: blueviolet;
+                    float: right;
+                }
+                50% {
+                    background-color: rgb(21, 171, 118);
+                    float: right;
+                }
+                100% {
+                    background-color: rgb(222, 101, 30);
+                    float: left;
+                }
+            }
+        </pre>
+        <table>
+            <tr>
+                <th>属性</th>
+                <th>说明</th>
+                <th>实例</th>
+            </tr>
+            <tr>
+                <td>animation-name</td>
+                <td>规定 @keyframes 动画的名称。</td>
+                <td><pre>
+                    
+                </pre></td>
+            </tr>
+            <tr>
+                <td>@keyframes</td>
+                <td>规定动画模式。</td>
+                <td><pre>
+
+                </pre></td>
+            </tr>
+            <tr>
+                <td>animation</td>
+                <td>设置所有动画属性的 简写属性 。格式：<strong>animation: name duration timing-function delay iteration-count direction [名时速延次方]</strong></td>
+                <td><pre>
+                    div {
+                        animation: example 5s linear 2s infinite alternate;
+                      }
+                </pre></td>
+            </tr>
+            <tr>
+                <td>animation-delay</td>
+                <td>规定动画开始的延迟时间。<strong>如果使用负值，则动画将开始播放，如同已播放 N 秒。</strong></td>
+                <td><pre>
+                    div {
+                        width: 250px;
+                        height: 34px;
+                        border: 2px solid palegreen;
+                        background-color: aqua;
+                        transition: all .7s;
+                        animation-name: text;
+                        animation-duration: 3s;
+                        animation-delay: 1s;
+                    }
+                </pre></td>
+            </tr>
+            <tr>
+                <td>animation-iteration-count</td>
+                <td>指定动画应运行的次数。<strong>使用值 "infinite" 动画将永远持续下去</strong></td>
+                <td><pre>
+                    div {
+                        width: 250px;
+                        height: 34px;
+                        border: 2px solid palegreen;
+                        background-color: aqua;
+                        transition: all .7s;
+                        animation-name: text;
+                        animation-duration: 3s;
+                        animation-iteration-count: 3;
+                    }
+                </pre></td>
+            </tr>
+            <tr>
+                <td>animation-direction</td>
+                <td>定是向前播放、向后播放还是交替播放动画。
+                    <ul>
+                        <li>normal - 动画正常播放（向前）。默认值</li>
+                        <li>reverse - 动画以反方向播放（向后）</li>
+                        <li>alternate - 动画先向前播放，然后向后</li>
+                        <li>alternate-reverse - 动画先向后播放，然后向前</li>
+                    </ul>
+                </td>
+                <td><pre>
+
+                </pre></td>
+            </tr>
+            <tr>
+                <td>animation-timing-function</td>
+                <td>规定动画的速度曲线。
+                    <ul>
+                        <li>ease - 指定从慢速开始，然后加快，然后缓慢结束的动画（默认）</li>
+                        <li>linear - 规定从开始到结束的速度相同的动画</li>
+                        <li>ease-in - 规定慢速开始的动画</li>
+                        <li>ease-out - 规定慢速结束的动画</li>
+                        <li>ease-in-out - 指定开始和结束较慢的动画</li>
+                        <li>cubic-bezier(n,n,n,n) - 运行您在三次贝塞尔函数中定义自己的值</li>
+                    </ul>
+                </td>
+                <td><pre>
+
+                </pre></td>
+            </tr>
+            <tr>
+                <td>animation-fill-mode</td>
+                <td>规定在不播放动画时目标元素的样式。</td>
+                <td><pre>
+                    <ul>
+                        <li>none - 默认值。动画在执行之前或之后不会对元素应用任何样式。</li>
+                        <li>forwards - 元素将保留由最后一个关键帧设置的样式值（依赖 animation-direction 和 animation-iteration-count）。</li>
+                        <li>backwards - 元素将获取由第一个关键帧设置的样式值（取决于 animation-direction），并在动画延迟期间保留该值。</li>
+                        <li>both - 动画会同时遵循向前和向后的规则，从而在两个方向上扩展动画属性。<br>
+                            在动画开始之前，让目标元素获取第一个关键帧设置的样式值，并在动画 <br>
+                            结束时保留最后一个关键帧的样式值</li>
+                    </ul>
+                </pre></td>
+            </tr>
+            <tr>
+                <td>animation-play-state</td>
+                <td>规定动画是运行还是暂停。</td>
+                <td><pre>
+                    div:hover {
+                        animation-play-state: pause;
+                    }
+                </pre></td>
+            </tr>
+        </table>
+    </p>
+    <hr>
+    <p>
+        <h3>CSS 3D 转换</h3>
+        <h4>CSS 转换属性</h4>
+        <table>
+            <tr>
+                <th>属性</th>
+                <th>说明</th>
+            </tr>
+            <tr>
+                <td>transform</td>
+                <td>向元素应用 2D 或 3D 转换。</td>
+            </tr>
+            <tr>
+                <td>transform-origin</td>
+                <td>允许你改变被转换元素的位置。</td>
+            </tr>
+            <tr>
+                <td>transform-style</td>
+                <td>规定被嵌套元素如何在 3D 空间中显示。 <strong>重要，必用</strong> <br>
+                 代码写父级，控制子级</td>
+            </tr>
+            <tr>
+                <td>perspective</td>
+                <td>规定 3D 元素的透视效果。</td>
+            </tr>
+            <tr>
+                <td>perspective-origin</td>
+                <td>规定 3D 元素的底部位置。</td>
+            </tr>
+            <tr>
+                <td>backface-visibility</td>
+                <td>定义元素在不面对屏幕时是否可见。</td>
+            </tr>
+        </table>
+        <h4>CSS 3D转换</h4>
+        <table>
+            <tr>
+                <th>转换方法</th>
+                <th>说明</th>
+                <th>实例</th>
+            </tr>
+            <tr>
+                <td>translate3d(x,y,z)</td>
+                <td>定义 3D 转化。单位：一般用 px </td>
+                <td><pre>
+                    img:hover {
+                        transform: rotate3d(1, 0, 0, -45deg);
+                    }
+                </pre></td>
+            </tr>
+            <tr>
+                <td>rotate3d(x,y,z,angle)</td>
+                <td>定义 3D 旋转。</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>scale3d(x,y,z)</td>
+                <td>定义 3D 缩放转换。</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>perspective(n)</td>
+                <td>定义 3D 转换元素的透视视图。</td>
+                <td>当为元素定义 perspective 属性时，其 <strong>子元素会获得透视效果</strong> ，而不是元素本身。<br>请与 perspective-origin 属性一同使用该属性，这样您就能够改变 3D 元素的底部位置。</td>
+            </tr>
+        </table>
+    </p>
+    <hr>
+    <p>
+        <h3>浏览器私有前缀</h3>
+        兼容老版本浏览器的写法
+        <ul>
+            <li>-moz- : firefox</li>
+            <li>-ms- : ie</li>
+            <li>-webkit- : safari、chorme</li>
+            <li>-o- : opera</li>
+        </ul>
+        <h5>提倡写法</h5>
+        <pre>
+            -moz-border-radius: 10px;
+            -webkit-border-radius: 10px;
+            -o-border-radius: 10px;
+            border-radius: 10px;
+        </pre>
+    </p>
+    <hr>
+    <p>
+        <h3>CSS Flexbox</h3>
+        在 Flexbox 布局模块（问世）之前，可用的布局模式有以下四种：
+        <ul>
+            <li>块（Block），用于网页中的部分（节）</li>
+            <li>行内（Inline），用于文本</li>
+            <li>表，用于二维表数据</li>
+            <li>定位，用于元素的明确位置</li>
+        </ul>
+        弹性框布局模块，可以更轻松地设计灵活的响应式布局结构，而无需使用浮动或定位。
+        <h5>flexbox 使用</h5>
+        <ul>
+            <li>定义 flex-container</li>
+            <li></li>
+        </ul>
+        <h4>flex-container 属性</h4>
+        <table>
+            <tr>
+                <th>属性</th>
+                <th>属性值</th>
+                <th>说明</th>
+                <th>实例</th>
+            </tr>
+            <tr>
+                <td>flex-direction</td>
+                <td>
+                    <ul>
+                        <li>row ~ 水平堆叠</li>
+                        <li>row-reverse ~ 水平堆叠（但从右到左）</li>
+                        <li>column ~ 垂直堆叠</li>
+                        <li>column-reverse ~ 垂直堆叠 flex 项目（但从下到上）</li>
+                    </ul>
+                </td>
+                <td>定义容器要在哪个方向上堆叠 flex 项目。</td>
+                <td><pre>
+                    .flex-container {
+                        display: flex;
+                        flex-direction: row-reverse;
+                        }
+                </pre></td>
+            </tr>
+            <tr>
+                <td>flex-wrap</td>
+                <td>
+                    <ul>
+                        <li>nowrap ~ 规定将不对 flex 项目换行（默认）</li>
+                        <li>wrap ~ 规定 flex 项目将在必要时进行换行</li>
+                        <li>wrap-reverse ~ 规定如有必要，弹性项目将以相反的顺序换行</li>
+                    </ul>
+                </td>
+                <td>是否应该对 flex 项目换行</td>
+                <td><pre>
+                    .flex-container {
+                        display: flex;
+                        flex-wrap: wrap-reverse;
+                        }
+                </pre></td>
+            </tr>
+            <tr>
+                <td>flex-flow</td>
+                <td></td>
+                <td><strong>[ 简写属性 ]</strong> 同时设置 flex-direction 和 flex-wrap 属性</td>
+                <td><pre>
+                    .flex-container {
+                        display: flex;
+                        flex-flow: row wrap;
+                        }
+                </pre></td>
+            </tr>
+            <tr>
+                <td>justify-content</td>
+                <td>
+                    <ul>
+                        <li>flex-start ~ 在容器的开头对齐（默认）</li>
+                        <li>flex-end ~ 在容器的末端对齐</li>
+                        <li>center ~ 在容器的中心对齐</li>
+                        <li>space-around ~ 显示行之前、之间和之后带有空格的 flex 项目 （项目前、间、后 n+1 个等距间隙）</li>
+                        <li>space-between ~ 显示行之间有空格的 flex 项目(项目间 n-1 个等距间隙)</li>
+                    </ul>
+                </td>
+                <td>用于水平对齐 flex 项目 <br>( 设置主轴排序方向 )</td>
+                <td><pre>
+                    .flex-container {
+                        display: flex;
+                        justify-content: space-between;
+                        }
+                </pre></td>
+            </tr>
+            <tr>
+                <td>align-items</td>
+                <td>
+                    <ul>
+                        <li>stretch ~ 拉伸 flex 项目以填充容器（默认）</li>
+                        <li>center ~ flex 项目在容器中间对齐</li>
+                        <li>flex-start ~ flex 项目在容器顶部对齐</li>
+                        <li>flex-end ~ flex 项目在容器底部对齐</li>
+                        <li>baseline ~ 使 flex 项目基线对齐</li>
+                    </ul>
+                </td>
+                <td>用于垂直对齐 flex 项目。<br>( 设置交叉轴排序方向 )</td>
+                <td><pre>
+                    .flex-container {
+                        display: flex;
+                        height: 200px;
+                        align-items: center;
+                        }
+                </pre></td>
+            </tr>
+            <tr>
+                <td>align-content</td>
+                <td>
+                    <ul>
+                        <li>stretch ~ 拉伸弹性线以占据剩余空间（默认）</li>
+                        <li>space-between ~ 显示的弹性线之间有相等的间距 (items分行时，之间有 n-1 等距间隙)</li>
+                        <li>space-around ~ 显示弹性线在其之前、之间和之后带有空格 (items分行时，之前、之间、之后有 n+1 等距间隙)</li>
+                        <li>center ~ 在容器中间显示弹性线 (items分行时，items之间 无间距 居中)</li>
+                        <li>flex-start ~ 在容器开头显示弹性线 (items分行时，items之间 无间距 顶上)</li>
+                        <li>flex-end ~ 在容器的末尾显示弹性线 (items分行时，items之间 无间距 顶下)</li>
+                    </ul>
+                </td>
+                <td>用于对齐弹性线 （行与行之间的对齐方式）<br> （ 前提：flex-wrap:wrap 时，既有多于一行flex items时才会生效 ） </td>
+                <td><pre>
+                    .flex-container {
+                    display: flex;
+                    height: 600px;
+                    flex-wrap: wrap;
+                    align-content: center;
+                    }
+                </pre></td>
+            </tr>
+        </table>
+        <h4>主轴和交叉轴 main axis & cross axis</h4>
+        <h5>flex-direction: row</h5>
+        main axis(主轴) 是row <br>
+        cross axis(交叉轴) 是column 
+        <h5>flex-direction: column</h5>
+        main axis(主轴) 是column <br>
+        cross axis(交叉轴) 是row 
+
+        <h4>完美居中</h4>
+        解决方案：将 justify-content 和 align-items 属性设置为居中，然后 flex 项目将完美居中
+        代码示例：
+        <pre>
+            .flex-container {
+                display: flex;
+                height: 300px;
+                justify-content: center;
+                align-items: center;
+                }
+        </pre>
+        <h4>flexbox  子元素属性</h4>
+        flex 容器的直接子元素会自动成为弹性（flex）项目。
+        <table>
+            <tr>
+                <th>属性</th>
+                <th>属性值</th>
+                <th>说明</th>
+                <th>实例</th>
+            </tr>
+            <tr>
+                <td>order</td>
+                <td>
+                </td>
+                <td>规定 flex 项目的顺序 <br>order 值必须是数字，默认值是 0。从小至大排序</td>
+                <td><pre>
+                    .flexbox-container>div {
+                        order: -1;
+                    }
+                </pre></td>
+            </tr>
+            <tr>
+                <td>flex</td>
+                <td>格式：flex: 0 0 200px; <br> <strong>flex：1 1 auto (flex item会按照flex container的宽度，平均分配空间去扩大或缩小)</strong> [增缩始]</td>
+                <td>是 flex-grow、flex-shrink 和 flex-basis 属性的 <strong>[ 简写属性 ]</strong></td>
+                <td><pre>
+                    .box2 {
+                        background-color: #22babb;
+                        flex: 0 0 125px;
+                    }
+                </pre></td>
+            </tr>
+            <tr>
+                <td>flex-grow</td>
+                <td>占有剩余空间的部分。<br> 例：1 0 1 ~ 剩余空间分为2份，A C各占有一份； 1 0 0 ~ 剩余空间分为1份，A独占</td>
+                <td>主轴方向有剩余空间时，规定某个 flex 项目相对于其余 flex 项目将增长多少 <br>该值必须是数字，默认值是 0 （不扩大）。</td>
+                <td><pre>
+                    &lt;div class="flex-container">
+                    &lt;div style="flex-grow: 1">1</div>
+                    &lt;div style="flex-grow: 1">2</div>
+                    &lt;div style="flex-grow: 8">3</div> 
+                    &lt;/div>
+                </pre></td>
+            </tr>
+            <tr>
+                <td>flex-shrink</td>
+                <td></td>
+                <td>项目超出container空间时，规定某个 flex 项目相对于其余 flex 项目将收缩多少 <br>该值必须是数字，默认值是 0 （不缩小） 。</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>flex-basis</td>
+                <td> row 时：指定宽度 <br> column时：指定高度</td>
+                <td>规定 flex 项目的初始长度。 <br> 设定为0时：大小取决于内容大小；设定为auto时：按照本身大小计算</td>
+                <td><pre>
+                    .box2 {
+                        background-color: #22babb;
+                        flex-basis: 125px;
+                    }
+                </pre></td>
+            </tr>
+            <tr>
+                <td>align-self</td>
+                <td>
+                    <ul>
+                        <li>center ~ 项目对齐到容器的中间</li>
+                        <li>flex-start ~ 项目在容器顶部对齐</li>
+                        <li>flex-end ~ 项目在容器底部对齐</li>
+                    </ul>
+                </td>
+                <td>规定弹性容器内 所选项目 的对齐方式（前提：所有元素排在一行）（用于覆盖 flex-container 中 align-items 设定）</td>
+                <td></td>
+            </tr>
+        </table>
+    </p>
+    <hr>
+    <p>
+        <h3>媒体查询 Media Query</h3>
+        媒体查询可用于检查许多事情，例如：
+        <ul>
+            <li>视口的宽度和高度</li>
+            <li>设备的宽度和高度</li>
+            <li>方向（平板电脑/手机处于横向还是纵向模式）</li>
+            <li>分辨率</li>
+        </ul>
+        <h4>媒体查询语法</h4>
+        <pre>
+            @media not|only mediatype and (expressions) {
+                CSS-Code;
+              }
+        </pre>
+        除非您使用 not 或 only 运算符，否则媒体类型是可选的，且隐含 all 类型。 <br>
+        <strong>实例：</strong>
+        <pre>
+            @media screen and (min-width: 480px) {
+                body {
+                  background-color: lightgreen;
+                }
+              }
+        </pre>
+        精确使用 992px 和 600px 吗？它们就是我们所称的设备的“典型断点”（typical breakpoints）。
+        <h4>常用用法</h4>
+        <ul>
+            <li>菜单的媒体查询 ~ 创建响应式导航菜单，在不同的屏幕尺寸上会有所不同</li>
+            <li>列的媒体查询 ~ 常见用法是创建弹性布局，布局具体取决于不同的屏幕尺寸</li>
+            <li>用媒体查询隐藏元素 ~ 在不同屏幕尺寸上隐藏元素</li>
+            <li>用媒体查询改变字体 ~ 更改不同屏幕尺寸上的元素的字体大小</li>
+            <li>弹性图片库 ~ 将媒体查询与 flexbox 一起使用来创建响应式图片库</li>
+            <li>弹性网站 ~ 将媒体查询与 flexbox 一起使用，以创建响应式网站</li>
+            <li>方向：人像 / 风景 ~ 根据浏览器的方向更改页面的布局</li>
+            <li>最小宽度到最大宽度 ~ 使用 max-width 和 min-width 属性设置最小宽度和最大宽度</li>
+        </ul>
+    </p>
+</body>
+
+</html>

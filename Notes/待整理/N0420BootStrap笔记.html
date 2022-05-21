@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BootStrap Notes</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+        }
+
+        strong {
+            color: tomato;
+        }
+
+        em {
+            font-style: normal;
+            color: cornflowerblue;
+        }
+        hr {
+            height: 3px;
+            background-color: #333;
+            background-image: linear-gradient(to right, red, #333,rgb(9, 206, 91));
+        }
+
+        p,
+        ul {
+            text-indent: 2em;
+        }
+
+        table,
+        th,
+        tr,
+        td {
+            margin: 0 3em;
+            padding: 0.2em 2em;
+            border: 2px solid gray;
+            background-color: #f5f5f5;
+            border-collapse: collapse;
+            text-align: center;
+        }
+
+        th {
+            background-color: #3f3f3f;
+            color: #f5f5f5;
+        }
+
+        a {
+            text-decoration: none;
+            color: rgb(215, 47, 162);
+        }
+    </style>
+</head>
+
+<body>
+    <h3>概述</h3>
+    <ul>
+        <li>Bootstrap 使用了一些 HTML5 元素和 CSS 属性。使用 Bootstrap 项目的开头包含 HTML5 声明</li>
+        <li>移动设备优先，网页的 head 之中添加 viewport meta 标签</li>
+    </ul>
+    <hr>
+    <strong>Bootstrap 网格系统 [ Grid System ]</strong>
+    <p>网页设计中的网格用于组织内容，让网站易于浏览，并降低用户端的负载。</p>
+    <p>Bootstrap 提供了一套响应式、移动设备优先的流式网格系统，随着屏幕或视口（viewport）尺寸的增加，系统会自动分为最多12列。</p>
+    <hr>
+
+    <strong>媒体查询</strong>
+    <p>Bootstrap 中的媒体查询允许您基于视口大小移动、显示并隐藏内容。</p>
+    <p><em>下面的媒体查询在 LESS 文件中使用，用来创建 Bootstrap 网格系统中的关键的分界点阈值。</em></p>
+    <pre>
+        /* 超小设备（手机，小于 768px） */
+        /* Bootstrap 中默认情况下没有媒体查询 */
+
+        /* 小型设备（平板电脑，768px 起） */
+        @media (min-width: @screen-sm-min) { ... }
+
+        /* 中型设备（台式电脑，992px 起） */
+        @media (min-width: @screen-md-min) { ... }
+
+        /* 大型设备（大台式电脑，1200px 起） */
+        @media (min-width: @screen-lg-min) { ... }</pre>
+    <p><em>我们有时候也会在媒体查询代码中包含 max-width，从而将 CSS 的影响限制在更小范围的屏幕大小之内。</em></p>
+    <pre>
+        @media (max-width: @screen-xs-max) { ... }
+        @media (min-width: @screen-sm-min) and (max-width: @screen-sm-max) { ... }
+        @media (min-width: @screen-md-min) and (max-width: @screen-md-max) { ... }
+        @media (min-width: @screen-lg-min) { ... }
+    </pre>
+    <hr>
+
+    <strong>基本的网格结构</strong>
+    <pre>
+        &lt;div class="container">
+           &lt;div class="row">
+               &lt;div class="col-*-*">&lt;/div>
+               &lt;div class="col-*-*">&lt;/div>      
+            &lt;/div>
+            &lt;div class="row">...&lt;/div>
+         &lt;/div>
+         &lt;div class="container">....</pre>
+    <hr>
+
+    <strong>列重置</strong>
+    <p>可以使用 .clearfix class和 响应式实用工具来解决 [网格在小设备浏览时无法确定网格显示的位置] 的问题</p>
+    <p><em>响应式实用工具</em></p>
+    <p>通过媒体查询结合大型、小型和中型设备，实现内容对设备的显示和隐藏。</p>
+    <p>响应式实用工具目前只适用于块和表切换。</p>
+    <table>
+        <tr>
+            <th></th>
+            <th>手机 (<768px) 超小屏幕 </th> <th>平板 (≥768px) 小屏幕</th>
+            <th>桌面 (≥992px) 中等屏幕</th>
+            <th>桌面 (≥1200px) 大屏幕</th>
+        </tr>
+        <tr>
+            <td>.visible-xs-*</td>
+            <td>可见</td>
+            <td>hidden</td>
+            <td>hidden</td>
+            <td>hidden</td>
+        </tr>
+        <tr>
+            <td>.visible-sm-*</td>
+            <td>hidden</td>
+            <td>可见</td>
+            <td>hidden</td>
+            <td>hidden</td>
+        </tr>
+        <tr>
+            <td>.visible-md-*</td>
+            <td>hidden</td>
+            <td>hidden</td>
+            <td>可见</td>
+            <td>hidden</td>
+        </tr>
+        <tr>
+            <td>.visible-lg-*</td>
+            <td>hidden</td>
+            <td>hidden</td>
+            <td>hidden</td>
+            <td>可见</td>
+        </tr>
+        <tr>
+            <td>.hidden-xs</td>
+            <td>隐藏</td>
+            <td>visible</td>
+            <td>visible</td>
+            <td>visible</td>
+        </tr>
+        <tr>
+            <td>.hidden-sm</td>
+            <td>visible</td>
+            <td>隐藏</td>
+            <td>visible</td>
+            <td>visible</td>
+        </tr>
+        <tr>
+            <td>hidden-md</td>
+            <td>visible</td>
+            <td>visible</td>
+            <td>隐藏</td>
+            <td>visible</td>
+        </tr>
+        <tr>
+            <td>.hidden-lg</td>
+            <td>visible</td>
+            <td>visible</td>
+            <td>visible</td>
+            <td>隐藏</td>
+        </tr>
+    </table>
+    <p>从 v3.2.0 版本起，形如 .visible-*-* 的类针对每种屏幕大小都有了三种变体，每个针对 CSS 中不同的 display 属性，列表如下：</p>
+    <table>
+        <tr>
+            <th>类组</th>
+            <th>CSS display</th>
+        </tr>
+        <tr>
+            <td>.visible-*-block</td>
+            <td>display: block;</td>
+        </tr>
+        <tr>
+            <td>.visible-*-inline</td>
+            <td>display: inline;</td>
+        </tr>
+        <tr>
+            <td>.visible-*-inline-block</td>
+            <td>display: inline-block;</td>
+        </tr>
+    </table>
+    <hr>
+
+    <strong>偏移列</strong>
+    <p>为了在大屏幕显示器上使用偏移，请使用 .col-md-offset-* 类,会把一个列的左外边距（margin）增加 * 列，其中 * 范围是从 1 到 11。</p>
+    <p>实例: 一个 div 中仅含一个 col-md-6 的列 ，设置 col-md-offset-6 ,令其居中</p>
+    <hr>
+
+    <strong>嵌套列</strong>
+    <p>为了在内容中嵌套默认的网格，请添加一个新的 .row，并在一个已有的 .col-md-* 列内添加一组 .col-md-* 列</p>
+    <p>被嵌套的行应包含一组列，这组列个数不能超过12（其实，没有要求你必须占满12列）。</p>
+    <hr>
+
+    <strong>列排序</strong>
+    <p>轻易地改变带有 .col-md-push-* 和 .col-md-pull-* 类的内置网格列的顺序，其中 * 范围是从 1 到 11。</p>
+    <ul>
+        <li>push ~ 将列 right 推 * 列 ；</li>
+        <li>pull ~ 将列 left 拉 * 列</li>
+        <li>设置不当，有可能文本重叠</li>
+    </ul>
+    <hr>
+
+    <strong>BootStrap 排版</strong>
+    <p>Bootstrap 使用 Helvetica Neue、 Helvetica、 Arial 和 sans-serif 作为其默认的字体栈。</p>
+    <hr width="75%"><br>
+
+    <strong>内联子标题</strong>
+    <p>向任何标题添加一个内联子标题，只需要简单地在元素两旁添加 <em>&lt;small></em> ，或者添加 .small class</p>
+    <pre>
+       &lt;h1>标题 &lt;small>子标题&lt;/small>&lt;/h1></pre>
+
+    <strong>引导主体副本</strong>
+    <p>为了给段落添加强调文本，则可以添加 <em>class="lead"</em> ，这将得到更大更粗、行高更高的文本</p>
+    <pre>
+        &lt;p class="lead">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi, nihil.&lt;/p></pre>
+
+    <strong>强调</strong>
+    <p>Bootstrap 提供了一些用于强调文本的类，如下面实例所示：</p>
+    <pre>
+        &lt;p class="text-left">向左对齐文本&lt;/p>           
+        &lt;p class="text-center">居中对齐文本&lt;/p>   
+        &lt;p class="text-right">向右对齐文本&lt;/p>
+        &lt;p class="text-muted">本行内容是减弱的&lt;/p>                    提示，使用浅灰色（#999）
+        &lt;p class="text-primary">本行内容带有一个 primary class&lt;/p>    主要，使用蓝色（#428bca）
+        &lt;p class="text-success">本行内容带有一个 success class&lt;/p>    成功，使用浅绿色(#3c763d)
+        &lt;p class="text-info">本行内容带有一个 info class&lt;/p>          通知信息，使用浅蓝色（#31708f）
+        &lt;p class="text-warning">本行内容带有一个 warning class&lt;/p>    警告，使用黄色（#8a6d3b）
+        &lt;p class="text-danger">本行内容带有一个 danger class&lt;/p>      危险，使用褐色（#a94442）</pre>
+
+    <strong>缩写</strong>
+    <p>Bootstrap 定义<em>&lt;abbr></em>元素的样式为显示在文本底部的一条虚线边框，当鼠标悬停在上面时会显示完整的文本</p>
+    <p>为了得到一个更小字体的文本，请添加 .initialism 到 &lt;abbr>。</p>
+    <pre>
+        &lt;abbr title="World Wide Web">WWW&lt;/abbr>
+        &lt;abbr title="Real Simple Syndication" class="initialism">RSS&lt;/abbr></pre>
+
+    <strong>地址</strong>
+    <p>使用 <em>&lt;address></em> 标签，您可以在网页上显示联系信息。</p>
+    <p>由于 &lt;address> 默认为 display:block;，您需要使用 &lt;br> 标签来为封闭的地址文本添加换行。</p>
+    <pre>
+        &lt;address>
+            &lt;strong>Some Company, Inc.&lt;/strong>&lt;br>
+            007 street&lt;br>
+            Some City, State XXXXX&lt;br>
+            &lt;abbr title="Phone">P:&lt;/abbr> (123) 456-7890
+        &lt;/address></pre>
+
+    <strong>引用</strong>
+    <p>您可以在任意的 HTML 文本旁使用默认的 <em>&lt;blockquote></em> 。</p>
+    <p>添加一个 <em>&lt;small></em> 标签来标识引用的来源，使用 <em>class .pull-right</em> 向右对齐引用。</p>
+    <pre>
+        &lt;blockquote class="pull-right">
+            这是一个向右对齐的引用。
+            &lt;small>Someone famous in &lt;cite title="Source Title">Source Title&lt;/cite>&lt;/small>
+        &lt;/blockquote></pre>
+
+    <strong>列表</strong>
+    <p>无序列表：使用 <em>class .list-unstyled</em> 来移除样式。 使用 class .list-inline 把所有的列表项放在同一行中。</p>
+    <p>定义列表：dl-horizontal 可以让 &lt;dl> 内的短语及其描述排在一行。</p>
+
+    <strong>代码</strong>
+    <p>Bootstrap 允许您以两种方式显示代码</p>
+    <ul>
+        <li>第一种是 &lt;code> 标签。 内联显示代码</li>
+        <li>第二种是 &lt;pre> 标签。如果代码需要被显示为一个独立的块元素或者代码有多行</li>
+    </ul>
+    <hr>
+    <strong>Bootstrap 表格</strong>
+    <hr width="75%">
+    <strong>表格类</strong>
+    <p>在 table 标签 写 class 名</p>
+    <p>下表样式可用于表格中：</p>
+    <table>
+        <tr>
+            <th>类</th>
+            <th>描述</th>
+        </tr>
+        <tr>
+            <td>.table</td>
+            <td>为任意 &lt;table> 添加基本样式 (只有横向分隔线)</td>
+        </tr>
+        <tr>
+            <td>table-striped</td>
+            <td>在 &lt;tbody> 内添加斑马线形式的条纹 ( IE8 不支持)</td>
+        </tr>
+        <tr>
+            <td>.table-bordered</td>
+            <td>为所有表格的单元格添加边框</td>
+        </tr>
+        <tr>
+            <td>.table-hover</td>
+            <td>在 &lt;tbody> 内的任一行启用鼠标悬停状态</td>
+        </tr>
+        <tr>
+            <td>.table-condensed</td>
+            <td>让表格更加紧凑</td>
+        </tr>
+    </table>
+    <strong> tr ,  th  和  td  类</strong>
+    <p>在 tr, th, td 标签 写 class 名</p>
+    <table>
+        <tr>
+            <th>类</th>
+            <th>描述</th>
+        </tr>
+        <tr>
+            <td>.active</td>
+            <td>将悬停的颜色应用在行或者单元格上</td>
+        </tr>
+        <tr>
+            <td>.success</td>
+            <td>表示成功的操作</td>
+        </tr>
+        <tr>
+            <td>.info</td>
+            <td>表示信息变化的操作</td>
+        </tr>
+        <tr>
+            <td>.warning</td>
+            <td>表示一个警告的操作</td>
+        </tr>
+        <tr>
+            <td>.danger</td>
+            <td>表示一个危险的操作</td>
+        </tr>
+    </table>
+    <strong>响应式表格</strong>
+    <p>通过把任意的 .table 包在 <em>.table-responsive</em> class 内，您可以让表格水平滚动以适应小型设备（小于 768px）。当在大于 768px 宽的大型设备上查看时，您将看不到任何的差别。</p>
+    <pre>
+        &lt;div class="table-responsive">
+            &lt;table class="table">
+                &lt;caption>响应式表格布局&lt;/caption>
+                ……
+            
+            &lt;/table>
+        &lt;/div></pre>
+    <hr>
+    <strong>Bootstrap 表单</strong>
+    <hr width="75%">
+    <strong>表单布局</strong>
+    <p>Bootstrap 提供了下列类型的表单布局：</p>
+    <ul>
+        <li>垂直表单（默认）</li>
+        <li>内联表单</li>
+        <li>水平表单</li>
+    </ul>
+
+    <strong>基本表单</strong>
+    <p>基本的表单结构是 Bootstrap 自带的，个别的表单控件自动接收一些全局样式。</p>
+    <p>创建基本表单的步骤：</p>
+    <ul>
+        <li>向父 &lt;form> 元素添加 role="form"。</li>
+        <li>把标签和控件放在一个带有 class .form-group 的 &lt;div> 中。这是获取最佳间距所必需的。</li>
+        <li>向所有的文本元素 &lt;input>、&lt;textarea> 和 &lt;select> 添加 class ="form-control" 。</li>
+    </ul>
+
+    <strong>内联表单</strong>
+    <p>向 &lt;form> 标签添加 class .form-inline。</p>
+    <p>所有元素是内联的，向左对齐的，标签是并排的</p>
+    <ul>
+        <li>默认情况下，Bootstrap 中的 input、select 和 textarea 有 100% 宽度。在使用内联表单时，您需要在表单控件上设置一个宽度。</li>
+        <li>使用 class .sr-only，您可以隐藏内联表单的标签。</li>
+    </ul>
+
+    <strong>水平表单</strong>
+    <p>水平表单与其他表单不仅标记的数量上不同，而且表单的呈现形式也不同</p>
+    <p>水平布局的表单，创建步骤：</p>
+    <ul>
+        <li>向父 &lt;form> 元素添加 class .form-horizontal。</li>
+        <li>把标签和控件放在一个带有 class .form-group 的 &lt;div> 中。</li>
+        <li>向标签添加 class .control-label。</li>
+    </ul>
+
+    <strong>支持的表单控件</strong>
+    <p>Bootstrap 支持最常见的表单控件，主要是 input、textarea、checkbox、radio 和 select。</p>
+    <em>复选框（Checkbox）和单选框（Radio）</em>
+    <ul>
+        <li>创建表单时，如果您想让用户从列表中选择若干个选项时，请使用 checkbox。如果您限制用户只能选择一个选项，请使用 radio</li>
+        <li>对一系列复选框和单选框使用 .checkbox-inline 或 .radio-inline class，控制它们显示在同一行上</li>
+    </ul>
+    <em>选择框（Select）</em>
+    <ul>
+        <ul>使用 &lt;select> 展示列表选项，通常是那些用户很熟悉的选择列表，比如州或者数字。</ul>
+        <ul>使用 multiple="multiple" 允许用户选择多个选项。</ul>
+    </ul>
+    <em>静态控件</em>
+    <p>当您需要在一个水平表单内的表单标签后放置纯文本时，请在 &lt;p> 上使用 class .form-control-static。</p>
+    <p>纯文本可以水平对齐</p>
+
+
+    <strong>表单控件状态</strong>
+    <p>除了 :focus 状态（即，用户点击 input 或使用 tab 键聚焦到 input 上），Bootstrap 还为禁用的输入框定义了样式，并提供了表单验证的 class。</p>
+    <em>输入框焦点</em>
+    <p>当输入框 input 接收到 :focus 时，输入框的轮廓会被移除，同时应用 box-shadow。</p>
+    <em>禁用的输入框 input</em>
+    <p>想要禁用一个输入框 input，只需要简单地添加 disabled 属性，这不仅会禁用输入框，还会改变输入框的样式以及当鼠标的指针悬停在元素上时鼠标指针的样式。</p>
+    <em>禁用的字段集 fieldset</em>
+    <p>对 &lt;fieldset> 添加 disabled 属性来禁用 &lt;fieldset> 内的所有控件。</p>
+    <em>验证状态</em>
+    <p>Bootstrap 包含了错误、警告和成功消息的验证样式。只需要对 <em>父元素</em> 简单地添加适当的 class（ <em>.has-warning、 .has-error 或 .has-success</em> ）即可使用验证状态。</p>
+    
+    <strong>表单控件大小</strong>
+    <p>分别使用 <em>class .input-lg</em> <em>.input-small</em> 和 <em>.col-lg-*</em> 来设置表单的高度和宽度</p>
+
+    <strong>表单帮助文本</strong>
+    <p>Bootstrap 表单控件可以在输入框 input 上有一个块级帮助文本。为了添加一个占用整个宽度的内容块，请在 &lt;input> 后使用 .<em>help-block</em></p>
+    <pre>
+        &lt;form role="form">
+            &lt;span>帮助文本实例&lt;/span>
+            &lt;input class="form-control" type="text" placeholder="">
+            &lt;span class="help-block">一个较长的帮助文本块，超过一行，
+            需要扩展到下一行。本实例中的帮助文本总共有两行。&lt;/span>
+        &lt;/form>
+    </pre>
+
+    <strong>Bootstrap 按钮</strong>
+    <table>
+        <tr>
+            <th>类</th>
+            <th>描述</th>
+            <th>实例</th>
+        </tr>
+        <tr>
+            <td>.btn</td>
+            <td>为按钮添加基本样式</td>
+            <td><button type="button" class="btn">基本按钮</button></td>
+        </tr>
+        <tr>
+            <td>.btn-default</td>
+            <td>默认/标准按钮</td>
+            <td><button type="button" class="btn btn-default">标准按钮</button></td>
+        </tr>
+        <tr>
+            <td>.btn-primary</td>
+            <td>原始按钮样式（未被操作）</td>
+            <td><button type="button" class="btn btn-primary">原始按钮</button></td>
+        </tr>
+        <tr>
+            <td>.btn-success</td>
+            <td>表示成功的动作</td>
+            <td><button type="button" class="btn btn-success">成功按钮</button></td>
+        </tr>
+        <tr>
+            <td>.btn-info</td>
+            <td>该样式可用于要弹出信息的按钮</td>
+            <td><button type="button" class="btn btn-info">信息按钮</button></td>
+        </tr>
+        <tr>
+            <td>.btn-warning</td>
+            <td>表示需要谨慎操作的按钮</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>.btn-danger</td>
+            <td>表示一个危险动作的按钮操作</td>
+            <td><button type="button" class="btn btn-danger">危险按钮</button></td>
+        </tr>
+        <tr>
+            <td>.btn-link</td>
+            <td>让按钮看起来像个链接 (仍然保留按钮行为)</td>
+            <td><button type="button" class="btn btn-link"><a href="http://www.baidu.com">链接按钮</a></button></td>
+        </tr>
+        <tr>
+            <td>.btn-lg</td>
+            <td>制作一个大按钮</td>
+            <td><button type="button" class="btn btn-lg">大按钮</button></td>
+        </tr>
+        <tr>
+            <td>.btn-sm</td>
+            <td>制作一个小按钮</td>
+            <td><button type="button" class="btn btn-danger btn-sm">小按钮</button></td>
+        </tr>
+        <tr>
+            <td>.btn-xs</td>
+            <td>制作一个超小按钮</td>
+            <td><button type="button" class="btn btn-xs">超小按钮</button></td>
+        </tr>
+        <tr>
+            <td>.btn-block</td>
+            <td>块级按钮(拉伸至父元素100%的宽度)</td>
+            <td><button type="button" class="btn btn-block">块级按钮</button></td>
+        </tr>
+        <tr>
+            <td>.active</td>
+            <td>按钮被点击</td>
+            <td><button type="button" class="btn active">被点击按钮</button></td>
+        </tr>
+        <tr>
+            <td>.disabled</td>
+            <td>禁用按钮</td>
+            <td><button type="button" class="btn disabled">禁用按钮</button></td>
+        </tr>
+    </table>
+
+    <strong>按钮组</strong>
+    <ul>
+        <li>在 div 中直接使用 .<em>btn-group</em> 可以创建按钮组
+            <ul>
+                <li><pre>
+                &lt;div class="<em>btn-group</em>">
+                        &lt;button type="button" class="btn btn-primary">Apple&lt;/button>
+                        &lt;button type="button" class="btn btn-primary">Samsung&lt;/button>
+                        &lt;button type="button" class="btn btn-primary">Sony&lt;/button>
+                    &lt;/div>
+                </pre></li>
+                <li>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary">Apple</button>
+                        <button type="button" class="btn btn-primary">Samsung</button>
+                        <button type="button" class="btn btn-primary">Sony</button>
+                      </div>
+                </li>
+            </ul>
+        </li>
+        <li>使用 .<em>btn-group-lg|sm|xs</em> 来控制按钮组的大小
+            <ul>
+                <li><pre>
+                  &lt;div class="btn-group <em>btn-group-sm</em>">
+                        &lt;button type="button" class="btn btn-primary">Apple&lt;/button>
+                        &lt;button type="button" class="btn btn-primary">Samsung&lt;/button>
+                        &lt;button type="button" class="btn btn-primary">Sony&lt;/button>
+                      &lt;/div>
+                </pre></li>
+                <li>
+                    <div class="btn-group btn-group-sm">
+                        <button type="button" class="btn btn-primary">Apple</button>
+                        <button type="button" class="btn btn-primary">Samsung</button>
+                        <button type="button" class="btn btn-primary">Sony</button>
+                    </div>
+                </li>
+            </ul>
+        </li>
+        <li>通过 .<em>btn-group-justified</em> 类来设置自适应大小的按钮组。<br>
+            注意: 如果是 &lt;button> 元素, 你需要在外层使用 .btn-group 类来包裹
+            <ul>
+                <li><pre>
+                    &lt;div class="btn-group <em>btn-group-justified</em>">
+                        &lt;a href="#" class="btn btn-primary">Apple&lt;/a>
+                        &lt;a href="#" class="btn btn-primary">Samsung&lt;/a>
+                        &lt;a href="#" class="btn btn-primary">Sony&lt;/a>
+                      &lt;/div>
+                </pre></li>
+                <li>
+                    <div class="btn-group btn-group-justified">
+                        <a href="#" class="btn btn-primary">Apple</a>
+                        <a href="#" class="btn btn-primary">Samsung</a>
+                        <a href="#" class="btn btn-primary">Sony</a>
+                    </div>
+                </li>
+            </ul>
+        </li>
+        <li>通过 .<em>btn-group-vertical</em> 类来设置 垂直方向 的按钮
+            <ul>
+                <li><pre>
+                  &lt;div class="<em>btn-group-vertical</em>">
+                        &lt;button type="button" class="btn btn-primary">Apple&lt;/button>
+                        &lt;button type="button" class="btn btn-primary">Samsung&lt;/button>
+                        &lt;button type="button" class="btn btn-primary">Sony&lt;/button>
+                      &lt;/div>
+                </pre></li>
+                <li>
+                    <div class="btn-group-vertical">
+                        <button type="button" class="btn btn-primary">Apple</button>
+                        <button type="button" class="btn btn-primary">Samsung</button>
+                        <button type="button" class="btn btn-primary">Sony</button>
+                    </div>
+                </li>
+            </ul>
+        </li>
+        <li>通过 .<em>dropdown-menu</em> 设置内嵌下拉菜单的按钮组
+            <ul>
+                <li><pre>
+                    &lt;div class="btn-group">
+                       &lt;button type="button" class="btn btn-primary">Apple&lt;/button>
+                        &lt;button type="button" class="btn btn-primary">Samsung&lt;/button>
+                        &lt;div class="btn-group">
+                          &lt;button type="button" class="btn btn-primary dropdown-toggle" <em>data-toggle="dropdown"</em>>
+                          Sony &lt;span class="caret">&lt;/span>&lt;/button>
+                          &lt;ul class="<em>dropdown-menu</em>" role="menu">
+                            &lt;li>&lt;a href="#">Tablet&lt;/a>&lt;/li>
+                            &lt;li>&lt;a href="#">Smartphone&lt;/a>&lt;/li>
+                          &lt;/ul>
+                        &lt;/div>
+                      &lt;/div>
+                </pre></li>
+                <li>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary">Apple</button>
+                        <button type="button" class="btn btn-primary">Samsung</button>
+                        <div class="btn-group">
+                          <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                          Sony <span class="caret"></span></button>
+                          <ul class="dropdown-menu" role="menu">
+                            <li><a href="#">Tablet</a></li>
+                            <li><a href="#">Smartphone</a></li>
+                          </ul>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </li>
+        <li>分割按钮
+            <ul>
+                <li><pre>
+                &lt;div class="btn-group">
+                        &lt;button type="button" class="btn btn-primary">Sony&lt;/button>
+                        <em>&lt;button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                          &lt;span class="caret">&lt;/span>
+                        &lt;/button></em>
+                        &lt;ul class="dropdown-menu" role="menu">
+                          &lt;li>&lt;a href="#">Tablet&lt;/a>&lt;/li>
+                          &lt;li>&lt;a href="#">Smartphone&lt;/a>&lt;/li>
+                        &lt;/ul>
+                      &lt;/div>
+                </pre></li>
+                <li>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary">Sony</button>
+                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                          <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+                          <li><a href="#">Tablet</a></li>
+                          <li><a href="#">Smartphone</a></li>
+                        </ul>
+                      </div>
+                </li>
+            </ul>
+        </li>
+    </ul>
+    <hr>
+
+    <strong>Bootstrap 图片</strong>
+    <p>Bootstrap 提供了四个可对图片应用简单样式的 class：</p>
+    <ul>
+        <li>.img-rounded：添加 border-radius:6px 来获得图片圆角。</li>
+        <li>.img-circle：添加 border-radius:50% 来让整个图片变成圆形。</li>
+        <li>.img-thumbnail：添加一些内边距（padding）和一个灰色的边框。</li>
+        <li>.img-responsive：让图片支持响应式设计， 图片将很好地扩展到父元素。</li>
+    </ul>
+    <table>
+        <tr>
+            <th>类</th>
+            <th>描述</th>
+        </tr>
+        <tr>
+            <td><em>.img-rounded</em></td>
+            <td>为图片添加圆角 (IE8 不支持)</td>
+        </tr>
+        <tr>
+            <td><em>.img-circle</em></td>
+            <td>将图片变为圆形 (IE8 不支持)</td>
+        </tr>
+        <tr>
+            <td><em>.img-thumbnail</em></td>
+            <td>缩略图功能</td>
+        </tr>
+        <tr>
+            <td><em>.img-responsive</em></td>
+            <td>图片响应式 (将很好地扩展到父元素)</td>
+        </tr>
+    </table>
+    <hr>
+
+    <strong>Bootstrap 辅助类</strong>
+    <p>总结：</p>
+    <p> text / bg 都有的类： Name-primary / Name-success / Name-info / Name-warning / Name-danger </p>
+    <hr width="75%">
+
+    <strong>文本</strong>
+    <p>以下不同的类展示了不同的文本颜色。如果文本是个链接鼠标移动到文本上会变暗</p>
+    <table>
+        <tr>
+            <th>类</th>
+            <th>描述</th>
+            <th>实例</th>
+        </tr>
+        <tr>
+            <td>.text-muted</td>
+            <td>"text-muted" 类的文本样式</td>
+            <td>
+                <p class="text-muted">段落样式</p>
+                <a class="text-muted" href="#">链接样式</a>
+            </td>
+        </tr>
+        <tr>
+            <td>.text-primary</td>
+            <td>"text-primary" 类的文本样式</td>
+            <td>
+                <p class="text-primary">段落样式</p>
+                <a class="text-primary" href="#">链接样式</a>
+            </td>
+        </tr>
+        <tr>
+            <td>.text-success</td>
+            <td>"text-success" 类的文本样式</td>
+            <td>
+                <p class="text-success">段落样式</p>
+                <a class="text-success" href="#">链接样式</a>
+            </td>
+        </tr>
+        <tr>
+            <td>.text-info</td>
+            <td>"text-info" 类的文本样式</td>
+            <td>
+                <p class="text-info">段落样式</p>
+                <a class="text-info" href="#">链接样式</a>
+            </td>
+        </tr>
+        <tr>
+            <td>.text-warning</td>
+            <td>"text-warning" 类的文本样式</td>
+            <td>
+                <p class="text-warning">段落样式</p>
+                <a class="text-warning" href="#">链接样式</a>
+            </td>
+        </tr>
+        <tr>
+            <td>.text-danger</td>
+            <td>"text-danger" 类的文本样式</td>
+            <td>
+                <p class="text-danger">段落样式</p>
+                <a class="text-danger" href="#">链接样式</a>
+            </td>
+        </tr>
+    </table>
+
+    <strong>背景</strong>
+    <p>以下不同的类展示了不同的背景颜色。 如果文本是个链接鼠标移动到文本上会变暗</p>
+    <table>
+        <tr>
+            <th>类</th>
+            <th>描述</th>
+            <th>实例</th>
+        </tr>
+        <tr>
+            <td>.bg-primary</td>
+            <td>表格单元格使用了 "bg-primary" 类</td>
+            <td><p class="bg-primary">段落样式</p>
+                <a class="bg-primary" href="#">链接样式</a></td>
+        </tr>
+        <tr>
+            <td>.bg-success</td>
+            <td>表格单元格使用了 "bg-success" 类</td>
+            <td><p class="bg-success">段落样式</p>
+                <a class="bg-success" href="#">链接样式</a></td>
+        </tr>
+        <tr>
+            <td>.bg-info</td>
+            <td>表格单元格使用了 "bg-info" 类</td>
+            <td><p class="bg-info">段落样式</p>
+                <a class="bg-info" href="#">链接样式</a></td>
+        </tr>
+        <tr>
+            <td>.bg-warning</td>
+            <td>表格单元格使用了 "bg-warning" 类</td>
+            <td><p class="bg-warning">段落样式</p>
+                <a class="bg-warning" href="#">链接样式</a></td>
+        </tr>
+        <tr>
+            <td>.bg-danger</td>
+            <td>表格单元格使用了 "bg-danger" 类</td>
+            <td><p class="bg-danger">段落样式</p>
+                <a class="bg-danger" href="#">链接样式</a></td>
+        </tr>
+    </table>
+    
+    <strong>其他</strong>
+    <table>
+        <tr>
+            <th>类</th>
+            <th>描述</th>
+            <th>实例</th>
+        </tr>
+        <tr>
+            <td>.pull-left</td>
+            <td>元素浮动到左边</td>
+            <td><span class="text-success">Lorem, ipsum dolor.</span><div class="pull-left" style="background-color: teal;">元素浮动到左边</div></td>
+        </tr>
+        <tr>
+            <td>.pull-right</td>
+            <td>元素浮动到右边</td>
+            <td><div class="pull-right" style="background-color: teal;">元素浮动到右边</div><span class="text-success">Lorem, ipsum dolor.</span></td>
+        </tr>
+        <tr>
+            <td>.center-block</td>
+            <td>设置元素为 display:block 并居中显示</td>
+            <td>
+                <div class="center-block" style="width: 40px; height: 40px; background-color: tomato;"></div>
+            </td>
+        </tr>
+        <tr>
+            <td>.clearfix</td>
+            <td>清除浮动</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>.show</td>
+            <td>强制元素显示</td>
+            <td><p> .show 类强制一个元素显示:</p>
+                <p class="show">该段落强制显示</p></td>
+        </tr>
+        <tr>
+            <td>.hidden</td>
+            <td>强制元素隐藏</td>
+            <td><p> .hidden 类强制一个元素隐藏 :</p>
+                <p class="hidden">该段落强制隐藏</p></td>
+        </tr>
+        <tr>
+            <td>.sr-only</td>
+            <td>除了屏幕阅读器外，其他设备上隐藏元素</td>
+            <td><p> .sr-only 类除了屏幕阅读器外，其他设备上都隐藏元素:</p>
+                <a class="sr-only" href="#">跳转到主要内容</a></td>
+        </tr>
+        <tr>
+            <td>.sr-only-focusable</td>
+            <td>与 .sr-only 类结合使用，在元素获取焦点时显示(如：键盘操作的用户)</td>
+            <td><p>与 .sr-only 类结合使用，在元素获取焦点时显示(如：键盘操作的用户):</p>
+                <a class="sr-only sr-only-focusable" href="#">跳转到主要内容</a></td>
+        </tr>
+        <tr>
+            <td>.text-hide</td>
+            <td>将页面元素所包含的文本内容替换为背景图</td>
+            <td><p> .text-hide 类将页面元素所包含的文本内容替换为背景图:</p>
+                <div class="text-hide">在 div 元素中插入一些文本。</div></td>
+        </tr>
+        <tr>
+            <td>.close</td>
+            <td>显示关闭按钮</td>
+            <!-- 
+                aria-hidden="true" 主要是帮助残障人士（如失明）使用识读设备（自动读取内容并自动播放出来），播放到带此属性的内容时会自动跳过，以免残障人士混淆！ 
+            -->
+            <td><button type="button" class="close" aria-hidden="true">&times;</button></td>
+        </tr>
+        <tr>
+            <td>.caret</td>
+            <td>显示下拉式功能</td>
+            <td>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Menu <span class="caret"></span></button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="https://www.runoob.com/try/try2.php?filename=trybs_ref_hlp_caret">查看源代码</a></li>
+                        <li><a href="#">另一个链接 link</a></li>
+                        <li><a href="#">其他功能</a></li>
+                    </ul>
+                </div>
+            </td>
+        </tr>
+    </table>
+    <hr>
+    <p><strong>Bootstrap 布局组件</strong></p>
+</body>
+
+</html>

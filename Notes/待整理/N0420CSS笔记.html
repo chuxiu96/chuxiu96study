@@ -1,0 +1,1743 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS笔记</title>
+</head>
+
+<body>
+    <div class="notes">
+        <a href="https://mp.weixin.qq.com/s/lNkLbVL8qWsay8c3krVL8A" target="_blank" style="color: tomato;text-decoration: none;">数据fan HTML 笔记</a>
+        <a href="https://mp.weixin.qq.com/s?__biz=MzU0Mjg0MzI1Nw==&mid=2247484100&idx=1&sn=bdc1867a145dc6d36d58652c616148ea&chksm=fb15cad2cc6243c44769c9254202fe52c65b7302a9535a1b152b890794e7c3e9117de7251590&scene=178&cur_album_id=1506739374313537537#rd" target="_blank" style="color: green;text-decoration: none;">数据fan CSS 笔记</a>
+        <a href="https://mp.weixin.qq.com/s/jcyVEHWkyzv4d71c09I3wA" target="_blank" style="color: blueviolet;text-decoration: none;">数据fan Java Script 笔记</a>
+        <a href="https://mp.weixin.qq.com/s?__biz=MzU0Mjg0MzI1Nw==&mid=2247484170&idx=1&sn=7e524ed872a5242e3cd5c9595afb7ff1&chksm=fb15cb1ccc62420a5ee1ed5735e069a63fe04512e6d219effc28d794c8a7a323cfc44e9bc325&scene=178&cur_album_id=1506739374313537537#rd" target="_blank" style="color: rgb(43, 226, 180);text-decoration: none;">数据fan H5+CSS3 笔记</a>
+    </div>
+    <p style="border: 2px solid  dodgerblue;">
+    <h2>CSS语法</h2>
+    语法： <br>
+    <div class="img"><img
+            src="https://www.runoob.com/wp-content/uploads/2013/07/632877C9-2462-41D6-BD0E-F7317E4C42AC.jpg" alt="CSS语法"
+            width="30%"></div> <br>
+    tips: <br>
+    1、声明以花括号{}括起来。各声明之间以；结束 <br>
+    2、声明中，属性和值以：分开
+    </p>
+    <hr>
+    <p>
+        注释： <br>
+        CSS注释以 /* 开始， */ 结束
+    </p>
+    <hr>
+    <p>
+        <h3 style="color: tomato;">CSS属性书写顺序</h3>
+        <a href="https://blog.csdn.net/qq_36060786/article/details/79311244" style="color: tomato; text-decoration: none;" target="_blank">建议顺序</a> (位盒文他)
+        <ul>
+            <li>布局定位 : display / position / float / clear / visibility / overflow </li>
+            <li>盒子自身 : width / height / margin / padding / border / background </li>
+            <li>文本 : color / font / text-decoration / text-align /vertical-align / white-space / break-word </li>
+            <li>其他（CSS3） : content / cursor /border-radius / box-shadow / text-shadow / background:linear-gradient </li>
+        </ul>
+    </p>
+    <hr>
+    <p>
+        <h3>简写属性</h3>
+        <h4>background 【背景】—— 色图铺定位 </h4>
+        <ul>
+            <li>background-color</li>
+            <li>background-image</li>
+            <li>background-repeat</li>
+            <li>background-attachment</li>
+            <li>background-position</li>
+        </ul>
+        <h4>border 【边框】—— 粗样色</h4>
+        <ul>
+            <li>border-width</li>
+            <li>border-style（必需）</li>
+            <li>border-color</li>
+        </ul>
+        <h4>outline 【轮廓】—— 粗样色</h4>
+        <ul>
+            <li>outline-width</li>
+            <li>outline-style（必需）</li>
+            <li>outline-color</li>
+        </ul>
+        <h4>font 【字体】—— 样粗大/行家</h4>
+        <ul>
+            <li>font-style</li>
+            <li>font-variant</li>
+            <li>font-weight</li>
+            <li>font-size/line-height</li>
+            <li>font-family</li>
+        </ul>
+        <h4>list 【列表】—— 类位图</h4>
+        <ul>
+            <li>list-style-type</li>
+            <li>list-style-position</li>
+            <li>list-style-image</li>
+        </ul>
+        <h4>transition 【过渡】—— 属时[延速] </h4>
+        <ul>
+            <li>property</li>
+            <li>duration</li>
+            <li>delay</li>
+            <li>timing-function</li>
+        </ul>
+        <h4>animation 【动画】—— 名时[速延次方] </h4>
+        <ul>
+            <li>name</li>
+            <li>duration</li>
+            <li>timing-function</li>
+            <li>delay</li>
+            <li>iteration-count</li>
+            <li>direction</li>
+        </ul>
+    </p>
+    <hr>
+    <p>
+    <h2>CSS选择器</h2>
+    CSS选择器：用于“查找”或选取要设置样式的 HTML 元素。 <br>
+    CSS分类： <br>
+    <ul>
+        <li>简单选择器（根据名称、id、类来选取元素）</li>
+        <li><a href="https://www.w3school.com.cn/css/css_combinators.asp" target="_blaank">组合器选择器（根据它们之间的特定关系来选取元素）</a>
+        <li><a href="https://www.w3school.com.cn/css/css_pseudo_classes.asp" target="_blaank">伪类选择器（根据特定状态选取元素）</a>
+        <li><a href="https://www.w3school.com.cn/css/css_pseudo_elements.asp"
+                target="_blaank">伪元素选择器（选取元素的一部分并设置其样式）</a>
+        <li><a href="https://www.w3school.com.cn/css/css_attribute_selectors.asp"
+                target="_blaank">属性选择器（根据属性或属性值来选取元素）</a>
+        </li>
+    </ul>
+    简单选择器：
+    <table border="1px" cellspacing="0px">
+        <thead>
+            <tr>
+                <th>选择器</th>
+                <th>例子</th>
+                <th>例子描述</th>
+            </tr>
+        </thead>
+        <tbody align="center">
+            <tr>
+                <td>.class</td>
+                <td>.intro</td>
+                <td>选取所有 class="intro" 的元素</td>
+            </tr>
+            <tr>
+                <td>#id</td>
+                <td>#firstname</td>
+                <td>选取 id="firstname" 的那个元素。</td>
+            </tr>
+            <tr>
+                <td>*</td>
+                <td>*</td>
+                <td>选取所有元素。</td>
+            </tr>
+            <tr>
+                <td>element</td>
+                <td>p</td>
+                <td>选取所有 <p> 元素。</td>
+            </tr>
+            <tr>
+                <td>element,element,..</td>
+                <td>div, p</td>
+                <td>选取所有 <div> 元素和所有 <p> 元素。</td>
+            </tr>
+        </tbody>
+    </table>
+    <br /><br />
+    <table border="1px" cellspacing="0px">
+        <tr>
+            <td>基础选择器</td>
+            <td>作用</td>
+            <td>特点</td>
+            <td>使用情况</td>
+            <td>用法</td>
+        </tr>
+        <tr>
+            <td>标签选择器</td>
+            <td>可选出所有相同的标签，例如p</td>
+            <td>不能差异化选择</td>
+            <td>较多</td>
+            <td>
+                <pre>p {color:red;}
+                </pre>
+            </td>
+        </tr>
+        <tr>
+            <td>类选择器</td>
+            <td>可以选出一个或多个标签</td>
+            <td>可以根据需求选择</td>
+            <td>非常多</td>
+            <td>
+                <pre>nav {color:red;}</pre>
+            </td>
+        </tr>
+        <tr>
+            <td>id选择器</td>
+            <td>一次只能选择1个标签</td>
+            <td>id属性只能在一个html文档中出现一次</td>
+            <td>一般和js搭配使用</td>
+            <td>
+                <pre>nav {color:red;}</pre>
+            </td>
+        </tr>
+        <tr>
+            <td>通配选择器</td>
+            <td>选择所有标签</td>
+            <td>选择的太多，有部分不需要</td>
+            <td>特殊情况使用</td>
+            <td>
+                <pre>* {color:red;}</pre>
+            </td>
+        </tr>
+    </table>
+    <h3>CSS的组合器选择器：组合器是解释选择器之间关系的某种机制。CSS 选择器可以包含多个简单选择器。在简单选择器之间，我们可以包含一个组合器。</h3>
+    CSS中有4种不同的组合器：
+    <ul>
+        <li>后代选择器（空格）</li>
+        <li>子选择器（>）</li>
+        <li>相邻兄弟选择器（+）</li>
+        <li>通用兄弟选择器（~）</li>
+    </ul>
+    <table border="1px" cellspacing="0px">
+        <tr>
+            <td>后代选择器</td>
+            <td>后代选择器用于选取某元素的后代元素。可一代一代往后查找，只选择最后一个元素。</td>
+            <td>
+                <pre>
+                div p   {
+                    background-color:yellow;
+                    }
+                .nav li a {
+                    color:red;
+                }
+            </pre>
+            </td>
+        </tr>
+        <tr>
+            <td>子元素选择器</td>
+            <td>只能选择作为某元素直接/一级子元素的元素。</td>
+            <td>
+                <pre>
+                div>p   {
+                    background-color:yellow;
+                    }
+                </pre>
+            </td>
+        </tr>
+        <tr>
+            <td>并集选择器</td>
+            <td>可选择多组标签，同时定义它们相同的样式。通常用于集体声明。习惯上竖着写</td>
+            <td>
+                <pre>
+                .div,
+                p,
+                .nav li {
+                    color: red;
+                }
+            </pre>
+            </td>
+        </tr>
+        <tr>
+            <td>伪类选择器</td>
+            <td>根据特殊状态选择元素</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>相邻兄弟选择器</td>
+            <td>可选择紧接在另一元素后的元素，且二者有相同父元素</td>
+            <td>
+                <pre>
+                div + p {
+                    background-color: yellow;
+                  }
+            </pre>
+            </td>
+        </tr>
+        <tr>
+            <td>通用兄弟选择器</td>
+            <td>选择属于指定元素后（前不选定）的的同级元素的所有元素。</td>
+            <td>
+                <pre>
+
+            </pre>
+            </td>
+        </tr>
+    </table>
+    链接伪类选择器 <br />
+    链接能够以不同的方式显示：
+    <pre>
+        /* 未访问的链接 */
+        a:link {
+        color: #FF0000;
+        }
+
+        /* 已访问的链接 */
+        a:visited {
+        color: #00FF00;
+        }
+
+        /* 鼠标悬停链接 */
+        a:hover {
+        color: #FF00FF;
+        }
+
+        /* 已选择的链接 */
+        a:active {
+        color: #0000FF;
+        }
+    </pre>
+    注意事项 <br>
+    1、a:hover 必须在 CSS 定义中的 a:link 和 a:visited 之后，才能生效！a:active 必须在 CSS 定义中的 a:hover 之后才能生效！伪类名称对大小写不敏感。 <br>
+    2、为确保生效，按LVHA （绿哈）的顺序声明：link visited hover active <br>
+    3、a链接具有默认样式，实际工作中都需单独指定样式 <br>
+
+    :focus伪类选择器 <br />
+    1、用于选取获得焦点的表单元素。 <br />
+    2、焦点就是光标，一般情况表单元素才能获取，因此这选择器也主要针对表单元素来说。
+
+
+    </br>
+    <hr>
+    <p>
+    <h3><a href="https://www.bilibili.com/video/BV14J4114768?p=94&spm_id_from=pageDriver" target="_blank"
+            style="text-decoration: none; color: tomato;">非常实用的 emmet 语法</a></h3>
+    </p>
+    <hr>
+    <p>
+    <h2>CSS使用</h2>
+    当浏览器读到样式表时，它将根据样式表中的信息来格式化 HTML 文档。 <br>
+    三种插入样式表的方法：
+    <ul>
+        <li>外部CSS</li>
+        <li>内部CSS</li>
+        <li>行内CSS</li>
+    </ul>
+    <table border="1px" cellspacing="0px">
+        <thead>
+            <tr>
+                <th>样式表</th>
+                <th>说明</th>
+                <th>Tips</th>
+            </tr>
+        </thead>
+        <tbody align="center">
+            <tr>
+                <td>外部CSS</td>
+                <td>通过使用外部样式表，您只需修改一个文件即可改变整个网站的外观！
+                    每张 HTML 页面必须在 head 部分的
+                    <link> 元素内包含对外部样式表文件的引用
+                </td>
+                <td>外部样式表可以在任何文本编辑器中编写，并且必须以 .css 扩展名保存。
+                    外部 .css 文件不应包含任何 HTML 标签</td>
+            </tr>
+            <tr>
+                <td>内部CSS</td>
+                <td>如果一张 HTML 页面拥有唯一的样式，那么可以使用内部样式表。
+                    内部样式是在 head 部分的 style元素中进行定义</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>行内CSS</td>
+                <td>行内样式（也称内联样式）可用于为单个元素应用唯一的样式。
+                    如需使用行内样式，请将 style 属性添加到相关元素。style 属性可包含任何 CSS 属性。</td>
+                <td>行内样式失去了样式表的许多优点（通过将内容与呈现混合在一起）。请谨慎使用此方法。</td>
+            </tr>
+        </tbody>
+    </table>
+    注意：如果在不同样式表中为同一选择器（元素）定义了一些属性，则将使用最后读取的样式表中的值。 <br>
+    层叠顺序：行内样式（在 HTML 元素中）&gt;外部和内部样式表（在 head 部分）&gt;浏览器默认样式
+    </p>
+    <hr>
+    <p>
+    <h2>CSS backgrounds [背景]</h2>
+    <table border="1px" cellspacing="0px">
+        <tr>
+            <th>Attribute</th>
+            <th>说明</th>
+            <th>实例</th>
+            <th>Tips</th>
+        </tr>
+
+        <tbody align="center">
+            <tr>
+                <td>background-color</td>
+                <td>指定元素的背景色。</td>
+                <td>
+                    <pre>
+                    body {
+                        background-color: lightblue;
+                        }
+                </pre>
+                </td>
+                <td>颜色指定："red" "#ff0000" rgba"255,0,0,0.6"</td>
+            </tr>
+            <tr>
+                <td>background-image</td>
+                <td>指定元素的背景图像。</td>
+                <td>
+                    <pre>
+                    body {
+                        background-image: url("paper.gif");
+                      }
+                </pre>
+                </td>
+                <td>默认情况下，图像会重复，以覆盖整个元素 <br> 可通过repet设置平铺
+                    <br>实际开发常见于logo或装饰性小图片或超大背景图，优点：利用position，非常容易控制图片位置（精灵图也是一种应用场景）
+                </td>
+            </tr>
+            <tr>
+                <td>background-repeat</td>
+                <td>设置如何平铺对象的 background-image 属性。</td>
+                <td>
+                    <pre>
+                    body
+                    {
+                        background-image:url('paper.gif');
+                        background-repeat:repeat-y;
+                    }
+                </pre>
+                </td>
+                <td>repeat 背景图像将向垂直和水平方向重复。这是默认 <br>
+                    repeat-x 只有水平位置会重复背景图像 <br>
+                    repeat-y 只有垂直位置会重复背景图像 <br>
+                    no-repeat background-image 不会重复 <br>
+                    inherit 指定 background-repeat 属性设置应该从父元素继承 <br>
+                </td>
+            </tr>
+            <tr>
+                <td><a href="https://www.runoob.com/cssref/pr-background-position.html"
+                        target="_blank">background-position</a></td>
+                <td>用于指定背景图像的位置。</td>
+                <td>
+                    <pre>
+                    body {
+                        background-image: url("/i/photo/tree.png");
+                        background-repeat: no-repeat;
+                        background-position: right top;
+                        margin-right: 200px;
+                      }
+                </pre>
+                </td>
+                <td>注意：对于这个工作在Firefox和Opera，background-attachment必须设置为 "fixed（固定）"<br>
+                    属性值：right center x% y% xpos ypos inherit <br>
+                    如果仅指定一个关键字，其他值将会是"center"；仅指定了一个值，其他值将是50％。
+                </td>
+            </tr>
+            <tr>
+                <td>background-attachment</td>
+                <td>指定背景图像是应该滚动还是固定的（不会随页面的其余部分一起滚动）</td>
+                <td>
+                    <pre>
+                    body {
+                        background-image: url("tree.png");
+                        background-repeat: no-repeat;
+                        background-position: right top;
+                        background-attachment: fixed;
+                      }
+                </pre>
+                </td>
+                <td>fixed 不会随着页面的滚动而滚动。 <br>
+                    scroll 随着页面的滚动而滚动，这是默认的。 <br>
+                    local 背景图片会随着元素内容的滚动而滚动 <br>
+                    inherit 设置应该从父元素继承。
+                </td>
+            </tr>
+            <tr>
+                <td>background</td>
+                <td>简写属性，缩短代码，指定所有背景属性</td>
+                <td>
+                    <pre>
+                    body {
+                        background: #ffffff url("tree.png") no-repeat right top;
+                      }
+                </pre>
+                </td>
+                <td>在使用简写属性时，属性值的顺序为：
+                    <ul>
+                        <li>background-color</li>
+                        <li>background-image</li>
+                        <li>background-repeat</li>
+                        <li>background-attachment</li>
+                        <li>background-position</li>
+                        [ 色图铺定位 ]
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td>背景色半透明</td>
+                <td></td>
+                <td>
+                    <pre>
+                    background: rgba(250, 150, 140, 0.5);
+                </pre>
+                </td>
+                <td>另外opacity也可半透明</td>
+            </tr>
+        </tbody>
+    </table>
+    </p>
+    <hr>
+    <p>
+    <h2>CSS Fonts [字体]</h2>
+    5个通用字体族：
+    <ul>
+        <li>衬线字体（Serif）- 在每个字母的边缘都有一个小的笔触。它们营造出一种形式感和优雅感。</li>
+        <li>无衬线字体（Sans-serif）- 字体线条简洁（没有小笔画）。它们营造出现代而简约的外观。</li>
+        <li>等宽字体（Monospace）- 这里所有字母都有相同的固定宽度。它们创造出机械式的外观。</li>
+        <li>草书字体（Cursive）- 模仿了人类的笔迹。</li>
+        <li>幻想字体（Fantasy）- 是装饰性/俏皮的字体。</li>
+    </ul>
+    <table border="1px" cellspacing="0px">
+        <tr>
+            <th>Attribute</th>
+            <th>说明</th>
+            <th>实例</th>
+            <th>Tips</th>
+        </tr>
+
+        <tbody align="center">
+            <tr>
+                <td>font-family</td>
+                <td>属性规定文本的字体
+                </td>
+                <td>
+                    <pre>
+                    .p1 {
+                        font-family: "Times New Roman", Times, serif;
+                      }
+                </pre>
+                </td>
+                <td>应包含多个字体名称作为“后备”系统，以确保浏览器/操作系统之间的最大兼容性 <br>
+                    从需要字体开始，通用系列字体结束。字体名称应以，相隔 <br>
+                    字体名称不止一个单词，则必须用引号引起来，例如："Times New Roman"。</td>
+            </tr>
+            <tr>
+                <td>font-style</td>
+                <td>主要用于指定斜体文本。</td>
+                <td>
+                    <pre>
+                    p.normal {
+                        font-style: normal;
+                      }
+                </pre>
+                </td>
+                <td>此属性可设置三个值：
+                    <ul>
+                        <li>normal - 文字正常显示</li>
+                        <li>italic - 文本以斜体显示</li>
+                        <li>oblique - 文本为“倾斜”（倾斜与斜体非常相似，但支持较少）</li>
+                    </ul>
+                    italic 是使用文字的斜体，oblique 是让没有斜体属性的文字倾斜！
+                </td>
+            </tr>
+            <tr>
+                <td>font-weight</td>
+                <td>指定字体的粗细。</td>
+                <td>
+                    <pre>
+                    p.normal {
+                        font-weight: normal;
+                      }
+                </pre>
+                </td>
+                <td>normal 默认值。定义标准的字符 <br>
+                    bold 定义粗体字符。 <br>
+                    bolder 定义更粗的字符。 <br>
+                    lighter 定义更细的字符。 <br>
+                    x00 400 等同于 normal，而 700 等同于 bold。 <br>
+                </td>
+            </tr>
+            <tr>
+                <td><a href="https://www.w3school.com.cn/css/css_font_size.asp" target="_blank">font-size</a></td>
+                <td>设置文本的大小。可以是绝对或相对大小。 <br>
+                    绝对尺寸：
+                    <ul>
+                        <li>将文本设置为指定大小</li>
+                        <li>不允许用户在所有浏览器中更改文本大小（可访问性不佳）</li>
+                        <li>当输出的物理尺寸已知时，绝对尺寸很有用</li>
+                    </ul>
+                    相对尺寸：
+                    <ul>
+                        <li>设置相对于周围元素的大小</li>
+                        <li>允许用户在浏览器中更改文本大小</li>
+                    </ul>
+                </td>
+                <td>
+                    <pre>
+                    body {font-size:100%;}
+
+                    h1 {
+                        font-size: 40px;
+                      }
+
+                    h1 {
+                    font-size: 2.5em; /* 40px/16=2.5em */
+                    }
+
+                    <h1 style="font-size:1vw">Hello World</h1>
+
+                </pre>
+                </td>
+                <td>0、在所有浏览器的解决方案中，设置
+
+                    <body>元素的默认字体大小的是百分比
+                        1、使用像素设置文本大小可以完全控制文本大小，仍然可以使用缩放工具来调整整个页面的大小； <br>
+                        2、为了允许用户调整文本大小，使用 em 设置字体大小，W3C 建议使用 em 尺寸单位。 <br>
+                        pixels/16=em。 <br>
+                        3、响应式字体大小：使用 vw 单位设置文本大小，文本大小将遵循浏览器窗口的大小，1vw = 视口宽度的 1％。
+                </td>
+            </tr>
+            <tr>
+                <td>font-variant</td>
+                <td>指定是否以 small-caps 字体（小型大写字母）显示文本</td>
+                <td>
+                    <pre>
+                    p.normal {
+                        font-variant: normal;
+                      }
+                      
+                      p.small {
+                        font-variant: small-caps;
+                      }
+                </pre>
+                </td>
+                <td>normal 默认值。浏览器会显示一个标准的字体。 <br>
+                    small-caps 浏览器会显示小型大写字母的字体。 <br>
+                    inherit 规定应该从父元素继承 font-variant 属性的值。 <br>
+                </td>
+            </tr>
+            <tr>
+                <td>font</td>
+                <td>简写属性，缩短代码，指定所有单个字体属性</td>
+                <td>
+                    <pre>
+                    p.a {
+                        font: 20px Arial, sans-serif;
+                      }
+                      
+                      p.b {
+                        font: italic small-caps bold 12px/30px Georgia, serif;
+                      }
+                </pre>
+                </td>
+                <td>font 属性是以下属性的简写属性<em>[类粗大/行家]</em>：
+                    <ul>
+                        <li>font-style</li>
+                        <li>font-variant</li>
+                        <li>font-weight</li>
+                        <li>font-size/line-height</li>
+                        <li>font-family</li>
+                    </ul>
+                    必须保留size和family属性，否则font将不起作用。
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    </p>
+    <hr>
+    <p>
+    <h3>CSS TEXT(文本)</h3>
+    <table border="1px" cellspacing="0px">
+        <tr>
+            <th>Attribute</th>
+            <th>说明</th>
+            <th>实例</th>
+            <th>Tips</th>
+        </tr>
+        <tr>
+            <td>color</td>
+            <td>设置文本的颜色.</td>
+            <td>
+                <pre>
+                    body {
+                        color: blue;
+                      }
+                </pre>
+            </td>
+            <td>对于 W3C compliant CSS：如果您定义了 color 属性，则还必须定义 background-color 属性。</td>
+        </tr>
+        <tr>
+            <td>text-align</td>
+            <td>设置文本的水平对齐方式。</td>
+            <td>
+                <pre>
+                    h1 {
+                        text-align: center;
+                      }
+                </pre>
+            </td>
+            <td>当 text-align 属性设置为 "justify" 后，将拉伸每一行，以使每一行具有相等的宽度，并且左右边距是直的（就像在杂志和报纸中)</td>
+        </tr>
+        <tr>
+            <td>direction</td>
+            <td>规定文本的方向 / 书写方向</td>
+            <td>
+                <pre>
+                    p {
+                        direction: rtl;
+                      }
+                </pre>
+            </td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>unicode-bidi</td>
+            <td>重写文本</td>
+            <td>
+                <pre>
+                    div {
+                        direction: rtl;
+                        unicode-bidi: bidi-override;
+                      }
+                </pre>
+            </td>
+            <td>unicode-bidi 属性与 direction 属性一起使用，设置或返回是否应重写文本以支持同一文档中的多种语言</td>
+        </tr>
+        <tr>
+            <td>vertical-align </td>
+            <td>设置元素的垂直对齐方式。</td>
+            <td>
+                <pre>
+                    img.bottom {
+                        vertical-align: bottom;
+                      }
+                </pre>
+            </td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>text-decoration</td>
+            <td>用于设置或删除文本装饰。</td>
+            <td>
+                <pre>
+                    h1 {
+                        text-decoration: overline;
+                      }
+                      
+                      h2 {
+                        text-decoration: line-through;
+                      }
+                      
+                      h3 {
+                        text-decoration: underline;
+                      }
+                </pre>
+            </td>
+            <td>通常用于从链接上删除下划线。<br />建议不要在非链接文本加下划线，因为这经常会使读者感到困惑。</td>
+        </tr>
+        <tr>
+            <td>text-transform</td>
+            <td>指定文本中的大写和小写字母。它可用于将所有内容转换为大写或小写字母，或将每个单词的首字母大写</td>
+            <td>
+                <pre>
+                    p.uppercase {
+                        text-transform: uppercase;
+                      }
+                      
+                      p.lowercase {
+                        text-transform: lowercase;
+                      }
+                      
+                      p.capitalize {
+                        text-transform: capitalize;
+                      }
+                </pre>
+            </td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>text-indent</td>
+            <td>用于指定文本第一行的缩进</td>
+            <td>
+                <pre>
+                    p {
+                        text-indent: 50px;
+                      }
+                </pre>
+            </td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>letter-spacing</td>
+            <td>用于指定文本中字符之间的间距。</td>
+            <td>
+                <pre>
+                    h1 {
+                        letter-spacing: 3px;
+                      }                      
+                </pre>
+            </td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>line-height</td>
+            <td>用于指定行之间的间距</td>
+            <td>
+                <pre>
+                    p.small {
+                        line-height: 0.8;
+                      }
+                </pre>
+            </td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>word-spacing</td>
+            <td>指定文本中单词之间的间距</td>
+            <td>
+                <pre>
+                    h1 {
+                        word-spacing: 10px;
+                      }
+                      
+                      h2 {
+                        word-spacing: -5px;
+                      }
+                </pre>
+            </td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>white-space</td>
+            <td>指定元素内部空白的处理方式。</td>
+            <td>
+                <pre>
+                    p {
+                        white-space: nowrap;
+                      }
+                </pre>
+            </td>
+            <td>nowarap,禁用文本环绕，即不换行</td>
+        </tr>
+        <tr>
+            <td>text-shadow</td>
+            <td>为文本添加阴影。</td>
+            <td>
+                <pre>
+                    h1 {
+                        text-shadow: 2px 2px 5px red;
+                      }
+                </pre>
+            </td>
+            <td>[ 平直模色 ]</td>
+        </tr>
+    </table>
+    </p>
+    <hr>
+    <p>
+    <h3>CSS Border[边框]</h3>
+    <table border="1px" cellspacing="0px">
+        <tr>
+            <th>Attribute</th>
+            <th>说明</th>
+            <th>实例</th>
+            <th>Tips</th>
+        </tr>
+        <tr>
+            <td>border-style</td>
+            <td>定义边框的样式</td>
+            <td>
+                <pre>
+                    h1  {
+                        border-style: dotted solid double dashed;
+                    }
+                </pre>
+            </td>
+            <td>设置border-style属性，其他 CSS 边框属性才会有作用！</td>
+        </tr>
+        <tr>
+            <td>border-width</td>
+            <td>指定四个边框的宽度</td>
+            <td>
+                <pre>
+                    p.two {
+                        border-style: solid;
+                        border-width: 20px 5px; /* 上边框和下边框为 20px，其他边为 5px */
+                      }
+                      
+                      p.three {
+                        border-style: solid;
+                        border-width: 25px 10px 4px 35px; /* 上边框 25px，右边框 10px，下边框 4px，左边框 35px */
+                      }
+                </pre>
+            </td>
+            <td>可以将宽度设置为特定大小（以 px、pt、cm、em 计），也可以使用以下三个预定义值之一：thin、medium 或 thick</td>
+        </tr>
+        <tr>
+            <td>border-color</td>
+            <td>设置四个边框的颜色。</td>
+            <td>
+                <pre>
+                    p.one {
+                        border-style: solid;
+                        border-color: red;
+                      }
+                      p.one {
+                        border-style: solid;
+                        border-color: red green blue yellow; /* 上红、右绿、下蓝、左黄 */
+                      }
+                </pre>
+            </td>
+            <td>如果未设置 border-color，则它将继承元素的颜色。<br /> border-color 属性可以设置一到四个值（用于上边框、右边框、下边框和左边框）。</td>
+        </tr>
+        <tr>
+            <td>border</td>
+            <td>简写属性,缩减代码。</td>
+            <td>
+                <pre>
+                    p {
+                        border: 5px solid red;
+                      }
+                      <!-- 只会下边框指定 -->
+                    p {
+                    border-bottom: 6px solid red;
+                    background-color: lightgrey;
+                    }
+                </pre>
+            </td>
+            <td>border 属性是以下各个边框属性的简写属性(无顺序)：
+                <li>border-width</li>
+                <li>border-style（必需）</li>
+                <li>border-color</li>
+                还可以只为一个边指定所有单个边框属性
+            </td>
+        </tr>
+        <tr>
+            <td>border-radius</td>
+            <td>向元素添加圆角边框</td>
+            <td>
+                <pre>
+                    p {
+                        border: 2px solid red;
+                        border-radius: 5px;
+                      }
+                </pre>
+            </td>
+            <td>1、设置圆：先放一个正方形盒子，radius数值为高度或宽度的一般，50%； <br> 
+                2、设置矩形：设置为高度 height 的一半；<br>
+                3、该属性为简写属性，可取四个值：左上角、右上角、右下角、左下角。
+            </td>
+        </tr>
+    </table>
+    </p>
+    <hr>
+    <p>
+    <h3>CSS BOX Model [盒子模型]</h3>
+    <img src="https://www.runoob.com/images/box-model.gif" alt="BOX MODEL" width="30%"> <br />
+    <ul>
+        <li>内容 - 框的内容，其中显示文本和图像。</li>
+        <li>内边距 - 清除内容周围的区域。内边距是透明的。</li>
+        <li>边框 - 围绕内边距和内容的边框。</li>
+        <li>外边距 - 清除边界外的区域。外边距是透明的。</li>
+    </ul>
+    <ul>
+        <li>背景应用于由内容和内边距、边框组成的区域。</li>
+        <li>内边距、边框和外边距都是可选的，默认值是零。但是，许多元素将由用户代理样式表设置外边距和内边距。可以通过将元素的 margin 和 padding
+            设置为零来覆盖这些浏览器样式。这可以分别进行，也可以使用通用选择器对所有元素进行设置</li>
+        <li>内边距、边框和外边距可以应用于一个元素的所有边，也可以应用于单独的边。</li>
+        <li>外边距可以是负值，而且在很多情况下都要使用负值的外边距。</li>
+    </ul>
+    </p>
+    <hr>
+    <p>
+    <h3>CSS Display[显示]</h3>
+    display 属性规定是否/如何显示元素。 <br />
+    每个 HTML 元素都有一个默认的 display 值，具体取决于它的元素类型。 <br />
+    大多数元素的默认 display 值为 block 或 inline。 <br />
+    <hr width="80%" align="left">
+
+    <h4>块级元素（block element）</h4>
+    <ul>
+        <li>块级元素总是从新行开始，并占据可用的全部宽度（尽可能向左和向右伸展）。</li>
+        <li>height、width、margin、padding都可以控制</li>
+        <li>宽度默认为容器（父级元素）的100%</li>
+        <li>是一个容器及盒子，内可放行内元素和块级元素</li>
+    </ul>
+    注意：文字类元素内，不可使用块级元素。如：p、h1~h6，否则出问题
+    <hr width="80%" align="left">
+
+    <h4>行内元素（inline element）</h4>
+    内联元素不从新行开始，仅占用所需的宽度。
+    <ul>
+        <li>内联元素不从新行开始，仅占用所需的宽度。</li>
+        <li>height、width直接设置无效</li>
+        <li>默认宽度是它内容的宽度</li>
+        <li>行内元素只能容纳文本或其他行内元素</li>
+    </ul>
+    注意：链接里不能再放链接；特殊情况链接a里可放块级元素，但最好转换块级模式
+    <hr width="80%" align="left">
+
+    <h4>行内块元素</h4>
+    在行内元素中有几个特殊的标签——img input td ，它们同时具有块级元素和行内元素的特点，有些资料称之为行内块元素
+    <ul>
+        <li>和相邻行内元素（行内块）在一行上，中间有空白间隙。一行可以显示多个</li>
+        <li>默认宽度就是它们本身内容的宽度</li>
+        <li>height、width、margin、padding都可以控制</li>
+    </ul>
+    <hr width="80%" align="left">
+
+    <h4>元素显示模式的转换</h4>
+    特殊情况下，需要元素模式的切换，简单理解：一个模式的元素想要另一模式的特性。 <br />
+    如：增加a链接的触发范围
+    <ul>
+        <li>转化为块级元素 display:block </li>
+        <li>转化为行内元素 display:inline </li>
+        <li>转化为行内块元素 display:inline-block </li>
+    </ul>
+    <h4>块级盒子水平居中</h4>
+    条件： <br>
+    1、 盒子指定 width <br>
+    2、左右margin设置为： auto
+    <h3>两种盒子模型类型 （与 margin 无关）</h3>
+    <h4>1、 box-sizing: content box (默认)</h4>
+    此时，元素的 width = content 宽度 <br />
+    <strong>盒子会膨胀</strong>
+    <h4>2、 box-sizing: border box 【常用】</h4>
+    此时，元素的width = content + padding + border 的宽度 <br />
+    <strong>盒子不会膨胀</strong>
+    <h3>外边距合并（外边距塌陷）</h3>
+    取margin较大者，为公用margin标准
+    <h3>盒子模型布局稳定性</h3>
+    建议优先级：width &gt; padding &gt; margin
+    <h3>嵌套块级元素垂直外边距合并</h3>
+    对于两个嵌套关系的块级元素，若父级元素没有上 内边距及边框，则父元素的上外边框会与子元素的上 外边距发生合并，合并后的外边距为两者中较大者，即使父级元素上外边距为0，也会发生合并。 <br>
+    解决方案：给父元素设置边框或者内边距
+    <h3>清除内外边距</h3>
+    网页元素很多都带有默认的内外边距，而且不同浏览器默认的不一致。因此，在布局前，首先要清除网页的内外边距
+    <br> CSS 第一行代码 ↓ <br>
+    <pre>
+        * {
+            margin:0;
+            padding:0;
+        }
+    </pre>
+    注意：行内元素较特殊，为照顾兼容性，只设置左右margin、padding，不设置上下内外边距。但是转化为块级和行内外元素就可以了
+    <h2>网页布局顺序</h2>
+    <ul>
+        <li>确定结构</li>
+        <li>布局方式</li>
+        <li>行内元素？</li>
+        <li>盒子类型？</li>
+        <li>width？height？</li>
+        <li>padding?</li>
+        <li>margin?</li>
+    </ul>
+    </p>
+    <hr>
+    <p>
+    <h3>CSS 三大特性</h3>
+    <ul>
+        层叠性原则
+        <li>样式冲突，就近原则</li>
+        <li>样式不冲突，不层叠</li>
+    </ul>
+    <ul>
+        继承性
+        <li>子元素可以继承父元素的样式（text-、font-、line-、color等）</li>
+        <li>恰当使用可简化代码</li>
+    </ul>
+    <ul>
+        优先级 <br />
+        当同一元素指定多个选择器，就会有优先级的产生
+        <li>选择器相同，则执行层叠性</li>
+        <li>选择器不同，则根据优先级权重执行</li>
+        <li>
+            <table border="1px" cellspacing="0px">
+                <tr>
+                    <td>选择器</td>
+                    <td>优先级权重</td>
+                </tr>
+                <tr>
+                    <td>继承 或 * </td>
+                    <td>0000</td>
+                </tr>
+                <tr>
+                    <td>元素选择器</td>
+                    <td>0001</td>
+                </tr>
+                <tr>
+                    <td>类选择器，伪类选择器</td>
+                    <td>0010</td>
+                </tr>
+                <tr>
+                    <td>id选择器</td>
+                    <td>0100</td>
+                </tr>
+                <tr>
+                    <td>行内样式</td>
+                    <td>1000</td>
+                </tr>
+                <tr>
+                    <td>!important</td>
+                    <td>无穷大</td>
+                </tr>
+            </table>
+        </li>
+    </ul>
+
+    </p>
+    <hr>
+    <p>
+    <h3>CSS Table [表格]</h3>
+    <table border="1px" cellspacing="0px" align="center">
+        <tr>
+            <th>Attribute</th>
+            <th>说明</th>
+            <th>实例</th>
+            <th>Tips</th>
+        </tr>
+        <tr>
+            <td>border</td>
+            <td>设置表格边框</td>
+            <td>
+                <pre>
+                table, th, td {
+                    border: 1px solid black;
+                  }
+            </pre>
+            </td>
+            <td>表格的宽度和高度由 width 和 height 属性定义。</td>
+        </tr>
+        <tr>
+            <td>border-collapse</td>
+            <td>设置是否将表格边框折叠为单一边框</td>
+            <td>
+                <pre>
+                    table {
+                        border-collapse: collapse;
+                      }                     
+            </pre>
+            </td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>text-align</td>
+            <td>设置 th 或 td 中内容的水平对齐方式</td>
+            <td>
+                <pre>
+
+            </pre>
+            </td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>vertical-align</td>
+            <td>设置 th 或 td 中内容的垂直对齐方式</td>
+            <td>
+                <pre>
+
+            </pre>
+            </td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>padding</td>
+            <td>控制边框和表格内容之间的间距</td>
+            <td>
+                <pre>
+
+            </pre>
+            </td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>border-bottom</td>
+            <td>水平分隔线</td>
+            <td>
+                <pre>
+                    th, td {
+                        border-bottom: 1px solid #ddd;
+                      }
+            </pre>
+            </td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>tr:hover</td>
+            <td>突出出显示鼠标悬停时的表格行</td>
+            <td>
+                <pre>
+                    tr:hover {background-color: #f5f5f5;}
+            </pre>
+            </td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>nth-child() 选择器</td>
+            <td>为所有偶数（或奇数）表行添加背景色，实现斑马纹表格效果</td>
+            <td>
+                <pre>
+                    tr:nth-child(even) {background-color: #f2f2f2;}
+            </pre>
+            </td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>overflow-x:auto</td>
+            <td>响应式表格</td>
+            <td>
+                <pre>
+                    &lt;div style="overflow-x:auto;"&gt;
+            </pre>
+            </td>
+            <td></td>
+        </tr>
+    </table>
+    </p>
+    <hr>
+    <p>
+    <h3><a href="https://www.bilibili.com/video/BV1P7411G7BW" target="_blank"
+            style="text-decoration: none;color: tomato;">CSS Position [定位]</a></h3>
+    定位可以让盒子自由地在某盒子内移动或固定于屏幕某个位置，且可以压住其他盒子。<br>
+    定位=定位模式 + 边偏移 <br>
+    应用于元素的定位方法的类型。一个属性5个值，共同配合5个属性：top、bottom、left、right、z-index（层级关系） <br>
+    相关口诀：<strong style="color: brown;">子绝父相，就近原则</strong> <br><br>
+    原因: <br>
+    1、为不影响其他盒子，子级不占有位置（脱离标准流）——选择 absolute <br>
+    2、父级 需加定位限制 子级 —— relative absolute fixed sticky <br>
+    3、布局时，父级要占有位置（不脱离标准流）——选择 relative <br>
+    最终： 子 absolute 父 relative <br><br>
+    <table border="1px" cellspacing="0px">
+        <tr>
+            <th>属性</th>
+            <th>描述</th>
+        </tr>
+        <tr>
+            <td>static （静态）</td>
+            <td>默认。<br> 静态定位的元素不受 top、bottom、left 和 right 属性的影响。<br> 它始终根据页面的正常流进行定位</td>
+        </tr>
+        <tr>
+            <td>relative</td>
+            <td>不脱离文档流的布局。只改变自身的位置，在文档流原先的位置留下空白区域 <br> 定位的起始位置为此元素原先在文档流的位置
+                <br>只是可以通过4个属性值改变自身的位置：top、bottom、left、right。
+            </td>
+        </tr>
+        <tr>
+            <td>absolute</td>
+            <td>脱离文档流的布局。遗留下来的空间由后面元素填充 <br> 定位的起始位置为最近一级带有定位的父元素（position不为static，其他均可），否则为body本身。 <br> 总结：起始位置看爸爸，static爸爸看祖宗（body），然后通过4个属性值改变自身的位置：top、bottom、left、right。<br>注意：不设置4个位置属性值，起始位置走正常文档流 </td>
+        </tr>
+        <tr>
+            <td>fixed (粘性)</td>
+            <td>相对于视口（viewport，浏览器窗口）进行偏移，即定位基点是浏览器窗口，固定在网页上 <br> 总结：起始位置不看任何人，只看浏览器窗口，然后通过4个属性值改变自身的位置：top、bottom、left、right。<br>注意：不设置4个位置属性值，起始位置走正常文档流 </td>
+        </tr>
+        <tr>
+            <td>stick</td>
+            <td>会产生动态效果，很想fixed和relative的结合：一些时候是relative定位（定位基点是自身默认位置），另一些时候自动变成fixed定位（定位基点是视口） <br> 总结：不设置4个位置属性值，与relative一样。具体规则：页面滚动，父元素脱离窗口时（部分不可见），就跟fixed一样。其他情况跟relative一样。 </td>
+        </tr>
+    </table>
+    <h4>定位总结</h4>
+    <table border="1px" cellspacing="0">
+        <tr>
+            <th>定位模式</th>
+            <th>是否脱标</th>
+            <th>移动位置</th>
+            <th>是否常用</th>
+        </tr>
+        <tr>
+            <td>static</td>
+            <td>否</td>
+            <td>不能使用边偏移</td>
+            <td>很少</td>
+        </tr>
+        <tr>
+            <td>relative</td>
+            <td>否</td>
+            <td>相对于自身边偏移</td>
+            <td>常用</td>
+        </tr>
+        <tr>
+            <td>absolute</td>
+            <td>是</td>
+            <td>带有定外的最近父级</td>
+            <td>常用</td>
+        </tr>
+        <tr>
+            <td>fixed</td>
+            <td>是</td>
+            <td>浏览器可视区</td>
+            <td>常用</td>
+        </tr>
+        <tr>
+            <td>sticky</td>
+            <td>否</td>
+            <td>浏览器可视区</td>
+            <td></td>
+        </tr>
+    </table>
+    <h5>固定定位小技巧</h5>
+    固定到版心右侧
+    算法： <br>
+    1、移动到网页中线 ———— left:50% <br>
+    2、再向左移动版心的一半像素 ———— margin-left:-xx px; <br>
+    <pre>
+        position:fixed;
+        left:50%;
+        margin-left:-400px;
+    </pre>
+    <h5>绝对定位盒子居中</h5>
+    算法：
+    1、移动到网页中线 ———— left:50% <br>
+    2、再向左移动盒子的一半像素 ———— margin-left:xx px; <br>
+    3、向下移动网页的一半 ———— top:50% <br>
+    4、再向上移动盒子的一半像素 ———— margin-top:-xx px; <br>
+    <h5>绝对定位特性</h5>
+    绝对定位和固定定位也和浮动类似。【行内块元素】 <br>
+    <ul>
+        <li>1、 行内元素 添加绝对定位或固定定位，可直接设置宽度与高度</li>
+        <li>2、 块级元素 添加绝对定位或固定定位，不给宽度与高度，默认大小是内容大小</li>
+    </ul>
+    注意： <br>
+    绝对定位和固定定位会压住标准流盒子； <br>
+    浮动不会压住标准流盒子。 <br>
+    <h5>定位叠放顺序</h5> 
+    使用 z-index 来控制盒子前后顺序（z轴）
+    <ul>
+        <li>默认是auto。可为负整数、0、正整数，数值越大越靠上</li>
+        <li>数值相同，后来居上</li>
+        <li>数字后面不能加单位</li>
+        <li>只有定位的盒子才有 z-index 属性</li>
+    </ul>
+    </p>
+    <hr>
+    <p>
+        <h3><a href="https://www.bilibili.com/video/BV14J4114768?p=155&spm_id_from=pageDriver" style="color: tomato;text-decoration: none;">PS 基本操作</a></h3> 
+        <h3><a href="https://www.bilibili.com/video/BV14J4114768?p=190" style="color: tomato;text-decoration: none;">PS 切图</a></h3> 
+    </p>
+    <hr>
+    <p>
+    <h3>CSS Outline [轮廓]</h3>
+    轮廓是在元素周围绘制的一条线，在边框之外，以凸显元素。 <br>
+    注意：轮廓与边框 [不同之处] 在于：轮廓是在元素边框之外绘制的，并且可能与其他内容重叠。同样，轮廓也不是元素尺寸的一部分；元素的总宽度和高度不受轮廓线宽度的影响。
+    <table border="1px" cellspacing="0px">
+        <tr>
+            <th>Attribute</th>
+            <th>说明</th>
+            <th>实例</th>
+            <th>Tips</th>
+        </tr>
+        <tr>
+            <td>outline-style</td>
+            <td>指定轮廓样式</td>
+            <td><pre>
+                p.dotted {outline-style: dotted;}
+            </pre></td>
+            <td><strong>注意：除非设置了 outline-style 属性，否则其他轮廓属性（在下一章中将详细介绍）都不会有任何作用！</strong><br>
+                dotted - 定义点状的轮廓。  <br>
+                dashed - 定义虚线的轮廓。 <br>
+                solid - 定义实线的轮廓。 <br>
+                double - 定义双线的轮廓。 <br>
+                groove - 定义 3D 凹槽轮廓。 <br>
+                ridge - 定义 3D 凸槽轮廓。 <br>
+                inset - 定义 3D 凹边轮廓。 <br>
+                outset - 定义 3D 凸边轮廓。 <br>
+                none - 定义无轮廓。 <br>
+                hidden - 定义隐藏的轮廓。</td>
+        </tr>
+        <tr>
+            <td>outline-width</td>
+            <td>指定轮廓的宽度</td>
+            <td><pre>
+                p.ex1 {
+                    border: 1px solid black;
+                    outline-style: solid;
+                    outline-color: red;
+                    outline-width: thin;
+                  }
+            </pre></td>
+            <td>thin（通常为 1px）
+                medium（通常为 3px）
+                thick （通常为 5px）
+                特定尺寸（以 px、pt、cm、em 计）</td>
+        </tr>
+        <tr>
+            <td>outline-color</td>
+            <td>设置轮廓的颜色。</td>
+            <td><pre>
+                p.ex1 {
+                    border: 2px solid black;
+                    outline-style: solid;
+                    outline-color: red;
+                  }
+            </pre></td>
+            <td>也可使用outline-color: invert。执行颜色反转。可以确保无论颜色背景如何，轮廓都是可见的</td>
+        </tr>
+        <tr>
+            <td>outline</td>
+            <td>简写属性</td>
+            <td><pre>
+                p.ex3 {outline: 5px solid yellow;}
+            </pre></td>
+            <td>outline-width
+                outline-style（必需）
+                outline-color</td>
+        </tr>
+        <tr>
+            <td>outline-offset</td>
+            <td>在元素的轮廓与边框之间添加空间。元素及其轮廓之间的空间是透明的。</td>
+            <td><pre>
+                p {
+                    margin: 30px;
+                    background: yellow;
+                    border: 1px solid black;
+                    outline: 1px solid red;
+                    outline-offset: 25px;
+                  }
+            </pre></td>
+            <td></td>
+        </tr>
+    </table>     
+    </p>
+    <hr>
+    <p>
+    <h3>CSS list [列表]</h3>
+    CSS 列表属性使您可以：
+    <ul>
+        <li>为有序列表设置不同的列表项标记</li>
+        <li>为无序列表设置不同的列表项标记</li>
+        <li>将图像设置为列表项标记</li>
+        <li>为列表和列表项添加背景色</li>
+    </ul>
+    <table border="1px" cellspacing="0px"> 
+        <tr>
+            <th>Attribute</th>
+            <th>说明</th>
+            <th>实例</th>
+            <th>Tips</th>
+        </tr>
+        <tr>
+            <td>list-style-type</td>
+            <td>指定列表项标记的类型。</td>
+            <td><pre>
+                ul.b {
+                    list-style-type: square;
+                  }
+                ol.d {
+                list-style-type: lower-alpha;
+                }
+            </pre></td>
+            <td>list-style-type:none 属性也可以用于删除标记/项目符号。请注意，列表还拥有默认的外边距和内边距。要删除此内容，请在 ul 或 ol 中添加 margin:0 和 padding:0</td>
+        </tr>
+        <tr>
+            <td>list-style-image</td>
+            <td>将图像指定为列表项标记</td>
+            <td><pre>
+                ul {
+                    list-style-image: url('sqpurple.gif');
+                  }
+            </pre></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>list-style-position</td>
+            <td>指定列表项标记（项目符号）的位置。</td>
+            <td><pre>
+                ul.b {
+                    list-style-position: inside;
+                  }
+            </pre></td>
+            <td>默认 outside </td>
+        </tr>
+        <tr>
+            <td>list-style</td>
+            <td>简写属性</td>
+            <td><pre>
+                ul {
+                    list-style: square inside url("sqpurple.gif");
+                  }
+            </pre></td>
+            <td>在使用简写属性时，属性值的顺序为：
+                <ul>
+                    <li>list-style-type（如果指定了 list-style-image，那么在由于某种原因而无法显示图像时，会显示这个属性的值）</li>
+                    <li>list-style-position（指定列表项标记应显示在内容流的内部还是外部）</li>
+                    <li>list-style-image（将图像指定为列表项标记）</li>
+                </ul>
+                如果缺少上述属性值之一，则将插入缺失属性的默认值（如果有）。
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>颜色样式</td>
+            <td><pre>
+                ul {
+                    background: #3399ff;
+                    padding: 20px;
+                  }
+            </pre></td>
+            <td>我们还可以使用颜色设置列表样式，使它们看起来更有趣。<br> 添加到 ol 或 ul 标记的任何样式都会影响整个列表，而添加到 li 标记的属性将影响各个列表项</td>
+        </tr>
+    </table>
+    </p>
+    <hr>
+    <p>
+        <h3>CSS overflow [溢出]</h3>
+        CSS overflow 属性控制对太大而区域无法容纳的内容的处理方式。 <br>
+        可设置以下值：
+        <ul>
+            <li>visible - 默认。溢出没有被剪裁。内容在元素框外渲染</li>
+            <li>hidden - 溢出被剪裁，其余内容将不可见</li>
+            <li>scroll - 溢出被剪裁，同时添加滚动条以查看其余内容</li>
+            <li>auto - 与 scroll 类似，但仅在必要时添加滚动条</li>
+        </ul>
+    <table border="1px" cellspacing="0px"> 
+        <tr>
+            <th>Attribute</th>
+            <th>说明</th>
+            <th>实例</th>
+            <th>Tips</th>
+        </tr>
+        <tr>
+            <td>overflow: visible</td>
+            <td>定在元素的内容太大而无法放入指定区域时是剪裁内容还是添加滚动条。</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>overflow: hidden</td>
+            <td>如果使用 hidden 值，溢出会被裁剪，其余内容被隐藏</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>overflow: scroll</td>
+            <td>如果将值设置为 scroll，溢出将被裁剪，并添加滚动条以便在框内滚动。请注意，这将在水平和垂直方向上添加一个滚动条（即使您不需要它）</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>overflow: auto</td>
+            <td>auto 值类似于 scroll，但是它仅在必要时添加滚动条</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>overflow-x 和 overflow-y</td>
+            <td>overflow-x 指定如何处理内容的左/右边缘。 <br>
+                overflow-y 指定如何处理内容的上/下边缘。</td>
+            <td><pre>
+                div {
+                    overflow-x: hidden; /* 隐藏水平滚动栏 */
+                    overflow-y: scroll; /* 添加垂直滚动栏 */
+                  }
+            </pre></td>
+            <td></td>
+        </tr>
+    </table>
+    </p>
+    <hr>
+    <p>
+        <h3>CSS float [浮动] 与 清除浮动</h3>
+        <strong> float 属性用于创建浮动框，将其移往一边，知道某一边缘接触及 包含块 或 另一浮动框 的边缘。</strong>
+        Float（浮动），会使元素向左或向右移动，其周围的元素也会重新排列。 <br>
+        往往是用于图像，但它在布局时一样非常有用。  <br><br>
+        float 属性可以设置以下值之一：
+        <ul>
+            <li>left - 元素浮动到其容器的左侧</li>
+            <li>right - 元素浮动在其容器的右侧</li>
+            <li>none - 元素不会浮动（将显示在文本中刚出现的位置）。默认值。</li>
+            <li>inherit - 元素继承其父级的 float 值</li>
+        </ul>
+        <h4>为何需要浮动</h4>
+        1、行内块元素可实现一行显示，但之间会有大的空白间隙，很难控制，不满足实际开发需求。 <br>
+        2、很多布局方式，标准流无法完成，此时利用 浮动 完成布局。因为浮动可以改变元素标签默认的排列方式。
+        <h4>浮动特性</h4>
+        1、<strong>浮动元素会脱离标准流 （脱标），脱标后不再保留原先的位置 （上浮，z轴+1）</strong> <br>
+        2、浮动元素会一行内显示，并且元素顶部对齐 <br>
+        3、浮动元素是互相贴合（无间隙），如果父级元素装不下这些浮动盒子，多出的盒子会另起一行 <br>
+        4、浮动元素会具有 行内块元素 的特性 <br>
+        5、浮动盒子只会影响浮动盒子后边的标准流，对前面标准流无影响 <br>
+        <h4>浮动元素常和标准流父级元素搭配使用</h4>
+        父级元素约束浮动元素位置：  <br>
+        &nbsp;&nbsp;&nbsp;&nbsp; 先用标准流 父级元素 排列 上下 位置，之后 内部元素 采取浮动排列 左右 位置。
+        <hr width="80%">
+        <h4>为什么要清除浮动</h4>
+        1、父盒子不一定有高度，很多时候，是让子盒子撑开父盒子<br>
+        2、浮动元素不占有高度，会对后面元素排版产生影响<br>
+        <h4>清除浮动本质</h4>
+        1、本质是清除浮动元素造成的影响 <br>
+        2、如果父元素有高度，则不需要清除浮动 <br>
+        3、清除浮动后，父盒子会根据子盒子自动检测高度。父级有了高度，就不会影响后面的标准流了。 <br>
+        <h4> clear 属性</h4>
+        clear 属性可设置以下值之一：
+        <ul>
+            <li>none - 允许两侧都有浮动元素。默认值</li>
+            <li>left - 左侧不允许浮动元素</li>
+            <li>right- 右侧不允许浮动元素</li>
+            <li>both - 左侧或右侧均不允许浮动元素</li>
+            <li>inherit - 元素继承其父级的 clear 值</li>
+        </ul>
+        实际工作中：几乎只用 clear：both； <br>
+        清除浮动的策略是：闭合浮动（只让浮动在父盒子内部影响）
+        <h4>清除浮动方法</h4>
+        1、额外标签法（隔墙法）：W3C推荐方法 <br>
+        2、父级添加 overflow 属性 <br>
+        3、父级添加 after 伪元素 <br>
+        4、父级添加双伪元素 <br>
+        <table border="1px" cellspacing="0px">
+            <tr>
+                <td>额外标签法</td>
+                <td>在浮动元素末尾添加空标签（必须是块级元素）</td>
+                <td><pre>
+                    &lt;div style="clear:both">&lt;/div>
+                    或
+                    &lt;br style="clear:both" />
+                </pre></td>
+                <td>优点：通俗易懂，易于书写 </td> <br> 
+                缺点：添加许多无意义的标签，结构化较差</td>
+            </tr>
+            <tr>
+                <td>父级添加 overflow </td>
+                <td>给父级添加 overflow 属性，将其属性设置为hidden、auto、sscroll</td>
+                <td><pre>
+                    .box {
+                        overflow: hidden;
+                        width: 1200px;
+                        background-color: aquamarine;
+                    }
+                </pre></td>
+                <td>
+                    说明：如果一个元素比父元素高，并且它是浮动的，它将“溢出”到其容器之外。<br>
+                    然后我们可以向包含元素添加 overflow: auto;，来解决此问题 <br><br>
+                    优点：代码简洁 <br> 
+                    缺点：无法显示溢出部分
+                </td>
+            </tr>
+            <tr>
+                <td>父级添加 after 伪元素</td>
+                <td>相当于 额外标签法 的升级版</td>
+                <td><pre>
+                    /* 设置空的h=0块级元素，清除浮动，隐藏 */
+                    .clearfix::after {
+                        content: "";
+                        display: block;
+                        height: 0;
+                        clear: both;
+                        visibility: hidden;
+                    }
+                    /* IE 6、7 专有 */
+                    .clearfix::after {
+                        *zoom: 1;
+                    }
+                </pre></td>
+                <td>实际常用，可复制代码标签调用
+                    优点：没有增加额外标签，结构更简单 <br>
+                    缺点：需要照顾低版本浏览器
+                </td>
+            </tr>
+            <tr>
+                <td>父级添加双伪元素</td>
+                <td>在 after 的基础上 在父级元素 before 添加</td>
+                <td><pre>
+                    .clearfix,
+                    .clearfix::after {
+                        content: "";
+                        display: block;
+                        height: 0;
+                        clear: both;
+                        visibility: hidden;
+                    }
+                    /* IE 6、7 专有 */
+                    .clearfix::after {
+                        *zoom: 1;
+                    }
+                </pre></td>
+                <td>优点：代码更简洁 <br> 缺点：要照顾低版本浏览器</td>
+            </tr>
+        </table>
+    </p>
+    <hr>
+    <p>
+        <h3>网页布局</h3>
+        <h4>传统网页布局的三种方式</h4>
+        <ul>
+            <li>标准流（普通流）</li>标签按默认方式排列，最基本的布局方式。
+            <li>浮动</li>
+            <li>定位</li>
+        </ul>
+        注意：实际开发中，一个页面都基本包含了这三种布局方式。（移动端有新布局方式）
+        <h3>网页布局准则</h3>
+        1、多个块级元素 纵向 排列找标准流， 横向 排列找浮动。 <br>
+        2、先设置盒子大小，再设置盒子位置。
+        <h3>常见网页布局</h3>
+        网页布局有很多种方式，一般分为以下几个部分：页眉、菜单、内容和页脚。
+        <p>【 页眉（header） 】 通常位于网站顶部（或顶部导航菜单的正下方）。它通常包含徽标（logo）或网站名称</p>
+        <p>【导航栏】 包含链接列表，以帮助访问者浏览您的网站</p>
+        【内容】 一般有三种形式:
+        <ul>
+            <li>1 列：一般用于移动端</li>
+            <li>2 列：一般用于平板设备</li>
+            <li>3 列：一般用于 PC 桌面设备</li>
+        </ul>
+        <h5>不相等的栏</h5>
+        主要内容（main content）是您网站上最大、最重要的部分。<br><br>
+
+        1、列宽不相等的情况很常见，因为大部分空间都为主内容保留。 <br>
+        2、附属内容（如果有）通常用作替代导航或指定与主要内容有关的信息。 <br>
+        3、您可以随意更改宽度，只要记住它的总和应为 100％ <br><br>
+        【 页脚 】位于页面底部。它通常包含诸如版权和联系方式之类的信息。
+        <h4>响应式网站布局</h4>
+        创建一个自适应的网站布局，会根据屏幕宽度切换两列与全宽列
+        <hr>
+        <h3>页面布局整体思路</h3>
+        <ul>
+            <li>通过测量确定页面版心（可视区）</li>
+            <li>分析行模块，行模块中的列模块</li>
+            <li>行中列模块 浮动 布局，确定列大小、位置</li>
+            <li>制作html结构。先结构后样式</li>
+        </ul>
+        <h3>网页布局总结</h3>
+        一个完整的网页，是标准流、浮动、定位一起完成布局的，每个都有自己的用法 <br>
+        1、标准流 <br>
+        可以让盒子上下排列或者左右排列，<span style="color: red;">垂直的块级盒子显示就用标准流布局</span> <br>
+        2、浮动 <br>
+        可以让多个块级元素一行显示，<span style="color: red;">多个块级盒子水平显示就用浮动布局</span> <br>
+        3、定位 <br>
+        可以让多个盒子前后叠压显示，<span style="color: red;">元素自由在某个盒子内移动就用定位布局</span> <br>
+    </p>
+    <hr>
+    <p>
+        <h3>元素的显示与隐藏 [display visibility overflow]</h3>
+        <h4> display 属性</h4>
+        <ul>
+            <li> display: none ; 隐藏对象 【用处更多】</li>
+            <li> display: block ; 除转换块级元素外，同时还有显示对象的意思</li>
+        </ul>
+        display 隐藏元素后，不再占有原来的位置 <br>
+        后面应用广泛，搭配 js 可以做很多网页效果 <br>
+        <h4> visibility 属性</h4>
+        <ul>
+            <li> visibility: hidden ; 元素隐藏</li>
+            <li> visibility: visible ; 元素可见</li>
+        </ul>
+        visibility 隐藏元素后，继续占有原来的位置 <br>
+        <h4> overflow 属性</h4>
+        <ul>
+            <li> overflow: visible ; 不剪切内容也不添加滚动条</li>
+            <li> overflow: hidden ; 不显示超出对象尺寸的内容，超出的部分隐藏掉</li>
+            <li> overflow: scroll ; 不管是否超出对象，总显示滚动条</li>
+            <li> overflow: auto ; 超出对象显示滚动条，不超出对象不显示滚动条</li>
+        </ul>
+        一般情况，不让溢出的内容显示出来，会影响布局  <br>
+        但是有定位的盒子（超出父盒子），请慎用 overflow:hidden ，因为它会隐藏多余的部分 <br>
+    </p>
+    <hr>
+    <p>
+        <h3>精灵图</h3>
+        <p>目的: 为有效地减少服务器接收和发送请求的次数，提高页面的加载速度，出现了CSS精灵技术</p>
+        <p>核心原理：将网页中的一些小背景图整合到一张大图中去，这样服务器只需要一次请求即可</p>
+        <h5>精灵图的使用</h5>
+        1、 主要针对背景图片使用，就是把多张小背景图片整合到一张图片上
+        2、 这个大图片也称为 sprites 精灵图或雪碧图
+    </p>
+    <hr>
+    <p>
+        <h3>CSS 初始化</h3>
+        重设浏览器的样式，也称为CSS reset，每个网页都必须首先进行CSS初始化。
+    </p>
+
+</body>
+
+</html>

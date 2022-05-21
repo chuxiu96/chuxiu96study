@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XML Notes</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+        }
+
+        h3 {
+            color: indigo;
+        }
+
+        strong,
+        h4 {
+            color: tomato;
+        }
+
+        em {
+            font-style: normal;
+            color: cornflowerblue;
+        }
+
+        p,
+        ul {
+            text-indent: 2em;
+        }
+
+        table,
+        th,
+        tr,
+        td {
+            margin: 0 3em;
+            padding: 0.2em 2em;
+            border: 2px solid gray;
+            background-color: #f5f5f5;
+            border-collapse: collapse;
+            text-align: center;
+        }
+
+        th {
+            background-color: #3f3f3f;
+            color: #f5f5f5;
+        }
+
+        a {
+            text-decoration: none;
+            color: rgb(215, 47, 162);
+        }
+    </style>
+</head>
+
+<body>
+    <h3>XML</h3>
+    <h4>简介</h4>
+    <p>XML 指可扩展标记语言（eXtensible Markup Language）。</p>
+    <p>XML 被设计用来传输和存储数据</p>
+
+    <h3>JSON</h3>
+    <h4>JSON 简介</h4>
+    <ul>
+        <li>JSON: JavaScript Object Notation(JavaScript 对象表示法)</li>
+        <li>JSON 是存储和交换文本信息的语法，类似 XML。</li>
+        <li>JSON 比 XML 更小、更快，更易解析。</li>
+    </ul>
+    <h4>JSON - 转换为 JavaScript 对象</h4>
+    <ul>
+        <li>JSON 文本格式在语法上与创建 JavaScript 对象的代码相同。</li>
+        <li>无需解析器，JavaScript 程序能够使用内建的 eval() 函数，用 JSON 数据来生成原生的 JavaScript 对象。</li>
+    </ul>
+    <h4>JSON 语法规则</h4>
+    <ul>
+        <li>数据在名称/值对中</li>
+        <li>数据由逗号分隔</li>
+        <li>大括号 {} 保存对象</li>
+        <li>中括号 [] 保存数组，数组可以包含多个对象</li>
+    </ul>
+    <h4>JSON 文件</h4>
+    <ul>
+        <li>JSON 文件的文件类型是 .json</li>
+        <li>JSON 文本的 MIME 类型是 application/json</li>
+    </ul>
+    <p>JSON 可以使用标准的 JavaScript 函数来解析。</p>
+    <ul>
+        <li>JSON.parse(): 将一个 JSON 字符串转换为 JavaScript 对象。</li>
+        <li>JSON.stringify(): 于将 JavaScript 值转换为 JSON 字符串。</li>
+    </ul>
+</body>
+
+</html>

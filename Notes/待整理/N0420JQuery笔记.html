@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title>JQuery Notes</title>
+    <style>
+        * {
+            margin: 0;
+        }
+
+        strong,
+        h4 {
+            color: tomato;
+        }
+
+        em {
+            font-style: normal;
+            color: cornflowerblue;
+        }
+
+        p,
+        ul {
+            text-indent: 2em;
+        }
+
+        table,
+        th,
+        tr,
+        td {
+            margin: 0 3em;
+            padding: 0.2em 2em;
+            border: 2px solid gray;
+            background-color: #f5f5f5;
+            border-collapse: collapse;
+            text-align: center;
+        }
+
+        th {
+            background-color: #3f3f3f;
+            color: #f5f5f5;
+        }
+
+        a {
+            text-decoration: none;
+            color: rgb(215, 47, 162);
+        }
+    </style>
+</head>
+
+<body>
+    <h2>jQuery 概述</h2>
+    <h4>什么是 jQuery ？</h4>
+    <ul>
+        <li>jQuery 是一个 JavaScript 函数库。</li>
+        <li>jQuery 是一个轻量级的"写的少，做的多"的 JavaScript 库。</li>
+        <li>jQuery 库包含以下功能：
+            <ul>
+                <li>HTML 元素选取</li>
+                <li>HTML 元素操作</li>
+                <li>CSS 操作</li>
+                <li>HTML 事件函数</li>
+                <li>JavaScript 特效和动画</li>
+                <li>HTML DOM 遍历和修改</li>
+                <li>AJAX</li>
+                <li>Utilities</li>
+            </ul>
+        </li>
+    </ul>
+
+    <h4>jQuery 语法</h4>
+    <strong>基础语法：</strong><em> $(selector).action()</em>
+    <ul>
+        <li>美元符号定义 jQuery</li>
+        <li>选择符（selector）"查询"和"查找" HTML 元素</li>
+        <li>jQuery 的 action() 执行对元素的操作</li>
+    </ul>
+
+    <h4>文档就绪事件</h4>
+    <p>为了防止文档在完全加载（就绪）之前运行 jQuery 代码，即在 DOM 加载完成后才可以对 DOM 进行操作。</p>
+    <p>所有 jQuery 函数位于一个 document ready 函数中：</p>
+    <pre><em>
+        $(document).ready(function(){
+ 
+            // 开始写 jQuery 代码...
+          
+         });</em></pre>
+    <p>简洁写法：</p>
+    <em>
+        <pre>
+        $(function(){
+ 
+            // 开始写 jQuery 代码...
+          
+         });</pre></em>
+
+    <h4>jQuery 事件</h4>
+    <strong>事件：</strong>页面对不同访问者的响应叫做事件。
+    <strong>常见 DOM 事件：</strong>
+    <table>
+        <tr>
+            <th>鼠标事件</th>
+            <th>键盘事件</th>
+            <th>表单事件</th>
+            <th>文档/窗口事件</th>
+        </tr>
+        <tr>
+            <td>click</td>
+            <td>keypress</td>
+            <td>submit</td>
+            <td>load</td>
+        </tr>
+        <tr>
+            <td>dblclick</td>
+            <td>keydown</td>
+            <td>change</td>
+            <td>resize</td>
+        </tr>
+        <tr>
+            <td>mouseenter</td>
+            <td>keyup</td>
+            <td>focus</td>
+            <td>scroll</td>
+        </tr>
+        <tr>
+            <td>mouseleave</td>
+            <td></td>
+            <td>blur</td>
+            <td>unload</td>
+        </tr>
+        <tr>
+            <td>hover</td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
+    <pre>
+        // 注意点：
+        $(function () {
+            $('选择器').事件(function () {
+                $('选择器').方法();               // <em>选择器要加引号</em>
+                $(this).方法();                  // <em>this 不用加引号</em>
+                $(this).css('属性名', '属性值'); // <em>括号内；'属性名', '属性值'</em>
+            });                                 // <em>分号 ; 不能掉</em>
+        });</pre>
+
+    <h4>JQuery 效果</h4>
+    <table>
+        <tr>
+            <th>效果名</th>
+            <th>语法</th>
+            <th>说明</th>
+            <th>参数</th>
+        </tr>
+        <tr>
+            <td colspan="4">隐藏/显示</td>
+        </tr>
+        <tr>
+            <td>hide() 和 show()</td>
+            <td>$(selector)<em>.hide</em>(speed,callback); <br>
+                $(selector)<em>.show</em>(speed,callback);</td>
+            <td>隐藏和显示 HTML 元素</td>
+            <td><ul>
+                <li>speed 参数 【可选】：规定隐藏/显示的速度， ~ 取值："slow"、"fast" 或毫秒。</li>
+                <li>callback 参数 【可选】：隐藏或显示完成后所执行的函数名称。</li>
+                <li>第二个参数是一个字符串，表示过渡使用哪种缓动函数(jQuery自身提供"linear" 和 "swing"，其他可以使用相关的插件）</li>
+            </ul></td>
+        </tr>
+        <tr>
+            <td>toggle()</td>
+            <td>$(selector)<em>.toggle</em>(speed,callback);</td>
+            <td>切换 隐藏/显示<ul>
+                <li>通过 jQuery，您可以使用 toggle() 方法来切换 hide() 和 show() 方法。</li>
+                <li>显示被隐藏的元素，并隐藏已显示的元素</li>
+            </ul></td>
+            <td>同↑</td>
+        </tr>
+        <tr>
+            <td colspan="4">淡入/淡出</td>
+        </tr>
+        <tr>
+            <td>fadeIn()</td>
+            <td>$(selector)<em>.fadeIn</em>(speed,callback);</td>
+            <td>淡入已隐藏的元素 <br>
+            <em>前提：元素已隐藏</em></td>
+            <td>同↑</td>
+        </tr>
+        <tr>
+            <td>fadeOut()</td>
+            <td>$(selector)<em>.fadeOut</em>(speed,callback);</td>
+            <td>淡出可见元素 <br>
+            <em>前提：元素可见</em></td>
+            <td>同↑</td>
+        </tr>
+        <tr>
+            <td>fadeToggle() </td>
+            <td>$(selector)<em>.fadeToggle</em>(speed,callback);</td>
+            <td>可以在 fadeIn() 与 fadeOut() 方法之间进行切换:
+                <ul>
+                    <li>如果元素已淡出，则 fadeToggle() 会向元素添加淡入效果。</li>
+                    <li>如果元素已淡入，则 fadeToggle() 会向元素添加淡出效果。</li>
+                </ul>
+            </td>
+            <td>同↑</td>
+        </tr>
+        <tr>
+            <td>fadeTo()</td>
+            <td>$(selector)<em>.fadeTo</em>(speed,<em>opacity</em>,callback);</td>
+            <td>允许渐变为给定的不透明度（值介于 0 与 1 之间）。</td>
+            <td><ul>
+                <li>speed 参数 【必需】：规定效果的时长。 ~ 可以取以下值："slow"、"fast" 或毫秒。</li>
+                <li>opacity 参数 【必需】：将淡入淡出效果设置为给定的不透明度（值介于 0 与 1 之间）。</li>
+                <li>callback 参数 【可选】:该函数完成后所执行的函数名称。</li>
+            </ul></td>
+        </tr>
+        <tr>
+            <td colspan="4">滑动</td>
+        </tr>
+        <tr>
+            <td>slideDown()</td>
+            <td>$(selector)<em>.slideDown</em>(speed,callback);</td>
+            <td>用于向下滑动元素。<br>
+                <em>前提：元素已隐藏</em></td>
+            <td>同 hide()</td>
+        </tr>
+        <tr>
+            <td>slideUp()</td>
+            <td>$(selector)<em>.slideUp</em>(speed,callback);</td>
+            <td>用于向上滑动元素。<br>
+                <em>前提：元素可见</em></td>
+            <td>同↑</td>
+        </tr>
+        <tr>
+            <td>slideToggle() </td>
+            <td>$(selector)<em>.slideToggle</em>(speed,callback);</td>
+            <td>jQuery slideToggle() 方法可以在 slideDown() 与 slideUp() 方法之间进行切换。
+                <ul>
+                    <li>如果元素向下滑动，则 slideToggle() 可向上滑动它们。</li>
+                    <li>如果元素向上滑动，则 slideToggle() 可向下滑动它们。</li>
+                </ul>
+            </td>
+            <td>同↑</td>
+        </tr>
+        <tr>
+            <td colspan="4">动画</td>
+        </tr>
+        <tr>
+            <td><a href="https://www.runoob.com/jquery/jquery-animate.html">animate()</a></td>
+            <td>$(selector)<em>.animate</em>(<em>{params}</em>,speed,callback);</td>
+            <td>
+                <ul>
+                    <li>默认情况下，所有 HTML 元素都有一个静态位置，且无法移动。 <br>
+                        如需对位置进行操作，要记得首先把元素的 CSS position 属性设置为 relative、fixed 或 absolute！</li>
+                    <li>生成动画的过程中可同时使用多个属性</li>
+                </ul>
+            </td>
+            <td>
+                <ul>
+                    <li>params 参数【必需】：定义形成动画的 CSS 属性。</li>
+                    <li>speed 参数 【可选】：规定效果的时长 ~ 可以取以下值："slow"、"fast" 或毫秒。</li>
+                    <li> callback 参数 【可选】：动画完成后所执行的函数名称</li>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td>操作多个属性 ： 几乎可以可以用 animate() 方法来操作所有 CSS 属性。但必须使用 Camel 标记法书写所有的属性名，比如，必须使用 paddingLeft 而不是 padding-left，使用 marginRight 而不是 margin-right，等等</td>
+            <td>使用相对值 ： 可以定义相对值（该值相对于元素的当前值）。需要在值的前面加上 += 或 -= <pre>height:'+=150px',</pre></td>
+            <td>使用预定义的值 ： 可以把属性的动画值设置为 "show"、"hide" 或 "toggle" <pre>height:'toggle'</pre></td>
+            <td>使用队列功能 : 默认地，jQuery 提供针对动画的队列功能。编写多个 animate() 调用，jQuery 会创建包含这些方法调用的"内部"队列。然后逐一运行这些 animate 调用。</td>
+        </tr>
+        <tr>
+            <td colspan="4">停止动画</td>
+        </tr>
+        <tr>
+            <td>stop()</td>
+            <td>$(selector)<em>.stop</em>(<em>stopAll,goToEnd</em>);</td>
+            <td>用于停止动画或效果，在它们完成之前。 <br>
+                适用于所有 jQuery 效果函数，包括滑动、淡入淡出和自定义动画。</td>
+            <td>
+                <ul>
+                    <li>stopAll 参数 【可选】： 规定是否应该清除动画队列。默认是 false，即仅停止活动的动画，允许任何排入队列的动画向后执行。</li>
+                    <li>goToEnd 参数 【可选】： 规定是否立即完成当前动画。默认是 false。</li>
+                </ul>
+            </td>
+        </tr>
+    </table>
+
+    <h4>jQuery - 链(Chaining)</h4>
+    <strong>Chaining 允许我们在一条语句中运行多个 jQuery 方法（在相同的元素上）。</strong>
+    <p>实例：</p>
+    <p><pre>
+        $("#p1").css("color","red").slideUp(2000).slideDown(2000);</pre></p>
+
+    <h3>jQuery HTML</h3>
+    <h4>jQuery - 获取内容和属性</h4>
+    <strong>jQuery DOM 操作</strong>
+    <p><em>获得内容</em></p>
+    <ul>
+        <li>text() - 设置或返回所选元素的文本内容</li>
+        <li>html() - 设置或返回所选元素的内容（包括 HTML 标记）</li>
+        <li>val() - 设置或返回表单字段的值</li>
+    </ul>
+    <p><pre>
+        $(function () {
+            $('#btn1').click(function() {
+                alert('段落1：' + $('#p1').text())
+            });
+            $('#btn2').click(function() {
+                alert('段落2：' + $('#p2').html())
+            });
+            $('#btn3').click(function() {
+                alert('输入的是：' + $('#text1').val())
+            })
+        });</pre></p>
+
+    <p><em>获取属性</em></p>
+    <ul>
+        <li>attr() - 用于获取属性值</li>
+    </ul>
+
+    <strong>attr() 和 prop()</strong>
+    <p>attr()函数的结果:</p>
+    <ul>
+        <li>1.如果有相应的属性，返回指定属性值。</li>
+        <li>2.如果没有相应的属性，返回值是 undefined。</li>
+    </ul>
+
+    <p>prop()函数的结果:</p>
+    <ul>
+        <li>1.如果有相应的属性，返回指定属性值。</li>
+        <li>2.如果没有相应的属性，返回值是空字符串。</li>
+    </ul>
+
+    <p>使用</p>
+    <ul>
+        <li>对于HTML元素本身就带有的固有属性，在处理时，使用prop方法。</li>
+        <li>对于HTML元素我们自己自定义的DOM属性，在处理时，使用 attr 方法</li>
+        <li>具有 true 和 false 两个属性的属性，如 checked, selected 或者 disabled 使用prop()</li>
+    </ul>
+
+
+    <h4>设置内容和属性</h4>
+
+    <p><strong>设置内容</strong></p>
+    <p>还是使用 text() 、 html() 、 val()来设置内容。</p>
+    <p><em>在方法 () 中，输入设置的内容即可</em></p>
+    <p>实例：</p>
+    <p><pre>
+        $(function() {
+            $('btn1').click(function() {
+                alert($('#anchor1').attr('href'));
+            });
+            $('#btn2').click(function() {
+                $('#para1').text('变化了的段落1！')
+            });
+            $('#btn3').click(function() {
+                $('#para2').html('&lt;strong>变化了的段落2！&lt;/strong>')
+            });
+            $('#btn4').click(function() {
+                $('#text1').val("不想输入了")
+            });
+        });</pre></p>
+    
+    <p><strong>text()、html() 以及 val() 的回调函数</strong></p>
+    <p>上面的三个 jQuery 方法：text()、html() 以及 val()，同样拥有回调函数。回调函数有两个参数：</p>
+    <ul>
+        <li>被选元素列表中当前元素的下标</li>
+        <li>以及原始（旧的）值</li>
+    </ul>
+    <p>然后以函数新值返回您希望使用的字符串。</p>
+    <p><pre>
+        $("#btn1").click(function(){
+            $("#test1").text(function(i,origText){
+                return "旧文本: " + <em>origText</em> + " 新文本: Hello world! (index: " + <em>i</em> + ")"; 
+            });
+        });</pre></p>
+
+    <p><strong>设置属性</strong></p>
+    <p>attr() 方法也用于设置/改变属性值。</p>
+    <p><pre>
+        $("button").click(function(){
+            $("#runoob").attr({
+                "href" : "http://www.runoob.com/jquery",
+                "title" : "jQuery 教程"
+            });
+        });</pre></p>
+
+        <p><strong>attr() 的回调函数</strong></p>
+        <p>jQuery 方法 attr()，也提供回调函数。回调函数有两个参数：</p>
+        <ul>
+            <li>被选元素列表中当前元素的下标，</li>
+            <li>以及原始（旧的）值。</li>
+        </ul>
+        <p>然后以函数新值返回您希望使用的字符串。</p>
+        <p><pre>
+            $("button").click(function(){
+                $("#runoob").attr("href", function(i,origValue){
+                  return <em>origValue</em> + "/jquery";    // 访问 https://www.runoob.com/jquery/jquery.com
+                });
+              });</pre></p>
+
+    <h3>jQuery - 添加元素</h3>
+    <strong>添加新的 HTML 内容</strong>
+    <ul>
+        <li>append() - 在被选元素的结尾插入内容（仍然在该元素的内部）</li>
+        <li>prepend() - 在被选元素的开头插入内容（仍然在该元素的内部）</li>
+        <li>after() - 在被选元素之后插入内容</li>
+        <li>before() - 在被选元素之前插入内容</li>
+    </ul>
+
+    <table>
+        <tr>
+            <th>方法</th>
+            <th>语法</th>
+            <th>说明</th>
+            <th>实例</th>
+        </tr>
+        <tr>
+            <td>append()</td>
+            <td><pre>$("被选取元素").append("添加内容");</pre></td>
+            <td>在被选元素的开头插入内容</td>
+            <td><pre>$('#para2').append('&lt;br>这是第三个段落');
+$('ol').append('&lt;li>这是第4个列表&lt;/li>');</pre></td>
+        </tr>
+        <tr>
+            <td>prepend()</td>
+            <td><pre>$("被选取元素").prepend("添加内容");</td>
+            <td>在被选元素的开头插入内容</td>
+            <td><pre>$('ol').prepend('&lt;li>这是第4个列表&lt;/li>');</pre></td>
+        </tr>
+        <tr>
+            <td>after()</td>
+            <td><pre>$("被选取元素").after("添加内容");</pre></td>
+            <td>在被选元素之后插入内容</td>
+            <td><pre>$('#para2').after('&lt;br>这是第三个段落')</pre></td>
+        </tr>
+        <tr>
+            <td>before()</td>
+            <td><pre>$("被选取元素").before("添加内容");</pre></td>
+            <td>在被选元素之前插入内容。</td>
+            <td><pre>$('ol').before('&lt;li>这是第4个列表&lt;/li>')</pre></td>
+        </tr>
+    </table>
+
+    <p><strong>append/prepend和after/before的区别</strong></p>
+    <ul>
+        <li>append/prepend 是在选择元素内部嵌入。</li>
+        <li>after/before 是在元素外面追加。</li>
+    </ul>
+
+    <strong>删除已有的 HTML 元素。</strong>
+    <ul>
+        <li>remove() - 删除被选元素（及其子元素）</li>
+        <li>empty() - 从被选元素中删除子元素</li>
+    </ul>
+    
+    <table>
+        <tr>
+            <th>方法</th>
+            <th>语法</th>
+            <th>说明</th>
+            <th>实例</th>
+        </tr>
+        <tr>
+            <td>remove()</td>
+            <td><pre>$("被选元素").remove();</pre></td>
+            <td>删除被选元素（及其子元素） <br>
+                可接受一个参数，允许您对被删元素进行 <em>过滤</em> 。<br>
+                该参数可以是任何 jQuery 选择器的语法。<br>
+                <pre>$("p").remove(".italic"); // 删除 class="italic" 的所有 &lt;p> 元素</pre></td>
+            <td>$("#div1").remove();</td>
+        </tr>
+        <tr>
+            <td>empty()</td>
+            <td><pre>$("被选元素").empty();</pre></td>
+            <td>删除被选元素的子元素。</td>
+            <td>$("#div1").empty();</td>
+        </tr>
+    </table>
+
+    <h3>jQuery CSS 类</h3>
+    <p><strong>操作 CSS</strong></p>
+    <ul>
+        <li>addClass() - 向被选元素添加一个或多个类</li>
+        <li>removeClass() - 从被选元素删除一个或多个类</li>
+        <li>toggleClass() - 对被选元素进行添加/删除类的切换操作</li>
+        <li>css() - 设置或返回样式属性</li>
+    </ul>
+    <table>
+        <tr>
+            <th>方法</th>
+            <th>语法</th>
+            <th>说明</th>
+            <th>实例</th>
+        </tr>
+        <tr>
+            <td>addClass(</td>
+            <td><pre>$("选择器").addClass("样式名");</pre></td>
+            <td></td>
+            <td><pre>.blue {
+                color:blue;
+                }
+            </pre>
+        <pre>$("h1,h2,p").addClass("blue");</pre></td>
+        </tr>
+        <tr>
+            <td>removeClass()</td>
+            <td><pre>$("选择器").removeClass("样式名");</pre></td>
+            <td></td>
+            <td><pre>$("h1,h2,p").removeClass("blue");</pre></td>
+        </tr>
+        <tr>
+            <td>toggleClass() </td>
+            <td><pre>$("选择器").toggleClass("样式名");</pre></td>
+            <td></td>
+            <td><pre>$("h1,h2,p").toggleClass("blue");</pre></td>
+        </tr>
+        <tr>
+            <td>css()</td>
+            <td>返回 ：<pre>$("选择器").css("属性名");</pre>
+                设置（单样式 / 多样式） ：
+                <ul>
+                    <li><pre>$("选择器").css("属性名"<em>,</em>"值");</pre></li>
+                    <li><pre>$("选择器").css(<em>{</em>"属性名"<em>:</em>"值"<em>,</em>"属性名"<em>:</em>"值",...<em>}</em>);</pre></li>
+                </ul></td>
+            <td></td>
+            <td><pre>$("p").css("background-color","yellow");</pre>
+                <pre>$("p").css({"background-color":"yellow","font-size":"200%"});</pre></td>
+        </tr>
+    </table>
+    <strong>Tips</strong>
+    <ul>
+        <li>有多个语句或键值对时，一般使用 { } 括起来</li>
+        <li>例如： 函数代码块 、animate() 多参数属性 、css() 设置多样式</li>
+    </ul>
+
+    <h3>jQuery 尺寸</h3>
+    <p><strong>jQuery 尺寸方法</strong></p>
+    <ul>
+        <li>width()</li>
+        <li>height()</li>
+        <li>innerWidth()</li>
+        <li>innerHeight()</li>
+        <li>outerWidth()</li>
+        <li>outerHeight()</li>
+    </ul>
+    <img src="https://www.runoob.com/images/img_jquerydim.gif" alt="jQuery 尺寸">
+    <p>实例</p>
+    <p><pre>
+        $(function () {
+            $('button').click(function () {
+                let txt = "";
+                txt += 'div宽度：' + $('div').width() + '&lt;br>';
+                txt += 'div高度：' + $('div').height() + '&lt;br>';
+                txt += 'div内宽：' + $('div').innerWidth() + '&lt;br>';
+                txt += 'div内高：' + $('div').innerHeight() + '&lt;br>';
+                txt += 'div外宽：' + $('div').outerWidth() + '&lt;br>';
+                txt += 'div外高：' + $('div').outerHeight() + '&lt;br>';
+                txt += 'div外宽真：' + $('div').outerWidth(true) + '&lt;br>';
+                txt += 'div外高真：' + $('div').outerHeight(true);
+                $('div').html(txt);
+            })
+        })</pre></p>
+    
+    <h3>jQuery 遍历</h3>
+    <p>用于根据其相对于其他元素的关系来"查找"（或选取）HTML 元素。</p>
+    <table>
+        <tr>
+            <th>方法</th>
+            <th>说明</th>
+            <th>实例</th>
+            <th>参数</th>
+        </tr>
+        <tr>
+            <td colspan="4">祖先</td>
+        </tr>
+        <tr>
+            <td>parent()</td>
+            <td>返回被选元素的 <em>直接父元素</em> 。<br>只会向上一级对 DOM 树进行遍历</td>
+            <td><pre>$("span")<em>.parent</em>();</pre></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>parents()</td>
+            <td>返回被选元素的 <em>所有祖先元素</em> 。<br>一路向上直到文档的根元素 (&lt;html>)</td>
+            <td><pre>$("span")<em>.parents</em>();</pre></td>
+            <td>可选参数来过滤对祖先元素的搜索
+                <pre>$("span").parents(<em>"ul"</em>);  // 返回所有 &lt;span> 元素的所有祖先，并且它是 <ul> 元素</pre>
+            </td>
+        </tr>
+        <tr>
+            <td>parentsUntil()</td>
+            <td>返回 <em>介于两个给定元素之间</em> 的 <em>所有祖先元素</em> 。</td>
+            <td><pre>$("span").parentsUntil("div"); <br> // 返回 span与 div元素之间所有祖先元素 </pre></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td colspan="4">后代</td>
+        </tr>
+        <tr>
+            <td>children()</td>
+            <td>返回被选元素的 <em>所有直接子元素</em> </td>
+            <td><pre>$("div").children();</pre></td>
+            <td>可选参数来过滤对子元素的搜索。
+                <pre>$("div").children("p.1"); // 返回类名为 "1" 的所有<br> p 元素，并且它们是 div 的直接子元素</pre>
+            </td>
+        </tr>
+        <tr>
+            <td>find() </td>
+            <td>返回被选元素的后代元素，一路向下直到最后一个后代。</td>
+            <td><pre>$("div").find("span"); // 返回属于<br> div> 后代的所有 span> 元素</pre>
+            <pre>$("div").find("*"); // 返回<br> div 的所有后代</pre></td>
+            <td><em>$('选择器').find('<em>param1, param2</em>')</em>，不带参数不生效</td>
+        </tr>
+        <tr>
+            <td colspan="4">同胞</td>
+        </tr>
+        <tr>
+            <td>siblings()</td>
+            <td>返回被选元素的 <em>所有同胞元素</em> </td>
+            <td><pre>$("h2").siblings(); // 返回 h2 的所有同胞元素</pre></td>
+            <td>可选参数来过滤对同胞元素的搜索。 <br>
+            <pre>$("h2").siblings("p"); // 返回 <br>属于h2 的同胞元素的所有 p 元素</pre></td>
+        </tr>
+        <tr>
+            <td>next() </td>
+            <td>返回被选元素的 <em>下一个同胞元素</em> 。</td>
+            <td><pre>$("h2").next(); // 返回 h2 的下一个同胞元素</pre></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>nextAll()</td>
+            <td>返回被选元素的 <em>所有跟随的同胞元素</em> </td>
+            <td><pre>$("h2").nextAll(); // 返回 <br> h2 的所有跟随的同胞元素</pre></td>
+            <td>可选参数来过滤对跟随的同胞元素的搜索</td>
+        </tr>
+        <tr>
+            <td>nextUntil()</td>
+            <td>返回介于两个给定参数之间的所有跟随的同胞元素</td>
+            <td><pre>$("h2").nextUntil("h6"); // 返回<br>介于 h2 与 h6 元素之间的所有同胞元素</pre></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td colspan="4">prev(), prevAll() & prevUntil() 方法 : 向前遍历，返回的是前面的同胞元素</td>
+        </tr>
+        <tr>
+            <td colspan="4">过滤 : 缩小搜索元素的范围 （基于其在一组元素中的位置来选择一个特定的元素）</td>
+        </tr>
+        <tr>
+            <td>first()</td>
+            <td>返回被选元素的 <em>首个元素</em> </td>
+            <td><pre>$("div p").first(); // 选取<br>首个 div 元素内部的第一个 p 元素</pre></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>last()</td>
+            <td>返回被选元素的 <em>最后一个元素</em> </td>
+            <td><pre>$("div p").last(); // 选择<br>最后一个 div 元素中的最后一个 p 元素</pre></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>eq()</td>
+            <td>返回被选元素中带有指定索引号的元素 (索引号从 0 开始)</td>
+            <td><pre>$("p").eq(1);  // 选取<br>第二个 p 元素（索引号 1）</pre></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>filter()</td>
+            <td>允许您规定一个标准。不匹配这个标准的元素会被从集合中删除，匹配的元素会被返回</td>
+            <td><pre>$("p").filter(".url");  // 返回<br>带有类名 "url" 的所有 p 元素</pre></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td> not()</td>
+            <td>返回不匹配标准的所有元素。与 filter() 相反。</td>
+            <td><pre>$("p").not(".url"); // 返回<br>不带有类名 "url" 的所有 p 元素</pre></td>
+            <td></td>
+        </tr>
+    </table>
+
+    <h3>jQuery AJAX</h3>
+    <p><strong>AJAX 简介</strong></p>
+    <ul>
+        <li>AJAX = 异步 JavaScript 和 XML（Asynchronous JavaScript and XML）。</li>
+        <li>不重载整个网页的情况下，AJAX 通过后台加载数据，并在网页上进行显示。</li>
+    </ul>
+    <p><strong> jQuery 与 AJAX</strong></p>
+    <ul>
+        <li>jQuery 提供多个与 AJAX 有关的方法。</li>
+        <li>通过 jQuery AJAX 方法，您能够使用 HTTP Get 和 HTTP Post 从远程服务器上请求文本、HTML、XML 或 JSON - 同时您能够把这些外部数据直接载入网页的被选元素中。</li>
+    </ul>
+
+    <h4>Ajax的运行环境</h4>
+    <p>Ajax技术需要运行在网站环境中才能生效，可以使用node创建的服务器作为网站服务器</p>
+    <a href="https://www.cnblogs.com/technicist/p/12730501.html">环境搭建</a>
+
+    <h4>jQuery 调用 AJAX 方法 最原始的封装，需要填很多参数</h4>
+    <p>语法：</p>
+    <p><pre><em>$.ajax({});</em></pre></p>
+    <p>参数</p>
+    <ul>
+        <li>type ~ 请求方式 GET / POST</li>
+        <li>url ~ 请求地址url</li>
+        <li>async ~ 是否异步， 默认 true 表示异步</li>
+        <li>data ~ 放到服务器返回的数据类型</li>
+        <li>dataType ~ 预期服务器返回的数据类型</li>
+        <li>contentType ~ 设置请求头</li>
+        <li>success ~ 请求成功时调用此函数</li>
+        <li>error ~ 请求失败时调用此函数</li>
+    </ul>
+
+    <table>
+        <tr>
+            <th>方法</th>
+            <th>语法</th>
+            <th>说明</th>
+            <th>参数</th>
+        </tr>
+        <tr>
+            <td>load()</td>
+            <td><pre>$(selector).load(URL,data,callback);</pre></td>
+            <td>从服务器加载数据，并把返回的数据放入被选元素中。</td>
+            <td><ul>
+                <li>URL 参数【必需】 : 规定您希望加载的 URL。</li>
+                <li>data 参数 【可选】： 规定与请求一同发送的查询字符串键/值对集合。</li>
+                <li>callback 参数 【可选】：是 load() 方法完成后所执行的函数名称。</li>
+            </ul></td>
+        </tr>
+        <tr>
+            <td>$.get()</td>
+            <td><pre>$.get(URL,callback);</pre></td>
+            <td>通过 HTTP GET 请求从服务器上请求数据。</td>
+            <td><ul>
+                <li>URL 参数【必需】 : 规定您希望加载的 URL。</li>
+                <li>callback 参数 【可选】：是 load() 方法完成后所执行的函数名称。</li>
+            </ul></td>
+        </tr>
+        <tr>
+            <td>$.post()</td>
+            <td><pre>$.post(URL,data,callback);</pre></td>
+            <td>通过 HTTP POST 请求向服务器提交数据。</td>
+            <td><ul>
+                <li>URL 参数【必需】 : 规定您希望加载的 URL。</li>
+                <li>data 参数 【可选】： 规定与请求一同发送的查询字符串键/值对集合。</li>
+                <li>callback 参数 【可选】：是 load() 方法完成后所执行的函数名称。</li>
+            </ul></td>
+        </tr>
+    </table>
+</body>
+
+</html>
