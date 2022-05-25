@@ -126,6 +126,26 @@ $ vue upgrade --next
 
 ##### 4.1.3 - 项目结构分析
 
+|  目录/文件   |                   说明                   |
+| :----------: | :--------------------------------------: |
+| node_modules |          npm 加载的项目依赖模块          |
+|    public    |             公共静态资源目录             |
+|  index.html  |         当前项目唯一的 HTML 页面         |
+|     src      | 项目源代码目录（程序员所写代码存放目录） |
+|  .gitignore  |              Git 的忽略文件              |
+|  index.html  |     SPA 单页面程序中唯一的 HTML 页面     |
+| package.json |            项目包管理配置文件            |
+
+###### src 目录
+
+| src 目录下 |                      说明                      |
+| :--------: | :--------------------------------------------: |
+|   assets   | 存放项目中所有静态资源文件（css、fonts、图片） |
+| components |           存放项目中所有的自定义组件           |
+|  app.vue   |      项目的根目录（项目运行后所见的结构）      |
+| index.css  |              项目的全局样式表文件              |
+|  main.js   |             整个项目的打包入口文件             |
+
 #### 4.2 - Vite
 
 [Vite](https://github.com/vitejs/vite)是一个 web 开发构建工具，由于其原生 ES 模块导入方式，可以实现闪电般的冷服务器启动。
@@ -349,7 +369,7 @@ vue会监听数据的变化，数据变化时，自动重新渲染页面的结�
 
     
 
-## 三、模版语法
+## 三、基础
 
 项目中产生的数据通常都是会变化的，前端接收后端数据并进行处理即模板语法
 
@@ -931,7 +951,7 @@ v-else-if 指令，充当 v-if 的 “ else-if ”块，可以连续使用
 ```
 
 - v-for 指令还支持一个<span style="color: #e3371e">可选</span>的第二个参数，为当前项的<span style="color: #e3371e">索引</span>
-    - 语法格式： `(item, inex) in itesm`
+    - 语法格式： `(item, index) in itesm`
     - v-for 指令中的 <span style="color: #0099dd">item</span> 项 和 <span style="color: #0099dd">index</span> 索引都是<span style="color: #0099dd">形参</span>，可根据需要<span style="color: #0099dd">重命名</span>
 
 ```html
@@ -1148,6 +1168,308 @@ v-else-if 指令，充当 v-if 的 “ else-if ”块，可以连续使用
 
 </html>
 ```
+
+### 2 - Class 与 Style 绑定
+
+实际开发中常遇到<span style="color: #e3371e">动态操作元素 class 和 内联style </span>
+
+因为它们都是 attribute，vue 允许开发者通过 <span style="color: #e3371e"> v-bind </span>属性绑定指令，为元素动态绑定<span style="color: #e3371e"> class 属性的值</span>和<span style="color: #e3371e">行内的 style 样式</span>
+
+#### 2.1 - 动态绑定 HTML 的 class
+
+##### 2.1.1 - 三元表达式
+
+通过<span style="color: #e3371e">三元表达式，动态地为元素绑定 class 的类名</span>
+
+```vue
+<template>
+	// 利用三元表达式，动态绑定 class
+    <h3 class="thin" :class="isItalic ? 'italic' : ''">Style</h3>
+	// 为按钮绑定点击事件，切换 isItalic 的布尔值
+    <button @click="isItalic=!isItalic">Toggle Italic</button>
+    <p>Lorem ipsum dolor sit.</p>
+</template>
+
+<script>
+export default {
+    name: 'MyStyle',
+    data() {
+        return {
+            isItalic: false
+        }
+    }
+}
+</script>
+
+<style lang="less" scoped>
+.thin {
+    font-weight: 200;
+}
+
+.italic {
+    font-style: italic;
+}
+</style>
+```
+
+##### 2.1.2 - 以 数组语法 绑定 HTML 的 Class
+
+如果元素需要<span style="color: #e3371e">动态绑定多个 Class </span>类名，此时可使用<span style="color: #e3371e">数组的语法格式</span>
+
+```vue
+<template>
+    <h3 class="thin" :class="[isItalic ? 'italic' : '',isDelete ? 'delete' : '']">Style</h3>
+    <button @click="isItalic=!isItalic">Toggle Italic</button>
+    <button @click="isDelete=!isDelete">Toggle Delete</button>
+    <p>Lorem ipsum dolor sit.</p>
+</template>
+
+<script>
+export default {
+    name: 'MyStyle',
+    data() {
+        return {
+            isItalic: false,
+            isDelete: false
+        }
+    }
+}
+</script>
+
+<style lang="less" scoped>
+.thin {
+    font-weight: 200;
+}
+
+.italic {
+    font-style: italic;
+}
+
+.delete {
+    text-decoration: line-through;
+}
+</style>
+```
+
+不过，当有多个条件 class 时，这样写太繁琐。所以在<span style="color: #e3371e">数组语法中也可以使用对象语法</span>用以简化
+
+##### 2.1.3- 以 对象语法 绑定 HTML 的 Class
+
+```vue
+  <h3
+    class="thin"
+    :class="classObj"
+  >Style</h3>
+  <button @click="classObj.italic=!classObj.italic">Toggle Italic</button>
+  <button @click="classObj.delete=!classObj.delete">Toggle Delete</button>
+  <p>Lorem ipsum dolor sit.</p>
+  
+  data() {
+    return {
+      classObj: {
+        italic: false,
+        delete: false,
+      },
+    };
+  },
+```
+
+#### 2.2 - 动态绑定 HTML 的内联 style
+
+##### 2.2.1 - 以 对象语法 绑定 HTML 的内联 style
+
+- `:style` 的对象语法十分直观——看着非常像 CSS，但其实是一个 JavaScript 对象。
+
+- CSS property 名可以用驼峰式 (camelCase) 或短横线分隔 (kebab-case，记得用引号括起来) 来命名
+
+    ```html
+    <div :style="{ color: activeColor, fontSize: fontSize + 'px'， 'background-color': bgcolor}"></div>
+    <button @click="fontSize += 1">字号 + 1</button>
+    ```
+
+    ```javascript
+    data() {
+      return {
+        activeColor: 'red',
+        fontSize: 30，
+        bgcolor: 'pink'
+      }
+    }
+    ```
+
+- 直接绑定到一个样式对象通常更好，这会让模板更清晰
+
+    ```html
+    <div :style="styleObject"></div>
+    ```
+
+    ```javascript
+    data() {
+      return {
+        styleObject: {
+          color: 'red',
+          fontSize: '13px'
+        }
+      }
+    }
+    ```
+
+##### 2.2.2 - 以 数组语法 绑定 HTML 的内联 style
+
+- `:style` 的数组语法可以将多个样式对象应用到同一个元素上
+
+- ```html
+    <div :style="[baseStyles, overridingStyles]"></div>
+    ```
+
+### 3 - 计算属性与侦听器
+
+#### 3.1 - 计算属性介绍
+
+计算属性<span style="color: #e3371e">本质</span>上就是一个 <span style="color: #e3371e">function 函数</span>，它可以<span style="color: #0099dd">实时监听</span> data 中数据的变化，并 <span style="color: #e3371e">return 一个计算后的新值</span>，供组件渲染 DOM 时使用
+
+- 对于任何包含响应式数据的复杂逻辑，你都应该使用**计算属性**
+
+#### 3.2 - 声明计算属性
+
+- 计算属性需要以 <span style="color: #ab04d9">function 函数</span>的形式声明到组件的 <span style="color: #ab04d9">computed 选项</span>中
+
+- 直接调用函数名即可
+
+- 计算属性<span style="color: #e3371e">侧重</span>于得到一个<span style="color: #e3371e">计算的结果</span>，因此属性值<span style="color: #0099dd">必须有 return 返回值</span>
+
+    ```html
+    <input type="text" v-model="count" />
+    <p>{{ count }} 乘以二的值：{{ plus }}</p>
+    ```
+
+    ```javascript
+        data() {
+            return {
+                count: 2,
+            };
+        },
+        computed: {
+            plus() {
+                return this.count * 2;
+            },
+        },
+    ```
+
+#### 3.3 - 计算属性的使用注意点
+
+- 计算属性<span style="color: #e3371e">必须</span><span style="color: #0099dd">定义在 computed 节点中</span>
+- 计算属性<span style="color: #e3371e">必须</span><span style="color: #0099dd">是一个 function 函数</span>
+- 计算属性<span style="color: #e3371e">必须</span><span style="color: #0099dd">有 return 值</span>
+- 计算属性<span style="color: #e3371e">必须</span><span style="color: #0099dd">当做普通属性使用</span>
+
+#### 3.4 - 计算属性 vs 方法
+
+- 计算属性
+    - 会<span style="color: #e3371e">缓存计算的结果</span>，只有计算属性的<span style="color: #0099dd">依赖项发生变化</span>时，才会<span style="color: #0099dd">重新进行计算</span>
+    - 因此计算属性的性能更好
+- 方法
+    - 不会缓存计算的结果，每当触发重新渲染时，调用方法将总会再次执行函数
+
+#### 3.5 - watch 侦听器介绍
+
+<span style="color: #e3371e">watch 侦听器</span>允许开发者监视数据的变化，从而<span style="color: #e3371e">针对数据的变化作特定的操作</span>
+
+#### 3.6 - watch 侦听器的基本语法
+
+开发者需要<span style="color: #e3371e">在 watch 节点下</span>，定义自己的侦听器
+
+- 以需要监听的数据名作为函数名
+
+- 函数传入的参数，第一个为<span style="color: #0099dd">变化后的新值</span>，第二个为<span style="color: #0099dd">变化前的旧值</span>
+
+    ```html
+        <h3>Watch child 侦听器的用法</h3>
+        <input type="text" v-model.trim="username" />
+    ```
+
+    ```javascript
+    	data() {
+    		return {
+                username: '',
+            };
+        },
+    	watch: {
+            // 监听 username 的值的变化
+            // 形参列表中，第一个值时“变化后的新值”，第二个值是“变化前的旧值”
+            username(newval, oldval) {
+                console.log(newval);
+                console.log(oldval);
+            },
+        },
+    ```
+
+#### 3.7 - [异步加载中使用watch](https://www.javascriptc.com/vue3js/guide/computed.html#%E4%BE%A6%E5%90%AC%E5%99%A8)
+
+#### 3.8 - 使用命令式的 vm.$watch
+
+- 参数：
+    - `{string | Function} source`
+    - `{Function | Object} callback`
+    - `{Object} [options]`
+        - `{boolean} deep`
+        - `{boolean} immediate`
+        - `{string} flush`
+- 返回：`{Function} unwatch`
+
+##### 3.8.1 - $watch
+
+`$watch` 返回一个取消侦听函数，用来停止触发回调
+
+```javascript
+const app = Vue.createApp({
+  data() {
+    return {
+      a: 1
+    }
+  }
+})
+
+const vm = app.mount('#app')
+
+const unwatch = vm.$watch('a', cb)
+// later, teardown the watcher
+unwatch()
+```
+
+##### 3.8.2 - **deep**选项
+
+当 watch 侦听的是一个<span style="color: #e3371e">对象</span>，如果<span style="color: #e3371e">对象中的属性值发生了变化</span>，则<span style="color: #e3371e">无法被监听到</span>
+
+为了发现对象内部值的变化，可以在选项参数中指定 `deep: true`。注意监听数组的变更不需要这么做。
+
+```javascript
+vm.$watch('someObject', callback, {
+  deep: true
+})
+vm.someObject.nestedValue = 123
+// callback is fired
+```
+
+##### 3.8.3 - **immediate**选项
+
+在选项参数中指定 `immediate: true` 将立即以表达式的当前值触发回调
+
+```javascript
+vm.$watch('a', callback, {
+  immediate: true
+})
+// 立即以 `a` 的当前值触发 `callback`
+```
+
+注意，在带有 `immediate` 选项时，你不能在第一次回调时取消侦听给定的 property。
+
+#### 3.9 - 计算属性 vs 侦听器
+
+- 计算属性
+    - 侧重于监听<span style="color: #e3371e">多个值</span>的变化，最终计算并<span style="color: #0099dd">返回一个新值</span>
+- 侦听器
+    - 侧重监听<span style="color: #e3371e">单个数据</span>的变化，最终<span style="color: #0099dd">执行特定的业务处理，不需要有任何返回值</span>
 
 
 
@@ -2222,9 +2544,9 @@ beforeCreate 中，无法访问 data 里的数据，因此最早只能在 create
 
 父子组件之间的数据共享非为：
 
-- <span style="color: #e3371e">父 ->子</span> 共享数据
-- <span style="color: #e3371e">父 <-子</span> 共享数据
-- <span style="color: #e3371e">父 <->子</span> 共享数据
+- <span style="color: #e3371e">父 ->子</span> 共享数据	<span style="color: #0099dd">v-bind 属性绑定</span>
+- <span style="color: #e3371e">父 <-子</span> 共享数据    <span style="color: #0099dd">v-on 事件绑定</span>
+- <span style="color: #e3371e">父 <->子</span> 共享数据  <span style="color: #0099dd">组件上的 v-model</span>
 
 ##### 2.2.1 - 父组件向子组件共享数据
 
@@ -2352,7 +2674,9 @@ beforeCreate 中，无法访问 data 里的数据，因此最早只能在 create
         },
     ```
 
-##### 2.2.4 - 兄弟组件之间的数据共享
+#### 2.3 - 兄弟组件之间的数据共享
+
+##### 2.3.1 - EventBus
 
 <span style="color: #e3371e">兄弟组件之间</span>实现数据共享的方案是 EventBus 。
 
@@ -2361,315 +2685,1749 @@ beforeCreate 中，无法访问 data 里的数据，因此最早只能在 create
 ![](vue3.assets/14-eventBus.png)
 
 - 安装 mitt 包，导入 mitt 包，调用 mitt( )，返回值为 EventBus 对象，用 bus 常量接收，向外导出 bus对象
+
+    - ```sh
+        # 安装 mitt 包
+        $ npm install mitt
+        ```
+
+    - 在项目中创建公共的 eventBus 模块
+
+        ```javascript
+        // 先创建 eventBus.js 文件
+        
+        // 导入 mitt 包
+        import mitt from 'mitt'
+        // 创建 EventBus 的实例对象
+        const bus = mitt()
+        
+        // 将 EventBus 的实例对象共享出去
+        export default bus
+        ```
+
 - 数据接收方
     - 导入并得到 EventBus 实例对象
+    
+        ```javascript
+        // 导入 eventBus.js 模块，得到共享的 bus 对象
+        import bus from './eventBus.js'
+        
+        export default {
+        	data() { return {count:0} }
+        }
+        ```
+    
     - 调用 EventBus 的 on( ) 方法，声明自定义事件，并通过事件回调接收数据
+    
+        ```javascript
+        // 导入 eventBus.js 模块，得到共享的 bus 对象
+        import bus from './eventBus.js'
+        
+        export default {
+        	data() { return {count:0} }
+        	created() {
+        	// 调用 bus.on() 方法注册一个自定义事件，得到事件处理函数的形参接收数据
+        	bus.on('countChange',(count) => {
+        		this.count = count
+        	})
+        	}
+        }
+        ```
+    
 - 数据发送方
     - 导入并得到 EventBus 实例对象
+    
+        ```javascript
+        // 导入 eventBus.js 模块，得到共享的 bus 对象
+        import bus from './eventBus.js'
+        ```
+    
     - 调用 EventBus 的 emit( ) 方法，向外发送数据
+    
+        ```html
+        <template>
+            <h3>数据发送方 —— count的值是： {{ count }}</h3>
+            <button @click="addCount">+ 1</button>
+        </template>
+        ```
+    
+        ```javascript
+        // 导入 eventBus.js 模块，得到共享的 bus 对象
+        import bus from './eventBus.js'
+        
+        export default {
+        	data() { return {count:0} }
+        	methods: {
+        		addCount() {
+        			this.count++
+        			// 调用 bus.emit 方法触发自定义事件，并发送数据
+        			bus.emit('countChange',this.count)
+        		}
+        	}
+        }
+        ```
 
-## 六、Class 与 Style 绑定
+#### 2.4 - 后代关系组件之间的数据共享
 
-实际开发中常遇到<span style="color: #e3371e">动态操作元素 class 和 内联style </span>
+- 后代关系组件之间共享数据，指得是<span style="color: #e3371e">父节点的组件</span>向其<span style="color: #e3371e">子孙组件</span>共享数据。
 
-因为它们都是 attribute，vue 允许开发者通过 <span style="color: #e3371e"> v-bind </span>属性绑定指令，为元素动态绑定<span style="color: #e3371e"> class 属性的值</span>和<span style="color: #e3371e">行内的 style 样式</span>
+    此时，可以使用 <span style="color: #e3371e">provide</span> 和<span style="color: #e3371e"> inject </span>实现后代关系组件之间的数据共享
 
-### 1 - 动态绑定 HTML 的 class
+- <span style="color: #e3371e">-注意</span>：没有直接或简介的嵌套关系，是无法使用，如：B 和 E、I
 
-#### 1.1 - 三元表达式
+![](vue3.assets/13-组件之间的关系-1653269405578.png)
 
-通过<span style="color: #e3371e">三元表达式，动态地为元素绑定 class 的类名</span>
+##### 2.4.1 - 实现步骤：provide 和 inject
+
+- 父节点的组件通过<span style="color: #e3371e"> provide 方法</span>，对其<span style="color: #e3371e">子孙组件</span>共享数据
+
+    ```javascript
+    export deafult {
+    	data() {
+    		return {
+    			color: 'red' // 1. 定义“父节点“要向”子孙节点“共享的数据
+    		}
+    	},
+    	provide() { // 2. provide 函数 return 的对象中，包含了“要向子孙节点共享的数据”
+    		return ｛
+    		color: this.color
+    	}
+    }
+    ```
+
+- 子孙节点可以使用<span style="color: #e3371e"> inject </span>数据，接收父级节点<span style="color: #e3371e">向下共享的数据</span>
+
+    ```html
+    <template>
+    	<h5>子孙节点 —— {{ color }}</h5>
+    </template>
+    ```
+
+    ```javascript
+    export default {
+    	// 子孙节点，使用 inject 接收父节点向下共享的 color 数据，并在页面上使用
+    	inject: ['color']
+    }
+    ```
+
+##### 2.4.2 - 父节点对外共享响应式的数据
+
+父节点使用 provide 向下共享数据时，可以结合 <span style="color: #e3371e">computed 函数</span>向下共享<span style="color: #e3371e">响应式的数据</span>
+
+注意：此处为 computed 函数，不是 commpute 节点
+
+```javascript
+import { computed } from 'vue' // 1. 从 vue 中按需导入 computed 函数
+
+export default {
+    data() {
+        return {color: red}
+    },
+    provide() {
+        return {
+            // 2. 使用 computed 函数，可以把要共享的数据“包装为”响应式的数据
+            color: computed(() => this.color)
+        }
+    }
+}
+```
+
+2.2.5.3 - 子孙节点使用响应式的数据
+
+如果父节点共享的时<span style="color: #e3371e">响应式的数据</span>，则子孙节点必须以 <span style="color: #e3371e">.value</span> 的形式使用
+
+```html
+<template>
+	<!-- 响应式的数据，必须以 .value 的形式进行使用 -->
+    <h5>子孙节点 —— {{ color.value }}</h5>
+</template>
+```
+
+```javascript
+export default {
+	inject: ['color']
+}
+```
+
+#### 总结
+
+- 父子关系
+    - 父 ->子	<span style="color: #e3371e">v-bind 属性绑定</span>
+    - 父<-子     <span style="color: #e3371e">v-on 事件绑定</span>
+    - 父<->子   <span style="color: #e3371e">组件上的 v-model</span>
+- 兄弟关系
+    - <span style="color: #e3371e">EventBus</span>
+- 后代关系
+    - <span style="color: #e3371e"> provide </span>& <span style="color: #e3371e">inject</span>
+- 全局数据共享
+    - <span style="color: #e3371e"> vuex </span>
+
+### 3 - ref 引用
+
+#### 3.1 - ref 引用介绍
+
+- ref 是用来辅助开发者在<span style="color: #e3371e">不依赖于 jQuery 的情况下</span>，获取 DOM 元素或组件的引用
+
+- 每个 vue 的组件实例上，都包含一个 <span style="color: #e3371e">$refs 对象</span>，里面存储这对应的 DOM 元素或组件的引用。<span style="color: #0099dd">默认情况</span>下，<span style="color: #0099dd">组件的 $refs 指向一个空对象</span>
+
+    ![](vue3.assets/18-获取ref.png)
+
+#### 3.2 - 使用 ref 引用 DOM 元素
+
+- 使用 <span style="color: #e3371e">ref 属性</span>，为对应 <span style="color: #0099dd">DOM</span> 添加<span style="color: #e3371e">引用ID</span>
+
+    ```html
+    <h3 ref="myh3"> MyRef 组件</h3>
+    <button @click="getRef"> 获取 $refs 引用</button>
+    ```
+
+- 通过 <span style="color: #e3371e">this.$refs.<引用ID></span> <span style="color: #0099dd">获取到 DOM 元素</span>的引用
+
+    ```javascript
+    methods: {
+    	getRef() {
+    		console.log(this.$refs.myh3)
+    	}
+    }
+    ```
+
+- 通过 <span style="color: #e3371e">this.$refs.<引用ID></span> <span style="color: #0099dd">操作 DOM 元素</span>
+
+    ```javascript
+    methods: {
+    	getRef() {
+    		console.log(this.$refs.myh3)
+    		this.$refs.myh3.style.color = 'red'
+    	}
+    }
+    ```
+
+#### 3.3 - 使用 ref 引用 组件实例
+
+- 使用 <span style="color: #e3371e">ref 属性</span>，为对应 <span style="color: #0099dd">组件</span> 添加<span style="color: #e3371e">引用ID</span>
+
+    ```html
+    <!-- 使用 ref 属性，为对应的“组件”添加引用ID -->
+    <my-counter ref="counerRef"></my-counter>
+    <button @click="getRef">获取 $refs 引用</button>
+    ```
+
+- 通过 <span style="color: #e3371e">this.$refs.<引用ID></span> <span style="color: #0099dd">引用组件的实例</span>
+
+- 通过 <span style="color: #e3371e">this.$refs.<引用ID></span> <span style="color: #0099dd">操作组件实例</span>
+
+    ```javascript
+    methods: {
+    	getRef() {
+    	// 通过 this.$refs.<引用ID> 引用组件的实例
+    	console.log(this.$refs.counterRef)
+    	// 通过 this.$refs.<引用ID> 引用组件的实例
+    	this.$refs.counterRef.add()
+    	}
+    }
+    ```
+
+#### 3.4 - 控制文本框和按钮的按需切换
+
+- 通过布尔值 inputVisible 来控制组件中的文本框与按钮的按需切换
+
+    ```html
+    <template>
+        <h2>App Root</h2>
+        <input type="text" v-if="inputVisible" ref="focusRef" />
+        <button v-else @click="showInput">展示 input 输入框</button>
+    </template>
+    ```
+
+- 在事件处理函数 shouwInput 中切换 布尔值，通过 v-if ，v-else 按需展示
+
+    ```javascript
+    export default {
+    	data() {
+    		return {
+    			// 控制文本框和按钮的按需切换
+    			inputVisible: false
+    		}
+    	},
+    	methods: {
+    		showInput() { // 切换布尔值，显示文本框
+    			this.inputVisible = true
+    		}
+    	}
+    	
+    }
+    ```
+
+- 当文本框展示出来之后，如果希望它立即获得焦点，则可以为其添加 ref 引用，并调用原生的 DOM 对象的 .focus() 方法即可。
+
+    由于 DOM 元素更新时异步的，导致出错，使用 <span style="color: #e3371e">this.$nextTick(cb) 方法</span> 解决
+
+#### 3.5 - this.$nextTick(cb) 方法
+
+组件的<span style="color: #e3371e"> this.$nextTick(cb) 方法 </span>会把 cb 回调<span style="color: #e3371e">推迟到下一个 DOM 更新周期之后执行</span>。
+
+即 等组件的 DOM 异步地重新更新渲染完成后，再执行 cb 回调函数，从而保障 cb 回调函数可以操作到最新的 DOM 元素
+
+```javascript
+    methods: {
+        showInput() {
+            this.inputVisible = true
+            this.$nextTick(() => {
+                console.log(this.$refs.focusRef)
+                this.$refs.focusRef.focus()
+            })
+        },
+    },
+```
+
+### 4 - 动态组件
+
+#### 4-1 动态组件的介绍
+
+动态组件指的是<span style="color: #e3371e">动态切换组件的显示和隐藏</span>
+
+vue 提供了一个内置的 <<span style="color: #e3371e">component</span>> 组件，专门用来实现组件的动态渲染
+
+- <component> 是组件的<span style="color: #e3371e">占位符</span>
+- 通过 <span style="color: #e3371e">is 属性</span>动态指定<span style="color: #e3371e">要渲染的组件名称</span>
+- <component <span style="color: #e3371e">is</span>="要渲染的组件的名称"></component>
+
+#### 4-2 动态组件渲染的实现
+
+- 在 data 节点中声明当前要渲染组件的名称
+
+    ```javascript
+    data() {
+    	return {
+    		comName: 'my-dynamic-1'
+    	}
+    }
+    ```
+
+- 在 template 中，通过 is 属性动态指定要渲染的组件名称
+
+    ```html
+    <component :is="comName"></component>
+    ```
+
+- 使用时，动态切换组件的名称
+
+    ```html
+        <h2>App Root</h2>
+        <button @click="comName = 'my-dynamic-1'">组件1</button>
+        <button @click="comName = 'my-dynamic-2'">组件2</button>
+        <component :is="comName"></component>
+    ```
+
+#### 4-3 使用 keep-alive 保持状态
+
+默认情况下，由于组件被销毁，切换动态组件时<span style="color: #e3371e">无法保持组件的状态</span>此时可以使用 vue 内置的<<span style="color: #e3371e">keep-alive</span>> 组件包裹 <compoent></component> 保持动态组件的状态
+
+### 5 - 插槽
+
+#### 5.1 - 插槽介绍
+
+插槽( Slot ) 是 vue为<span style="color: #e3371e">组件的封装者</span>提供的能力。允许开发者在封装组件时，把<span style="color: #e3371e">不确定的、希望由用户指定的部分</span>定义为插槽
+
+![](vue3.assets/19-插槽介绍.png)
+
+可以把插槽认为是组件封装期间，为用户预留的<span style="color: #e3371e">内容的占位符</span>
+
+#### 5.2 - 插槽的基本用法
+
+在封装组件时，可以通过 <<span style="color: #e3371e">slot</span>> 元素<span style="color: #e3371e">定义插槽</span>，从而<span style="color: #e3371e">为用户预留内容占位符</span>
+
+- 封装组价时，定义插槽
+
+```html
+<template>
+    <h3>MyCom组件</h3>
+    <p>start</p>
+    <slot></slot>
+    <p>end</p>
+</template>
+```
+
+- 使用组件时，为插槽指定具体的内容
+
+```html
+<template>
+    <h2>App Root</h2>
+    <my-com>
+        <p>用户自定义的具体内容</p>
+    </my-com>
+</template>
+```
+
+##### 5.2.1 - 没有预留插槽的内容会被丢弃
+
+如果在封装组件时<span style="color: #e3371e">没有预留任何<<span style="color: #e3371e">slot</span>>插槽</span>，则用户提供的任何<span style="color: #e3371e">自定义内容</span>都<span style="color: #0099dd">会被丢弃</span>
+
+##### 5.2.2 - 后备内容
+
+封装组件时，可以为预留的 <slot> 插槽提供<span style="color: #e3371e">后备内容</span>（默认内容）。
+
+如果组件的使用者没有为插槽提供任何内容，则后备内容会生效
+
+```html
+<template>
+    <h3>MyCom组件</h3>
+    <p>start</p>
+    <slot>这是后备内容</slot>
+    <p>end</p>
+</template>
+```
+
+##### 5.2.3 - 具名插槽
+
+在封装组件时<span style="color: #e3371e">如需预留多个插槽节点</span>，则需为每个 <slot> 插槽指定<span style="color: #e3371e">具体的 name 名称</span>。
+
+注意：没有指定 name 名称的插槽，会有隐含的名称叫做 “<span style="color: #0099dd">default</span>”
+
+```html
+<template>
+    <h3>MyArticle组件</h3>
+    <div>
+        <header>
+            <slot name="header"></slot>
+        </header>
+        <main>
+            <slot></slot>
+        </main>
+        <footer>
+            <slot name="footer"></slot>
+        </footer>
+    </div>
+</template>
+```
+
+##### 5.2.4 - 为具名插槽提供内容
+
+在一个 <<span style="color: #e3371e">template 元素</span>>上使用 <span style="color: #e3371e"> v-slot </span>指令，并以 v-slot 的参数形式提供其名称
+
+```html
+<template>
+    <h2>App Root</h2>
+    <my-article>
+        <template v-slot:header>
+            <h3>My Title</h3>
+        </template>
+        <template v-slot:default>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+        </template>
+        <template v-slot:footer>
+            <h5>出岫</h5>
+        </template>
+    </my-article>
+</template>
+```
+
+注意：只有默认插槽可以省略 template 包裹标签，具名插槽千万不能省！
+
+##### 5.2.5 - 具名插槽的简写形式
+
+v-slot 也有缩写，把参数之前的所有内容（<span style="color: #e3371e">v-slot:</span>）替换为字符 <span style="color: #e3371e">#</span> 。
+
+例如： v-slot:header ——> <span style="color: #0099dd">#</span>header
+
+#### 5.3 - 作用域插槽
+
+在封装组件的过程中，可以为预留的 <slot> 插槽绑定 props 数据，这种<span style="color: #e3371e">带有 props 数据的 <<span style="color: #e3371e">slot</span>> </span>叫做“<span style="color: #e3371e">作用域插槽</span>”
 
 ```vue
 <template>
-	// 利用三元表达式，动态绑定 class
-    <h3 class="thin" :class="isItalic ? 'italic' : ''">Style</h3>
-	// 为按钮绑定点击事件，切换 isItalic 的布尔值
-    <button @click="isItalic=!isItalic">Toggle Italic</button>
-    <p>Lorem ipsum dolor sit.</p>
+    <h3>Test组件</h3>
+    <slot :info="information" :msg="message"></slot>
 </template>
 
 <script>
 export default {
-    name: 'MyStyle',
+    name: 'MyTest',
     data() {
         return {
-            isItalic: false
+            information: {
+                phone: '138xxxxyyyy',
+                address: '荆州',
+            },
+            message: '出岫',
         }
-    }
+    },
 }
 </script>
-
-<style lang="less" scoped>
-.thin {
-    font-weight: 200;
-}
-
-.italic {
-    font-style: italic;
-}
-</style>
 ```
 
-#### 1.2 - 以 数组语法 绑定 HTML 的 Class
-
-如果元素需要<span style="color: #e3371e">动态绑定多个 Class </span>类名，此时可使用<span style="color: #e3371e">数组的语法格式</span>
-
-```vue
-<template>
-    <h3 class="thin" :class="[isItalic ? 'italic' : '',isDelete ? 'delete' : '']">Style</h3>
-    <button @click="isItalic=!isItalic">Toggle Italic</button>
-    <button @click="isDelete=!isDelete">Toggle Delete</button>
-    <p>Lorem ipsum dolor sit.</p>
-</template>
-
-<script>
-export default {
-    name: 'MyStyle',
-    data() {
-        return {
-            isItalic: false,
-            isDelete: false
-        }
-    }
-}
-</script>
-
-<style lang="less" scoped>
-.thin {
-    font-weight: 200;
-}
-
-.italic {
-    font-style: italic;
-}
-
-.delete {
-    text-decoration: line-through;
-}
-</style>
+```html
+    <my-test>
+        <template #default="scope">
+            <div>
+                <p>{{ scope.msg }}</p>
+                <p>{{ scope.info.address }}</p>
+            </div>
+        </template>
+    </my-test>
 ```
 
-不过，当有多个条件 class 时，这样写太繁琐。所以在<span style="color: #e3371e">数组语法中也可以使用对象语法</span>用以简化
+##### 5.3.1 - 解构作用域的插槽
 
-#### 1.3- 以 对象语法 绑定 HTML 的 Class
+实际开发中，也可使用解构赋值方式来接收作用域插槽对外提供的数据
 
-```vue
-  <h3
-    class="thin"
-    :class="classObj"
-  >Style</h3>
-  <button @click="classObj.italic=!classObj.italic">Toggle Italic</button>
-  <button @click="classObj.delete=!classObj.delete">Toggle Delete</button>
-  <p>Lorem ipsum dolor sit.</p>
-  
-  data() {
-    return {
-      classObj: {
-        italic: false,
-        delete: false,
-      },
-    };
-  },
+```html
+    <my-test>
+        <template #default="{ info, msg }">
+            <div>
+                <p>{{ msg }}</p>
+                <p>{{ info.address }}</p>
+            </div>
+        </template>
+    </my-test>
 ```
 
-### 2 - 动态绑定 HTML 的内联 style
+### 6 - 自定义指令
 
-#### 2.1 - 以 对象语法 绑定 HTML 的内联 style
+#### 6.1 - 自定义指令介绍
 
-- `:style` 的对象语法十分直观——看着非常像 CSS，但其实是一个 JavaScript 对象。
+vue 官方提供了 v-for、v-model、v-if 等常用的<span style="color: #e3371e">内置属性</span>。
 
-- CSS property 名可以用驼峰式 (camelCase) 或短横线分隔 (kebab-case，记得用引号括起来) 来命名
+除此之外，vue 还允许开发者注册<span style="color: #e3371e">自定义指令</span>
 
-    ```html
-    <div :style="{ color: activeColor, fontSize: fontSize + 'px'， 'background-color': bgcolor}"></div>
-    <button @click="fontSize += 1">字号 + 1</button>
-    ```
+按注册方式分为：
+
+- <span style="color: #e3371e">全局</span>自定义指令
+
+- <span style="color: #e3371e">局部</span>自定义指令
+
+#### 6.2 - 全局自定义指令
+
+<span style="color: #e3371e">全局共享的自定义指令</span>需要通过“单页面应用程序的实例对象”进行声明
+
+- 参数el —— 指令绑定到的元素，可用于直接操作 DOM
+
+```javascript
+const app = createApp(App)
+
+// 注册一个全局自定义指令 ' v-focus '
+app.directive('focus', {
+    // 当被绑定的元素插入到 DOM 中时，自动触发 mounted 函数
+    mounted(el) {
+        // focus the  element
+        el.focus()
+    },
+})
+```
+
+#### 6.3 - 局部自定义指令
+
+在每个 vue 组件中，可以在<span style="color: #e3371e"> directives </span>节点中声明<span style="color: #e3371e">局部自定义指令</span>
+
+```javascript
+    directives: {
+        // 自定义个局部自定义指令 v-focus
+        focus: {
+            // 当被绑定的元素插入到 DOM 中是，自动触发 mounted 函数
+            mounted(el) {
+                el.focus() // 被绑定的元素自动聚焦
+            },
+        },
+    },
+```
+
+#### 6.4 - updated 函数的执行时机
+
+mounted 函数只在元素第一次插入 DOM 时被调用，但 DOM 更新时 mounted 函数不会被触发
+
+<span style="color: #e3371e">updated 函数</span>会在<span style="color: #e3371e">每次 DOM 更新完成后</span>被调用
+
+```javascript
+app.directive('focus', {
+    mounted(el) {   // 第一次插入 DOM 时触发这个函数
+        el.focus()
+    },
+    updated(el) {   // 每次 DOM 更新时都会触发这个函数
+        el.focus()
+    },
+})
+```
+
+注意：在 <span style="color: #e3371e">vue2</span> 项目中使用自定义指令时，【 mounted -> <span style="color: #0099dd">bind</span>】 【 updated -> <span style="color: #0099dd">update</span> 】
+
+#### 6.5 - 函数简写
+
+如果 mounted 和 updated 函数中的逻辑完全相同，则可以简写成如下格式：
+
+```javascript
+app.directive('focus', (el) => {
+	// 在 mounted 和 updated 时都会触发相同的业务处理
+	el.focus()
+})
+```
+
+#### 6.6 - 指令的参数值
+
+在绑定指令时，可以通过“<span style="color: #e3371e"> = </span>”的形式为指令绑定<span style="color: #e3371e">具体的参数值</span>
+
+自定义指令时，通过第二个形参接收外界传的值，参数 binding 是一个<span style="color: #0099dd">对象</span>，<span style="color: #ab04d9">binding.value</span> 为外界传的值
+
+```javascript
+// 自定义 v-color 指令
+app.directive('color', (el, binding) => {
+    // binding.value 就是通过”等号“为指令绑定的值
+    el.style.color = binding.value
+})
+```
+
+```html
+        <!-- 在使用 v-color 指令时，可以通过”等号“绑定指定的值 -->
+        <p v-color="'blue'">Lorem ipsum dolor sit amet.</p>
+        <input type="text" v-color="'green'" />
+```
+
+##### 6.6.1 - binding对象的属性
+
+| binding对象的属性 |                    说明                     |
+| :---------------: | :-----------------------------------------: |
+|     instance      |             使用指令的组件实例              |
+|       value       |               传递给指令的值                |
+|     oldValue      | 先前的值，仅 beforeUpdate 和 updated 中可用 |
+|        arg        |          参数传递给指令（如果有）           |
+|     modifiers     |         包含修饰符（如果有）的对象          |
+|        dir        |     一个对象，在注册指令时作为参数传递      |
+
+
+
+## 六、vue-router
+
+### 1 - 路由介绍
+
+路由（router）就是<span style="color: #e3371e">对应关系</span>
+
+路由分为两大类：
+
+- 后端路由
+- 前端路由
+
+#### 1.1 - 后端路由
+
+后端路由指的是：<span style="color: #e3371e">请求方式</span>、<span style="color: #e3371e">请求地址</span>与 <span style="color: #e3371e">function 处理函数</span><span style="color: #0099dd">对应关系</span>。
+
+在 node.js 中，express 路由的基本用法：
+
+```javascript
+// 1. 导入 express
+const express = require('express')
+// 2. 调用 express 的 Router 方法，创建路由实例
+const router = express.Router()
+
+// 3. 声明路由规则
+router.get('/userlist', function(req,res)) {/* 路由的处理函数 */}
+router.post('/adduser', function(req,res)) {/* 路由的处理函数 */}
+
+// 4. 将路由对象共享出去
+module.exports = router
+```
+
+#### 1.2 - SPA 与前端路由
+
+- SPA
+    - 指的是一个 web 网站只有唯一的一个 HTML 页面，<span style="color: #e3371e">所有组件的展示和切换</span>都在这唯一的一个页面内完成
+- 此时，<span style="color: #e3371e">不同组件之间的切换</span>需要通过<span style="color: #e3371e">前段路由</span>来实现
+- 结论：在 SPA 项目中，<span style="color: #0099dd">不同功能之间的切换</span>，要<span style="color: #0099dd">依赖于前端路由</span>来完成
+
+#### 1.3 - 前端路由
+
+通俗易懂的概念：前端路由是 <span style="color: #e3371e"> Hash 地址</span>与<span style="color: #e3371e">组件</span>之间的<span style="color: #e3371e">对应关系</span>
+
+<span style="color: #ab04d9">Vue 路由</span>允许我们通过<span style="color: #ab04d9">不同的 URL </span>访问<span style="color: #ab04d9">不同的内容</span>
+
+通过 Vue 可以实现多视图的单页 Web 应用（single page web application，SPA）
+
+#### 1.4 - 前端路由的工作方式
+
+- 用户<span style="color: #e3371e">点击了</span>页面上的<span style="color: #e3371e">路由链接</span>
+
+- 导致了<span style="color: #e3371e"> URL 地址栏</span>中的<span style="color: #e3371e"> Hash </span>发生了变化
+
+- <span style="color: #e3371e">前端路由监听到 Hash 地址的变化</span>
+
+- 前端路由把当前 <span style="color: #e3371e"> Hash 地址对应的组件渲染到浏览器中</span>
+
+    ![](vue3.assets/20-前端路由的工作方式.png)
+
+#### 1.5 - 简易的前端路由的实现
+
+实际开发中使用 vue 官方的 <span style="color: #e3371e">vue -router</span> 方案
+
+步骤：
+
+- <span style="color: #e3371e">导入并注册</span> MyHome、MyMovie、MyAbout 三个组件
 
     ```javascript
-    data() {
-      return {
-        activeColor: 'red',
-        fontSize: 30，
-        bgcolor: 'pink'
-      }
-    }
+    import MyHome from './MyHome.vue'
+    import MyMovie from './MyMovie.vue'
+    import MyAbout from './MyAbout.vue'
+    
+        components: {
+            MyHome,
+            MyMovie,
+            MyAbout
+        },
     ```
 
-- 直接绑定到一个样式对象通常更好，这会让模板更清晰
+- 通过 <component> 标签的 <span style="color: #e3371e">is 属性</span>，动态切换要显示的组件
 
     ```html
-    <div :style="styleObject"></div>
-    ```
-
-    ```javascript
-    data() {
-      return {
-        styleObject: {
-          color: 'red',
-          fontSize: '13px'
-        }
-      }
-    }
-    ```
-
-#### 2.2 - 以 数组语法 绑定 HTML 的内联 style
-
-- `:style` 的数组语法可以将多个样式对象应用到同一个元素上
-
-- ```html
-    <div :style="[baseStyles, overridingStyles]"></div>
-    ```
-
-## 七、计算属性与侦听器
-
-### 1 - 计算属性介绍
-
-计算属性<span style="color: #e3371e">本质</span>上就是一个 <span style="color: #e3371e">function 函数</span>，它可以<span style="color: #0099dd">实时监听</span> data 中数据的变化，并 <span style="color: #e3371e">return 一个计算后的新值</span>，供组件渲染 DOM 时使用
-
-- 对于任何包含响应式数据的复杂逻辑，你都应该使用**计算属性**
-
-### 2 - 声明计算属性
-
-- 计算属性需要以 <span style="color: #ab04d9">function 函数</span>的形式声明到组件的 <span style="color: #ab04d9">computed 选项</span>中
-
-- 直接调用函数名即可
-
-- 计算属性<span style="color: #e3371e">侧重</span>于得到一个<span style="color: #e3371e">计算的结果</span>，因此属性值<span style="color: #0099dd">必须有 return 返回值</span>
-
-    ```html
-    <input type="text" v-model="count" />
-    <p>{{ count }} 乘以二的值：{{ plus }}</p>
+    <template>
+        <h2>App Root</h2>
+        
+        <component :is="comName"></component>
+    </template>
     ```
 
     ```javascript
         data() {
             return {
-                count: 2,
-            };
-        },
-        computed: {
-            plus() {
-                return this.count * 2;
-            },
+                comName: 'MyHome',
+            }
         },
     ```
 
-### 3 - 计算属性的使用注意点
-
-- 计算属性<span style="color: #e3371e">必须</span><span style="color: #0099dd">定义在 computed 节点中</span>
-- 计算属性<span style="color: #e3371e">必须</span><span style="color: #0099dd">是一个 function 函数</span>
-- 计算属性<span style="color: #e3371e">必须</span><span style="color: #0099dd">有 return 值</span>
-- 计算属性<span style="color: #e3371e">必须</span><span style="color: #0099dd">当做普通属性使用</span>
-
-### 4 - 计算属性 vs 方法
-
-- 计算属性
-    - 会<span style="color: #e3371e">缓存计算的结果</span>，只有计算属性的<span style="color: #0099dd">依赖项发生变化</span>时，才会<span style="color: #0099dd">重新进行计算</span>
-    - 因此计算属性的性能更好
-- 方法
-    - 不会缓存计算的结果，每当触发重新渲染时，调用方法将总会再次执行函数
-
-### 5 - watch 侦听器介绍
-
-<span style="color: #e3371e">watch 侦听器</span>允许开发者监视数据的变化，从而<span style="color: #e3371e">针对数据的变化作特定的操作</span>
-
-### 6 - watch 侦听器的基本语法
-
-开发者需要<span style="color: #e3371e">在 watch 节点下</span>，定义自己的侦听器
-
-- 以需要监听的数据名作为函数名
-
-- 函数传入的参数，第一个为<span style="color: #0099dd">变化后的新值</span>，第二个为<span style="color: #0099dd">变化前的旧值</span>
+- 在组件的结构中声明 3 个 <a> 连接，通过点击不同的 <a> 链接，切换浏览器地址栏的 Hash 值
 
     ```html
-        <h3>Watch child 侦听器的用法</h3>
-        <input type="text" v-model.trim="username" />
+        <a href="#/home">Home</a>&nbsp;
+        <a href="#/movie">movie</a>&nbsp;
+        <a href="#/about">about</a>
     ```
+
+- 在 created 生命周期函数中监听浏览器地址栏中 Hash 地址的变化，动态切换要展示的组件的名称
 
     ```javascript
-    	data() {
-    		return {
-                username: '',
-            };
-        },
-    	watch: {
-            // 监听 username 的值的变化
-            // 形参列表中，第一个值时“变化后的新值”，第二个值是“变化前的旧值”
-            username(newval, oldval) {
-                console.log(newval);
-                console.log(oldval);
-            },
+        created() {
+            window.onhashchange = () => {
+                switch (location.hash) {
+                    case '#/home': // 点击了”首页“的链接
+                        this.comName = 'my-home'
+                        break
+                    case '#/movie': // 点击了”电影“的链接
+                        this.comName = 'my-movie'
+                        break
+                    case '#/about': // 点击了”关于“的链接
+                        this.comName = 'my-about'
+                        break
+                }
+            }
         },
     ```
 
-### 7 - [异步加载中使用watch](https://www.javascriptc.com/vue3js/guide/computed.html#%E4%BE%A6%E5%90%AC%E5%99%A8)
+### 2 - vue-router 的基本用法
 
-### 8 - 使用命令式的 vm.$watch
+#### 2.1 * vue-router 的介绍
 
-- 参数：
-    - `{string | Function} source`
-    - `{Function | Object} callback`
-    - `{Object} [options]`
-        - `{boolean} deep`
-        - `{boolean} immediate`
-        - `{string} flush`
+<span style="color: #e3371e">vue-router </span>是 vue.js 官方给出的<span style="color: #e3371e">路由解决方案</span>
 
-- 返回：`{Function} unwatch`
+vue-router 只能结合 vue 项目进行使用，能够轻松的管理 SPA 项目中组件的切换
 
-#### 8.1 - $watch
+#### 2.2 * vue-router 的版本
 
-`$watch` 返回一个取消侦听函数，用来停止触发回调
+目前有 3.x 的版本和 4.x 的版本
+
+- 3.x 只能结合 <span style="color: #e3371e"> vue2 </span>进行使用
+- 4.x 只能结合 <span style="color: #e3371e"> vue3 </span>进行使用
+
+#### 2.3 * vue-router 4.x 的基本使用步骤
+
+- 在项目中安装 vue-router
+
+    3 种方法
+
+    - 直接下载/CDN
+
+        > <https://unpkg.com/vue-router@4>
+
+    - npm
+
+        ```sh
+        npm install vue-router@4
+        # 安装 4.x 最新的路由
+        npm install vue-router@next -S
+        ```
+
+    - yarn
+
+        ```sh
+        yarn add vue-router@4
+        ```
+
+- 定义路由组件
+
+    - 在项目中定义 <span style="color: #0099dd">MyHome.vue</span>、<span style="color: #0099dd">MyMovie.vue</span>、<span style="color: #0099dd">MyAbout.vue</span> 三个组件。
+    - 将来使用 vue-router 赖控制它们的展示与切换
+
+- 声明<span style="color: #e3371e">路由链接</span>和<span style="color: #e3371e">占位符</span>
+
+    - 使用 <<span style="color: #0099dd">router-link</span>> 标签来声明<span style="color: #ffa1d4">路由链接</span>
+
+        - 以 <span style="color: #0099dd">to 属性</span>声明 Hash 地址，且 Hash 地址不再以 # 开头
+
+        ```html
+            <!-- 声明路由链接 -->
+            <router-link to="/home">首页</router-link>
+            <router-link to="/movie">电影</router-link>
+            <router-link to="/about">关于</router-link>
+        ```
+
+    - 使用 <<span style="color: #0099dd">router-view</span>> 标签来声明<span style="color: #ffa1d4">路由占位符</span>
+
+        ```html
+            <!-- 声明路由占位符 -->
+            <router-view></router-view>
+        ```
+
+- 创建<span style="color: #e3371e">路由模块</span>
+
+    在项目中<span style="color: #0099dd">创建 router.js </span>路由模块，在其中创建并得到路由的实例对象
+
+    - 在 vue-router 中按需导入两个方法
+
+        ```javascript
+        // 1. 从 vue-router 中按需到导入两个方法
+        //      createRouter 方法用于创建路由的实例对象
+        //      cteateWebHashHistory 用于指定路由的工作模式（hash 模式）
+        import { createRouter, createWebHashHistory } from 'vue-router'
+        ```
+
+    - 导入需要使用路由控制的组件
+
+        ```javascript
+        // 2.   导入需要使用路由控制的组件
+        import Home from './MyHome.vue'
+        import Movie from './MyMovie.vue'
+        import About from './MyAbout.vue'
+        ```
+
+    - 创建路由实例对象
+
+        ```javascript
+        // 1.   从 vue-router 中按需到导入两个方法
+        //      createRouter 方法用于创建路由的实例对象
+        //      cteateWebHashHistory 用于指定路由的工作模式（hash 模式）
+        import { createRouter, createWebHashHistory } from 'vue-router'
+        
+        // 3.   创建路由实例对象
+        const router = createRouter({
+            //  3.1 通过 history 属性指定路由的工作模式
+            history: createWebHashHistory(),
+            //  3.2 通过 routes 数组，指定路由规则
+            routes: [
+                //  path 是 hash 地址，component 是要展示的组件
+                { path: '/home', component: Home },
+                { path: '/movie', component: Movie },
+                { path: '/about', component: About },
+            ],
+        })
+        ```
+
+    - 向外共享路由实例对象
+
+        ```javascript
+        //  4.  向外共享路由实例对象
+        export default router
+        ```
+
+- 在 main.js 中<span style="color: #e3371e">导入并挂载</span>路由模块
+
+    ```javascript
+    import router from './components/25.start/router'
+    
+    const app = createApp(App)
+    
+    // 挂载路由模块
+    app.use(router)
+    
+    app.mount('#app')
+    ```
+
+### 3 - vue-router 的高级用法
+
+#### 3.1 - 路由重定向
+
+<span style="color: #e3371e">路由重定向</span>指的是：用户在访问<span style="color: #e3371e">地址 A </span>的时候，<span style="color: #e3371e">强制用户跳转</span>到<span style="color: #e3371e">地址C</span>，从而展示特定的组件页面
+
+- 通过路由规则的<span style="color: #0099dd"> redirect </span>属性，指定一个新的路由地址，可以很方便地设置路由的重定向
+
+    ```javascript
+    // 3.   创建路由实例对象
+    const router = createRouter({
+        //  3.1 通过 history 属性指定路由的工作模式
+        history: createWebHashHistory(),
+        //  3.2 通过 routes 数组，指定路由规则
+        routes: [
+            //  path 是 hash 地址，component 是要展示的组件
+            { path: '/', component: Home },
+            { path: '/home', component: Home },
+            { path: '/movie', component: Movie },
+            { path: '/about', component: About },
+        ],
+    })
+    ```
+
+#### 3.2 - 路由高亮
+
+通过以下两种方式，将<span style="color: #e3371e">激活的路由链接</span>进行高亮显示
+
+- 使用<span style="color: #e3371e">默认的</span>高亮 class 类
+- <span style="color: #e3371e">自定义</span>路由高亮的 class 类
+
+##### 3.2.1 - 默认的高亮 class 类
+
+被激活的路由链接，默认会应用一个叫做 <span style="color: #e3371e"> router-link-active </span>的类名
+
+开发者可以使用<span style="color: #0099dd">此类名选择器</span>，为<span style="color: #0099dd">激活的路由链接</span>设置高亮的样式
+
+```css
+/* 在 index.css  全局样式表中，重新 router-link-active 的样式 */
+.router-link-active {
+    background-color: #444;
+    color: #fff;
+    font-weight: bold;
+}
+```
+
+##### 3.2.2 - 自定义路由高亮的 class 类
+
+在创建路由的实例对象时，开发者可以基于 <span style="color: #e3371e"> linkActiveClass </span>属性，自定义路由链接被激活时所应用的类名
 
 ```javascript
-const app = Vue.createApp({
-  data() {
-    return {
-      a: 1
+// 3.   创建路由实例对象
+const router = createRouter({
+    history: createWebHashHistory(),
+    //  指定被激活的路由路径，会应用 router-active 这个类名
+    // 默认的 router-link-active 类名会被覆盖掉
+    linkActiveClass: 'router-active',
+    routes: [
+        { path: '/home', component: Home },
+        { path: '/movie', component: Movie },
+        { path: '/about', component: About },
+    ],
+})
+```
+
+```css
+.router-active {
+    background-color: #444;
+    color: #fff;
+    font-weight: bold;
+}
+```
+
+#### 3.3 - 嵌套路由
+
+通过路由实现<span style="color: #e3371e">组件的嵌套展示</span>，叫做嵌套路由
+
+![](vue3.assets/21-嵌套路由.png)
+
+##### 实现步骤
+
+- 在相应组件中声明<span style="color: #e3371e">子路由链接</span>和<span style="color: #e3371e">子路由占位符</span>
+
+    ```html
+    <template>
+        <h3>MyAbout组件</h3>
+        <!-- 在关于页面中，声明两个子路由链接 -->
+        <router-link to="/about/tab1">tab1</router-link>
+        &nbsp;
+        <router-link to="/about/tab2">tab2</router-link>
+    
+        <!-- 在关于页面中，声明 tab1 和 tab2 的路由占位符 -->
+        <router-view></router-view>
+    </template>
+    ```
+
+- 在父路由规则中，通过 <span style="color: #e3371e">children</span> 属性<span style="color: #e3371e">嵌套声明</span>子路由规则
+
+    在 router.js 路由模块中，导入需要的组件，并使用 <span style="color: #e3371e">children 属性</span>声明子路由规则
+
+    注意：子路由规则的 path中，<span style="color: #0099dd">不以</span> “ <span style="color: #0099dd">/</span> ”开头
+
+    ```javascript
+    // 导入需要的子组件
+    import Tab1 from './tabs/MyTab1.vue'
+    import Tab2 from './tabs/MyTab2.vue'
+    
+    // 3.   创建路由实例对象
+    const router = createRouter({
+        history: createWebHashHistory(),
+        linkActiveClass: 'router-active',
+        routes: [
+            { path: '/', component: Home },
+            { path: '/home', component: Home },
+            { path: '/movie', component: Movie },
+            {
+                //  about 页面的路由规则（父级路由规则）
+                path: '/about',
+                component: About,
+                children: [
+                    // 通过 children 属性嵌套子级路由规则
+                    // 子路由规则的 path中，不以 “ / ”开头
+                    { path: 'tab1', component: Tab1 }, //访问  /about/tab1 时，展示 Tab1 组件
+                    { path: 'tab2', component: Tab2 }, //访问  /about/tab1 时，展示 Tab1 组件
+                ],
+            },
+        ],
+    })
+    ```
+
+#### 3.4 - 嵌套路由中的路由重定向
+
+在父级路由规则中，通过路由规则的<span style="color: #0099dd"> redirect </span>属性，指定一个新的路由地址
+
+```javascript
+    routes: [
+        { path: '/', component: Home },
+        { path: '/home', component: Home },
+        { path: '/movie', component: Movie },
+        {
+            //  about 页面的路由规则（父级路由规则）
+            path: '/about',
+            component: About,
+            // 通过路由规则的 redirect 属性，指向 tab1
+            redirect: '/about/tab1',
+            children: [
+                { path: 'tab1', component: Tab1 }, 
+                { path: 'tab2', component: Tab2 }, 
+            ],
+        },
+    ],
+```
+
+#### 3.5 - 动态路由匹配
+
+##### 问题
+
+给多个路由链接匹配多个路由规则，太麻烦，<span style="color: #e3371e">复用性差</span>
+
+```html
+    <router-link to="/movie/1">电影1</router-link>
+    <router-link to="/movie/2">电影2</router-link>
+    <router-link to="/movie/3">电影3</router-link>
+```
+
+```javascript
+        { path: '/movie/1', component: Movie },
+        { path: '/movie/2', component: Movie },
+        { path: '/movie/3', component: Movie },
+```
+
+##### 解决
+
+<span style="color: #e3371e">动态路由</span>指的是：将 Hash 地址中<span style="color: #e3371e">可变的部分</span>定义为<span style="color: #e3371e">参数项</span>，从而<span style="color: #e3371e">提高路由规则的复用性</span>。
+
+在 vue-router中，使用 <span style="color: #0099dd">英文的冒号（ : ）</span>来定义路由的参数项
+
+```html
+    <router-link to="/movie/1">电影1</router-link>
+    &nbsp;
+    <router-link to="/movie/2">电影2</router-link>
+    &nbsp;
+    <router-link to="/movie/3">电影3</router-link>
+```
+
+
+
+```javascript
+        // 路由中的动态参数以   :   进行声明，冒号后面时动态参数的名称
+        { path: '/movie/:id', component: Movie },
+
+        //  将以下 3 个路由规则，合并成了一个，提高了路由规则的复用性
+        { path: '/movie/1', component: Movie },
+        { path: '/movie/2', component: Movie },
+        { path: '/movie/3', component: Movie },
+```
+
+#### 3.6 - 获取动态路由的参数值
+
+##### 3.6.1 - $route.params 参数对象
+
+通过动态路由匹配的方式渲染出来的组件中，可以使用 <span style="color: #e3371e">$route.params</span> 对象访问到<span style="color: #e3371e">动态匹配的参数值</span>
+
+注意：<span style="color: #0099dd">参数值要对应</span>
+
+```html
+<template>
+    <!-- $route.params 是路由的“参数对象” -->
+    <h3>MyMovie Component —— {{ $route.params.id }}</h3>
+    <p>I AM MOVIE !</p>
+    <p>I AM MOVIE !</p>
+    <p>I AM MOVIE !</p>
+</template>
+```
+
+##### 3.6.2 - 使用 porps 接收路由参数
+
+<span style="color: #e3371e">为简化路由参数的获取形式</span>，vue-router 允许在<span style="color: #e3371e">路由贵重</span>中<span style="color: #e3371e">开启 props </span>传参
+
+- 在定义路由规则时，声明 <span style="color: #0099dd">props: true</span> 选项
+
+    ```javascript
+            // 动态路由匹配，开启动态路由传参
+            { path: '/movie/:id', component: Movie, props: true },
+    ```
+
+- 在通过动态路由匹配的方式渲染出来的<span style="color: #0099dd">组件中</span>，使用 <span style="color: #0099dd">props 接收</span>路由规则中匹配到的<span style="color: #0099dd">参数项</span>
+
+    ```javascript
+    export default {
+        name: 'MyMovie',
+        props: ['id'],
     }
-  }
-})
+    ```
 
-const vm = app.mount('#app')
+- 在通过动态路由匹配的方式渲染出来的<span style="color: #0099dd">组件中</span>，<span style="color: #0099dd">直接使用 </span>props 中接收到的<span style="color: #0099dd">路由参数</span>
 
-const unwatch = vm.$watch('a', cb)
-// later, teardown the watcher
-unwatch()
+    ```html
+    <template>
+        <h3>MyMovie Component —— {{ id }}</h3>
+        <p>I AM MOVIE !</p>
+        <p>I AM MOVIE !</p>
+        <p>I AM MOVIE !</p>
+    </template>
+    ```
+
+### 4 - 编程式导航
+
+- 编程式导航： 通过<span style="color: #e3371e">调用 API </span>实现导航的方式
+    - 普通网页中调用 <span style="color: #0099dd"> location.href </span> 跳转到新页面的方式
+- 声明式导航：通过<span style="color: #e3371e">点击链接</span>实现导航的方式
+    - 普通网页中点击 <a> 链接
+    - vue 项目中点击 <router-link>
+
+#### 4.1 * vue-router 中的编程式导航 API
+
+vue-router 提供了许多编程时导航的 API ，其中最常用的两个 API 分别时：
+
+- <span style="color: #e3371e">this.$router.push </span>('hash 地址')
+    - 跳转到指定 Hash 地址，从而展示对应的组件
+- <span style="color: #e3371e">this.$router.go </span>(数值n)
+    - 实现导航历史的前进、后退
+
+#### 4.2 - this.$router.push
+
+调用 <span style="color: #e3371e">this.$router.push</span> () 方法，可以跳转到指定的 hash 地址，从而展示对应的组件页面
+
+```vue
+<template>
+    <h3>MyHome Component</h3>
+    <button @click="goToMovie(3)">去看电影 3 </button>
+</template>
+
+<script>
+export default {
+    name: 'Myhome',
+    methods: {
+        goToMovie(id) {
+            this.$router.push('/movie/' + id)
+        }
+    },
+}
+</script>
 ```
 
-#### 8.2 - **deep**选项
+#### 4.3 - this.$router.go
 
-当 watch 侦听的是一个<span style="color: #e3371e">对象</span>，如果<span style="color: #e3371e">对象中的属性值发生了变化</span>，则<span style="color: #e3371e">无法被监听到</span>
+调用 <span style="color: #e3371e">this.$router.go</span> () 方法，实现导航历史的前进、后退
 
-为了发现对象内部值的变化，可以在选项参数中指定 `deep: true`。注意监听数组的变更不需要这么做。
+```vue
+<template>
+    <h3>MyHome Component</h3>
+    <button @click="goBack">后退</button>
+</template>
+
+<script>
+export default {
+    name: 'Myhome',
+    methods: {
+        goBack() {
+            this.$router.go(-1)
+        }
+    },
+}
+</script>
+```
+
+### 5 - 命名路由
+
+<span style="color: #e3371e">命名路由</span> ：通过 <span style="color: #e3371e">name 属性</span> 为路由规则<span style="color: #e3371e">定义名称</span> 的方式
+
+注意：命名路由的 <span style="color: #e3371e"> name 值不能重复，必须保证唯一性</span> 
+
+#### 5.1 - 使用命名路由实现声明式导航
+
+为 <router-link> 标签动态绑定 to 属性的值，并通过<span style="color: #e3371e"> name 属性</span> 指定要跳转到的路由规则
+
+期间，还可用<span style="color: #e3371e"> params 属性</span> 指定跳转期间要携带的路由参数
 
 ```javascript
-vm.$watch('someObject', callback, {
-  deep: true
-})
-vm.someObject.nestedValue = 123
-// callback is fired
+//	router.js 文件
+routes: [
+        { path: '/', component: Home },
+        { path: '/home', component: Home },
+        // 动态路由匹配，开启动态路由传参
+        { name: 'mov', path: '/movie/:id', component: Movie, props: true },
+        ]
 ```
 
-#### 8.3 - **immediate**选项
+```html
+<template>
+    <h3>MyHome Component</h3>
+    <router-link :to="{ name: 'mov', params: {id: 3}}">go to movie</router-link>
+</template>
+```
 
-在选项参数中指定 `immediate: true` 将立即以表达式的当前值触发回调
+#### 5.2 - 使用命名路由实现编程式导航
+
+调用 <span style="color: #e3371e"> push 函数</span> 期间制定一个<span style="color: #e3371e">配置对象</span> ，<span style="color: #e3371e"> name </span> 是要跳转到的路由规则、<span style="color: #e3371e"> params </span> 是携带的路由参数
+
+```vue
+<template>
+    <h3>MyHome Component</h3>
+    <button @click="goToMovie(3)">去看电影 3</button>
+</template>
+
+<script>
+export default {
+    name: 'Myhome',
+    methods: {
+        goToMovie(id) {
+            this.$router.push({ name: 'mov', params: { id: 3 } })
+        },
+    },
+}
+</script>
+```
+
+### 6 - 导航守卫
+
+<span style="color: #e3371e">导航守卫</span> 可以<span style="color: #e3371e">控制路由的访问权限</span> 
+
+![](vue3.assets/23-导航守卫.png)
+
+#### 6.1 - 声明全局导航守卫
+
+<span style="color: #e3371e">全局导航守卫</span> 会<span style="color: #e3371e">拦截每个路由规则</span> ，从而对每个路由进行<span style="color: #e3371e">访问权限</span>的控制。
 
 ```javascript
-vm.$watch('a', callback, {
-  immediate: true
-})
-// 立即以 `a` 的当前值触发 `callback`
+// 创建路由实例对象
+const router = createRouter({ …… })
+
+// 调用实例对象的 beforeEach 函数，声明“全局前置守卫”
+// fn 必须是一个函数，每次拦截到路由的请求，都会调用 fn 进行处理
+// 因此 fn 叫做“守卫方法”
+router.beforeEach(fn)
 ```
 
-注意，在带有 `immediate` 选项时，你不能在第一次回调时取消侦听给定的 property。
+#### 6.2 - 守卫方法的 3 个形参
 
-### 9 - 计算属性 vs 侦听器
+router.beforeEach() 接收 3 个形参
 
-- 计算属性
-    - 侧重于监听<span style="color: #e3371e">多个值</span>的变化，最终计算并<span style="color: #0099dd">返回一个新值</span>
-- 侦听器
-    - 侧重监听<span style="color: #e3371e">单个数据</span>的变化，最终<span style="color: #0099dd">执行特定的业务处理，不需要有任何返回值</span>
+- to	- 目标路由对象
+- from	- 当前导航正要离开的路由对象
+- next	- 是一个函数，表示放行
+
+注意：
+
+- 守卫方法中如果<span style="color: #e3371e">不声明 next 形参</span> ，则默认<span style="color: #e3371e">允许用户访问每一个路由</span>！
+
+- 守卫方法中如果<span style="color: #e3371e">声明了 next 形参</span> ，则<span style="color: #e3371e">必须调用 next() 函数</span>，否则不允许用户访问任何一个路由！
+
+    ```javascript
+    // 全局路由导航守卫
+    router.beforeEach((to, from,next) => {
+        next()
+    })
+    ```
+
+#### 6.3 - next 函数的 3 种调用方式
+
+- next()	- 直接放行
+
+- next(<span style="color: #0099dd">false</span> )	- <span style="color: #e3371e">强制其停留在当前页面</span> 
+
+- next(<span style="color: #0099dd">'/login'</span> )	- <span style="color: #e3371e">强制其跳转到登陆页面</span> 
+
+    ```javascript
+    router.beforeEach((to, from,next) => {
+        if(to.path === '/main') {
+            // 证明用户要访问后台主页
+            // 强制用户跳转到注册页
+            next('/login')
+        } else {
+            //  访问的不是后台主页
+            // 直接放行
+            next()
+        }
+    })
+    ```
+
+#### 6.4 - 结合 token 控制后台主页的访问权限
+
+```javascript
+// 全局前置守卫
+router.beforeEach((to, from,next) => {
+    const token = localStorage.getItem('token')     // 1. 读取 token
+    if(to.path === '/main' && !token) {       // 2. 想要访问“后台主页”且 token 值不存在
+        // next(false)      // 3.1 不允许跳转
+        next('/login')      //  3.2 强制跳转到“登录页面”
+    } else {
+        next() // 3.3  直接放行，运行用户访问“后台主页”
+    }
+})
+```
+
+## 七、vue-cli
+
+### 1 * vue-cli介绍
+
+<span style="color: #e3371e">vue-cli </span> （俗称：vue <span style="color: #e3371e">脚手架</span> ）是 vue 官方提供的、<span style="color: #e3371e">快速生成 vue 工程化项目</span> 的工具
+
+#### 特点
+
+- 开箱即用
+- 基于 webpack
+- 功能丰富且易于扩展
+- 支持创建 vue2 和 vue3 的项目
+
+### 2 * vue-cli 安装
+
+#### 2.1 * vue-cli 安装流程
+
+- 安装
+
+    ```sh
+    # 全局安装最新版本的 @vue/cli
+    $ npm install -g @vue/cli
+    # OR
+    yarn global add @vue/cli
+    ```
+
+- 查看版本
+
+    ```sh
+    $ vue --version
+    @vue/cli 5.0.4
+    # 要求 @vue/cli 版本在4.5.0以上
+    ```
+
+- 升级
+
+    ```sh
+    # 升级全局的 vue/cli包
+    $ npm update -g @vue/cli
+    # OR
+    yarn global upgrade --latest @vue/cli
+    ```
+
+- 创建一个项目
+
+    ```sh
+    # 创建项目
+    $ vue create my-project
+    
+    # 使用可视化创建工具来创建项目
+    $ vue ui
+    ```
+
+- 启动
+
+    ```sh
+    ＄npm run serve
+    ```
+
+- 关闭：两次 ctrl + c
+
+#### 2.2 * 解决 Windows PowerShell 不识别 vue 命令的问题
+
+默认情况下，在 PowerShell 中执行 <span style="color: #e3371e">vue --version</span> 命令会提示错误消息
+
+解决方案：
+
+- 以<span style="color: #0099dd">管理员省份</span> 运行 PowerShell
+- 执行 <span style="color: #0099dd"> set-ExecutionPolicy RemoteSigned</span> 命令
+- 输入字符 <span style="color: #0099dd">Y</span>  ，<span style="color: #0099dd">回车</span> 即可
+
+Vue 提供了一个官方的CLI，为单页面应用 (SPA) 快速搭建繁杂的脚手架。
+
+#### 2.3 * 基于 vue ui 创建 vue 项目
+
+- 终端运行 `vue ui` 命令，自动在浏览器中打开<span style="color: #e3371e">创建项目的可视化面板</span> 
+
+- 点击 <span style="color: #e3371e">在此创建新项目</span> ，在<span style="color: #e3371e">详情</span> 页面<span style="color: #e3371e">填写项目名称</span> 
+- 在 <span style="color: #e3371e">预设</span> 页面选择<span style="color: #e3371e">手动配置项目</span> 
+- 在 <span style="color: #e3371e">功能</span>  页面<span style="color: #e3371e">勾选需要安装的功能</span> 
+    - <span style="color: #0099dd">Choose Vue Version、Babel、Css 预处理器、使用配置文件</span>
+- 在 <span style="color: #e3371e">配置</span>  页面勾选 <span style="color: #e3371e">vue 的版本</span>和<span style="color: #e3371e">需要的预处理器</span> 
+- <span style="color: #e3371e">创建项目</span> ，将刚才的所有配置<span style="color: #e3371e">保存为预设</span> （模版），方便下沉创建项目时<span style="color: #e3371e">直接复用之前的配置</span> 
+- 创建项目并自动安装依赖包
+
+<span style="color: #ab04d9">vue ui 的本质</span>：通过可视化的面板<span style="color: #49bf51">采集</span>到用户的配置消息后，在后台<span style="color: #49bf51">基于命令行的方式</span>自动初始化项目
+
+- 项目创建完成后，自动进入<span style="color: #e3371e">项目仪表盘</span> 
+
+#### 2.4 * 基于 命令行 创建 vue 项目
+
+- 终端运行 `vue create <项目名>` 命令，基于<span style="color: #e3371e">交互式的命令行</span> 创建 vue 的项目
+
+- 选取一个preset
+
+    ![](vue3.assets/25-vue-cli-1.png)
+
+    - 决定手动选择特性，在操作提示的最后你可以选择将已选项保存为一个将来可复用的 preset。
+    - 被保存的 preset 将会存在用户的 home 目录下一个名为 `.vuerc` 的 JSON 文件里。如果你想要修改被保存的 preset / 选项，可以编辑这个文件。
+
+- 选择`Manually select features(手动安装)`则会进入[下一步选项](https://copyfuture.com/blogs-details/20200519144521753sqo6c6n1o1lx3jb)
+
+    ![](vue3.assets/25-vue-cli-2.png)
+
+    - 一般项目开发只需要选择`Babel`、`Router`、`Vuex`就足够了
+
+- 一路回车
+
+- 安装成功
+
+- 启动
+
+    > ```sh
+    > ＄npm run serve
+    > ```
+
+
+
+## 八、vuex
+
+### 1 - vuex 的介绍
+
+vuex 是<span style="color: #e3371e">终极的</span>组件之间的数据共享方案，在企业级的 vue 项目开发中， vuex 可以让组件之间的数据共享变得<span style="color: #e3371e">高效</span>、<span style="color: #e3371e">清晰</span>、且<span style="color: #e3371e">易于维护</span>
+
+- vuex 用与管理需要组件之间需要被共享的数据
+
+    ![](vue3.assets/15-vuex介绍.png)
+
+
+
+## 九、vue 3.x 中全局配置 axios
+
+### 1 - 全局配置 axios 的原因
+
+在实际项目开发中，几乎每个组件都会用到 axios 发起数据请求。此时会遇到如下两个问题：
+
+- 每个组件中都需要<span style="color: #e3371e">导入 axios </span>（代码臃肿）
+
+- 每次发起请求都需要填写<span style="color: #e3371e">完整的请求路径</span>（不利于后期的维护）
+
+    ![](vue3.assets/16-全局配置axios的原因.png)
+
+### 2 - 全局配置 axios
+
+![](vue3.assets/17-如何全局配置axios.png)
+
+- 在 <span style="color: #e3371e"> main.js </span>入口文件中，通过 <span style="color: #e3371e">app.config.globalProperties</span> 全局挂载 axios
+
+
+
+## 十、组件库
+
+### 1 - vue 组件库介绍
+
+实际开发中，前端开发者可把<span style="color: #e3371e">自己封装的. vue 组件</span> 整理、打包、并<span style="color: #e3371e">发布为 npm 的包</span> ，从而供其他人下载和使用。
+
+这种可直接下载并在项目中使用的现有组件，就叫做<span style="color: #e3371e"> vue 组件库</span> 。
+
+### 2 - vue 组件库 和 bootstrap 的区别
+
+二者之间存在本质的区别：
+
+- bootstrap 只提供<span style="color: #e3371e">纯粹的原材料</span> （HTML 结构、css样式及 JS 特效），需要开发者做<span style="color: #e3371e">进一步的组装</span> 和<span style="color: #e3371e">改造</span> 
+- vue 组件库时<span style="color: #e3371e">遵循 vue 语法、高度定制</span> 的现有组件，开箱即用
+
+### 3 - 最常用的 vue 组件库
+
+- <span style="color: #e3371e">PC 端</span> 
+    - [Element UI](https://element-plus.org/zh-CN/#/zh-CN)
+    - [View UI](https://www.iviewui.com/)
+- <span style="color: #e3371e">移动端</span> 
+    - [Mint UI](https://mint-ui.github.io/#!/zh-cn)
+    - [Vant](https://vant-contrib.gitee.io/vant/#/zh-CN)
+
+### 4 - Element UI
+
+Element UI 是<span style="color: #e3371e">饿了么前端团队</span>开源的一套<span style="color: #e3371e">PC 端 vue 组件库</span> 。支持在 vue2 和 vue3 项目中使用
+
+- vue2 的项目使用<span style="color: #0099dd">旧版的</span> [Element UI](https://element.eleme.io/#/zh-CN)
+- vue3 的项目使用<span style="color: #0099dd">新版的</span> [Element Plus](https://element-plus.org/zh-CN/#/zh-CN)
+
+#### 4.1 - 在 vue2 的项目中使用 Element UI
+
+##### 4.1.1 - 安装
+
+```sh
+npm i element-ui -S
+```
+
+##### 4.1.2 - 引入
+
+开发者可以<span style="color: #e3371e">一次性完整引入所有的</span> element-ui 组件
+
+或是根据需求，只<span style="color: #e3371e">按需引入用到的</span>  element-ui 组件
+
+###### 完整引入
+
+操作简单，但<span style="color: #0099dd">额外引入</span> 一些用不到的组件，导致<span style="color: #0099dd">项目体积过大</span> 
+
+- 在 <span style="color: #49bf51"> main.js </span>中写入
+
+```javascript
+// 1. 完整引入 element ui 的组件
+import ElementUI from 'element-ui'
+// 2. 导入 element ui 组件的样式
+import 'element-ui/lib/theme-chalk/index.css'
+
+// 3. 把 ElementUI 注册为 vue 的插件【注册后，即可在每个组件中直接使用每一个 element ui 的组件】
+Vue.use(ElementUI)
+```
+
+###### 按需引入
+
+相对复杂，但<span style="color: #0099dd">只引入用到</span>的组件，能起到<span style="color: #0099dd">优化项目体积的目的</span> 
+
+- 借助 <span style="color: #49bf51">babel-plugin-component </span>，可以只引入需要的组件，以达到减小项目体积的目的
+
+- 首先，安装 babel-plugin-component
+
+    ```sh
+    npm install babel-plugin-component -D
+    ```
+
+- 然后，将 .babelrc 修改为
+
+    ```json
+    {
+      "presets": [["es2015", { "modules": false }]],
+      "plugins": [
+        [
+          "component",
+          {
+            "libraryName": "element-ui",
+            "styleLibraryName": "theme-chalk"
+          }
+        ]
+      ]
+    }
+    ```
+
+- 接下来，只希望引入部分组件，比如 Button 和 Select，那么需要在 main.js 中写入以下内容
+
+    ```javascript
+    import Vue from 'vue';
+    import { Button, Select } from 'element-ui';
+    import App from './App.vue';
+    
+    Vue.component(Button.name, Button);
+    Vue.component(Select.name, Select);
+    /* 或写为
+     * Vue.use(Button)
+     * Vue.use(Select)
+     */
+    
+    new Vue({
+      el: '#app',
+      render: h => h(App)
+    });
+    ```
+
+##### 4.1.3 - 把组件的导入和注册封装为独立的模块
+
+在 src 目录下新建 <span style="color: #e3371e">element-ui/index.js</span>  模块，并声明如下代码
+
+```javascript
+// → 模块路径 /src/element-ui/index.js
+import Vue from 'vue'
+// 按需导入 element ui 的组件
+import { Button, Input } from 'element-ui'
+
+// 注册需要的组件
+Vue.use(Button)
+Vue.use(Input)
+
+// → 在 main.js 中导入
+import './element-ui'
+```
+
+#### 4.2 - 在 vue3 的项目中使用 Element Plus
+
+##### 4.2.1 - 安装
+
+使用包管理器安装 Element Plus
+
+```sh
+# 选择一个你喜欢的包管理器
+
+# NPM
+$ npm install element-plus --save
+
+# Yarn
+$ yarn add element-plus
+
+# pnpm
+$ pnpm install element-plus
+```
+
+##### 4.2.2 - 引入
+
+###### 浏览器直接引入
+
+- 直接通过浏览器的 HTML 标签导入 Element Plus，然后就可以使用全局变量 `ElementPlus`了
+
+    ```html
+    <!-- unpkg 的引入方式 -->
+    <head>
+      <!-- 导入样式 -->
+      <link rel="stylesheet" href="//unpkg.com/element-plus/dist/index.css" />
+      <!-- 导入 Vue 3 -->
+      <script src="//unpkg.com/vue@next"></script>
+      <!-- 导入组件库 -->
+      <script src="//unpkg.com/element-plus"></script>
+    </head>
+    ```
+
+###### 完整引入
+
+- 在 <span style="color: #49bf51"> main.ts </span>中写入
+
+    ```javascript
+    // main.ts
+    import { createApp } from 'vue'
+    import ElementPlus from 'element-plus'
+    import 'element-plus/dist/index.css'
+    import App from './App.vue'
+    
+    const app = createApp(App)
+    
+    app.use(ElementPlus)
+    app.mount('#app')
+    ```
+
+###### 按需引入
+
+- 自动导入（推荐）
+
+    - 先安装 `unplugin-vue-components` 和 `unplugin-auto-import`这两款插件
+
+        ```sh
+        npm install -D unplugin-vue-components unplugin-auto-import
+        ```
+
+    - 把下列代码插入到你的 `Vite` 或 `Webpack` 的配置文件中
+
+        ```javascript
+        // webpack.config.js | vue.config.js
+        const AutoImport = require('unplugin-auto-import/webpack')
+        const Components = require('unplugin-vue-components/webpack')
+        const { ElementPlusResolver } = require('unplugin-vue-components/resolvers')
+        
+        module.exports = {
+          // ...
+          configureWebpack: {
+          	plugins: [
+            	AutoImport({
+              	resolvers: [ElementPlusResolver()],
+            	}),
+            	Components({
+              	resolvers: [ElementPlusResolver()],
+            	}),
+          	],
+          }
+        }
+        ```
+
+        ```javascript
+        // vite.config.ts
+        import AutoImport from 'unplugin-auto-import/vite'
+        import Components from 'unplugin-vue-components/vite'
+        import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+        
+        export default {
+          plugins: [
+            // ...
+            AutoImport({
+              resolvers: [ElementPlusResolver()],
+            }),
+            Components({
+              resolvers: [ElementPlusResolver()],
+            }),
+          ],
+        }
+        ```
+
+- 手动导入
+
+## 十一、proxy 跨域代理
+
+### 1 - 接口的跨域问题
+
+vue 项目运行的地址：http://localhost:8080/
+
+API 接口运行的地址：https:www.escook.cn/api/users
+
+
+
+由于当前的 API 接口<span style="color: #e3371e">没有开启 CORS</span>  跨域资源共享，因此默认情况下，上面的接口<span style="color: #e3371e">无法请求成功</span> 
+
+![](vue3.assets/26-proxy跨域代理.png)
+
+### 2 - 通过代理解决接口的跨域问题
+
+通过 vue-cli 创建的项目在遇到接口跨域问题时，可以用过<span style="color: #e3371e">代理</span>的方式来解决
+
+- 把 axios 的 <span style="color: #e3371e">请求根路径</span> 设置为 <span style="color: #e3371e">vue 项目的运行地址</span> （接口请求不再跨域）
+
+- vue 项目发现请求的接口不存在，把请求 <span style="color: #e3371e">转交给 proxy 代理</span> 
+
+- 代理把请求根路径 <span style="color: #e3371e">替换为</span> devServer.proxy 属性的值， <span style="color: #e3371e">发起真正的数据请求</span> 
+
+- 代理把请求到的数据， <span style="color: #e3371e">转发给 axios </span> 
+
+    ![](vue3.assets/26-proxy跨域代理-1.png)
+
+### 3 - 在项目中配置 proxy 代理
+
+- 在 main.js 入口文件中，把 <span style="color: #e3371e">axios 的请求根路径改造为当前 web 项目的根路径</span> 
+
+    ```javascript
+    // axios.defaults.baseURL = 'https://www.escook.cn'
+    
+    // 配置请求根路径
+    axios.defaults.baseURL = 'http://localhost:8080'
+    ```
+
+- 在 <span style="color: #e3371e">项目根目录</span> 下创建 <span style="color: #e3371e">vue.config.js</span> 的配置文件，并声明如下的配置
+
+    ```javascript
+    module.export = {
+    	devServer: {
+    		// 当前项目在开发调试阶段，
+    		// 会将任何位置请求（没有匹配到静态文件的请求）代理到 https://www.escook.cn
+    		proxy: 'https://www.escook.cn',
+    	}
+    }
+    ```
+
+    需要重启项目
+
+     <span style="color: #e3371e">注意</span> ：
+
+    -  <span style="color: #e3371e">devServer.proxy</span> 提供的代理功能， <span style="color: #e3371e">仅在开发调试阶段生效</span> 
+    - 项目上线发布后，依旧需要 API 接口服务器 <span style="color: #e3371e">开启 CORS</span> 跨域资源共享
+
+
 
 ## 风格指南
 

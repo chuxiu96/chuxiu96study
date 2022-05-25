@@ -201,7 +201,7 @@ $ git clone username@host:/path/to/repository
 
 ```sh
 $ git add <filename>
-$ git add *
+$ git add .
 ```
 
 ##### step2: 实际提交改动
