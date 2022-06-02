@@ -177,9 +177,11 @@ ol:last-child {
 	margin-bottom: 0;
 }
 blockquote {
-	border-left: 8px solid #e16071;
+	border-left: 6px solid #e16071;
+	border-radius: 4px;
 	padding: 0 15px;
-	color: #629584;
+	font-weight: 700;
+	color: #ff239d;
 }
 blockquote blockquote {
 	padding-right: 0;
@@ -247,6 +249,7 @@ tt {
 code {
 	background-color: #f3f4f4;
 	padding: 0 2px 0 2px;
+	color: #e83107;
 }
 
 .md-fences {
