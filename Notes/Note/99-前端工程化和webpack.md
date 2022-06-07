@@ -1,13 +1,15 @@
-## 1 - 前端工程化
+## 前端工程化与 webpack
 
-### 1.1 - 实际的前端开发
+### 1 - 前端工程化
+
+#### 1.1 - 实际的前端开发
 
 -  <span style="color: #e3371e">模块化</span> ：js 的模块化、css 的模块化、 资源的模块化
 -  <span style="color: #e3371e">组件化</span> ：复用现有的 UI 结构、样式、行为
 -  <span style="color: #e3371e">规范化</span> ：目录结构的划分、编码结构化、接口规范化、文档规范化、git 分支管理
 -  <span style="color: #e3371e">自动化</span> ：自动化构建、自动部署、自动化测试
 
-### 1.2 - 前端工程化
+#### 1.2 - 前端工程化
 
 在 <span style="color: #e3371e">企业级的前端项目开发</span> 中，把前端开发所需的 <span style="color: #e3371e">工具、技术、流程、经验</span> 等进行 <span style="color: #0099dd">规范化、标准化</span> 
 
@@ -15,14 +17,14 @@
 
 前端开发 <span style="color: #e3371e">自成体系</span> ，有一套 <span style="color: #e3371e">标准的开发方案和流程</span> 
 
-### 1.3 - 前端工程化的解决方案
+#### 1.3 - 前端工程化的解决方案
 
-#### 1.3.1 - 早期前端工程化方案
+##### 1.3.1 - 早期前端工程化方案
 
 -  <span style="color: #e3371e">[grunt](https://www.gruntjs.net/)</span> 
 -  <span style="color: #e3371e">[gulp](https://www.gulpjs.com.cn/)</span>
 
-#### 1.3.2 - 目前主流前端工程化方案
+##### 1.3.2 - 目前主流前端工程化方案
 
 -  <span style="color: #e3371e">[webpack](https://www.webpackjs.com/)</span> 
 -  <span style="color: #e3371e">[parcel](https://zh.parceljs.org/)</span> 
@@ -292,11 +294,11 @@ loader 加载器的作用： <span style="color: #ab04d9">协助 webpack 打�
 - 在 webpack.config.js 的 `module` -> `rules` 数组中，添加 loader 规则
 
     ```javascript
-    module: {		// 所有第三方文件模块的匹配规则
-    	rules: [	// 文件后缀名的匹配规则
-    		{test: /\.css$/, use: {'style-loader', 'css-loader'}}
-    	]
-    }
+        module: {   // 所有第三方文件模块的匹配规则
+            rules: [    // 文件后缀名的匹配规则
+                {test:/\.css$/, use: ['style-loader', 'css-loader']}
+            ]
+        }
     ```
 
     其中， <span style="color: #e3371e">test</span> 表示匹配的 <span style="color: #e3371e">文件类型</span> ， <span style="color: #e3371e">use</span> 表示对应 <span style="color: #e3371e">要调用的 loader </span> 
@@ -304,3 +306,274 @@ loader 加载器的作用： <span style="color: #ab04d9">协助 webpack 打�
     - 注意：
         - use 数组中指定的 loader  <span style="color: #e3371e">顺序是固定的</span> 
         - 多个 loader 的调用顺序时：<span style="color: #e3371e">从后往前调用</span> 
+
+- 重新打包
+
+    ```sh
+    npm run dev
+    ```
+
+#### 4.3 - 打包处理 less 文件
+
+- 安装处理 less 文件的 loader
+
+    ```sh
+    npm i less-loader less -D
+    ```
+
+- 在 webpack.config.js 的 `module` -> `rules` 数组中，添加 loader 规则
+
+    ```
+        module: {   // 所有第三方文件模块的匹配规则
+            rules: [    // 文件后缀名的匹配规则
+                {test:/\.css$/, use: ['style-loader', 'css-loader', 'less-loader']}
+            ]
+        }
+    ```
+
+- 重新打包
+
+    ```sh
+    npm run dev
+    ```
+
+#### 4.4 - 打包处理样式表中与 url 路径相关的文件
+
+- 安装相关loader
+
+    ```sh
+    npm i url-loader file-loader -D
+    ```
+
+- 在 webpack.config.js 的 `module` -> `rules` 数组中，添加 loader 规则
+
+    ```javascript
+        module: {
+            // 所有第三方文件模块的匹配规则
+            rules: [
+                // 调用的 loder 仅一个，可以只传一个字符串；多个 loader，则必须指定数组
+                { test: /\.jpg|png|gif$/, use: ['url-loader?limit=22229'] },
+            ],
+        }
+    ```
+
+    其中 <span style="color: #e3371e">?</span> 之后的时 <span style="color: #e3371e">loader 的参数项</span> ：
+
+    - limit 用来指定 <span style="color: #0099dd">图片的大小</span> ，单位时字节（byte）
+    - 只有 <span style="color: #0099dd">≤</span> limit 大小的图片，才会被转为 base64 格式的图片
+
+- 重新打包
+
+#### 4.5 - 打包处理 js 文件中的高级语法（未成功）
+
+webpack 只能打包处理 <span style="color: #e3371e">一部分</span> 高级的 JavaScript 语法。
+
+对于无法处理的高级  JavaScript 语法，需借助 <span style="color: #e3371e">babel-loader</span> 进行打包处理
+
+- 安装 babel-loader
+
+    ```sh
+    npm i babel-loader @babel/core @babel/plugin-proposal-decorators -D
+    npm i babel-loader@8.2.2 @babel/core@7.14.6 @babel/plugin-proposal-decorators@7.14.5 -D
+    ```
+
+- 在 webpack.config.js 的 `module` -> `rules` 数组中，添加 loader 规则
+
+    ```javascript
+        module: {
+            // 所有第三方文件模块的匹配规则
+            rules: [
+                // 使用 babel-loader 处理高级的 js 语法
+                // 配置 babel-loader 时，排除第三方包
+                { test: /\.js$/, use: 'babel-loader', exclude: /node_modules/ },
+            ],
+        }
+    ```
+
+- 在项目根目录下，创建名为 `babel.config.js` 的配置文件，定义 <span style="color: #e3371e">babel 的配置项</span> ：
+
+    ```js
+    module.exports = {
+    	// 声明 babel 可用的插件
+        // 将来，webpack 在调用 babel-loader 的时候，会先加载 plugins 插件来使用
+    	plugins: [['@babel/plugin-proposal-decorators', { legacy: true }]]
+    }
+    ```
+
+    [babel 中文官网](https://www.babeljs.cn/docs/)
+
+- 重新打包
+
+### 5 - 打包发布
+
+#### 5.1 - 为什么要打包发布
+
+ <span style="color: #e3371e">项目开发完成后</span> ，需要使用 webpack <span style="color: #e3371e">对项目进行打包发布</span> ，主要原因有以下两点：
+
+- 开发环境下，打包生成的文件 <span style="color: #0099dd">存放于内存中</span> ，无法获取到最终打包生成的文件
+- 开发环境下，打包生成的文件 <span style="color: #0099dd">不会进行代码压缩和性能能优化</span> 
+
+ <span style="color: #e3371e">为使项目能够在生产环境中最高性能的运行</span> ，因此需要对项目进行打包发布
+
+#### 5.2 - 配置 webpack 的打包发布
+
+在 `package.json` 文件的 <span style="color: #e3371e">scripts 节点</span> 下，新增 <span style="color: #e3371e">build</span> 命令：
+
+```json
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "dev": "webpack serve",	// 开发环境中，运行 dev 命令
+        "build": "webpack --mode production"	// 项目发布时，运行 build 命令
+    },
+```
+
+-  <span style="color: #e3371e">--mode</span> 是一个参数项，用来指定 webpack 的 <span style="color: #e3371e">运行模式</span> 
+    - production 代表生产环境，会对打包生成的文件进行 <span style="color: #0099dd">代码压缩</span> 和 <span style="color: #0099dd">性能优化</span> 
+    - 通过 --mode 指定的参数项，会 <span style="color: #0099dd">覆盖</span> webpack.config.js 中的 model 选项
+
+#### 5.3 - 把 JavaScript 文件统一生成到 js 目录中
+
+在 <span style="color: #e3371e">webpack.config.js</span> 配置文件的 <span style="color: #e3371e">output 节点</span> 中，进行如下配置：
+
+```js
+    output: {
+        // 设置输出文件存放路径
+        path: path.join(__dirname, './dist'),
+        // 设置输出文件名称
+        filename: 'js/bundle.js',
+    },
+```
+
+#### 5.4 - 把图片文件统一生成到 image 目录中
+
+在 <span style="color: #e3371e">webpack.config.js</span> 配置文件的 <span style="color: #e3371e">url-loader 配置项</span> 中，新增 <span style="color: #e3371e">outputPath 选项</span> 即可指定图片文件的输出路径：
+
+```js
+{
+    test: /\.jpg|png|gif$/,
+    use: {
+        loader: 'url-loader',
+        options: {
+            limit: 22228,
+            // 明确指定把打包生成的图片文件，存储到 dist 目录下的 image 文件夹中
+            outputPath: 'images',
+        },
+    },
+},
+```
+
+或（更推荐↓）
+
+```js
+// 配置 url-loader 时，多个参数之间，使用 & 分隔
+{ test: /\.jpg|png|gif$/, use: 'url-loader?limit=22228&outputPath=images' },
+```
+
+#### 5.5 - clean-webpack-plugin
+
+为在每次打包发布时 <span style="color: #e3371e">自动清理 dist 目录下的旧文件</span> ，可安装配置 <span style="color: #e3371e">clean-webpack-plugin</span> 插件
+
+- 安装插件
+
+```sh
+npm install clean-webpack-plugin --save-dev 
+```
+
+- 在 `webpack.config.js` 中导入插件
+
+```js
+// 导入 clean-webpack-plugin 插件
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const cleanPlugin = new CleanWebpackPlugin()
+```
+
+- 在 `module.exports` 的 `plugins 节点` 下
+
+```js
+plugins: [htmlPlugin, cleanPlugin], // 通过 plugins 节点，使 htmlPlugin 插件生效
+```
+
+### 6 - Source Map
+
+ <span style="color: #e3371e">Source Map</span> 就是一个 <span style="color: #e3371e">信息文件</span> ，里面存储这 <span style="color: #e3371e">位置信息</span> 。存储着压缩混淆后的代码对应的 <span style="color: #e3371e">转换前的位置</span> 。
+
+有了它，代码报错时，除错工具将 <span style="color: #e3371e">直接显示原始代码，而非转化后的代码</span> ，极大地方便后期调试。
+
+#### 6.1 - 默认 Source Map 的问题
+
+开发环境下默认生成的 Source Map，记录的时 <span style="color: #e3371e">生成后的代码位置</span> ，导致 <span style="color: #e3371e">运行时报错的行数</span> 与 <span style="color: #e3371e">源代码的行数</span> <span style="color: #ab04d9">不一致</span> 的问题
+
+#### 6.2 - 解决默认 Source Map 的问题
+
+开发环境中，在 `webpack.config.js` 中添加如下配置，可保证 <span style="color: #e3371e">运行时报错的行数</span> 与 <span style="color: #e3371e">源代码的行数</span> <span style="color: #ab04d9">一致</span> ：
+
+```js
+module.exports = {
+    mode: 'development',
+    // eval-soirce-map仅限在“开发模式”下使用，不建议在“生产模式”下使用
+    // 此选项生成的 Source Map 能够保证“运行时报错的行数”与“源代码的行数”保持一致
+    devtool: 'eval-source-map',
+    // 其他配置项……
+}    
+```
+
+- 开发调试阶段，建议将 devtool 的值设为： eval-source-map
+-  <span style="color: #0099dd">生产环境</span> 下，建议 <span style="color: #0099dd">省略 devtool 选项</span> ，最终生成文件中不包含 Source Map，可 <span style="color: #0099dd">防止源代码</span> 通过 Source Map 的形式 <span style="color: #0099dd">暴露</span> 给别有所图之人
+-  <span style="color: #0099dd">生成环境</span> 下，只想 <span style="color: #0099dd">定位报错的具体行数</span> ，且 <span style="color: #0099dd">不想暴露源码</span> 。可将 devtool 的值设为： nosources-source-map
+-  <span style="color: #0099dd">生产环境</span> 下，想 <span style="color: #0099dd">定位报错行数的同时</span> ， <span style="color: #0099dd">展示具体报错的源码</span> 。可将 devtool 的值设为： source-map
+
+#### 6.3 - 最佳实践
+
+- 开发环境
+    - devtool 的值设为 <span style="color: #e3371e">eval-source-map</span> 
+    - 好处：可精确定位到具体错误行
+- 生产环境
+    -  <span style="color: #e3371e">关闭 Source Map</span>  <span style="color: #0099dd">或</span> 将 devtool 的值设为 <span style="color: #e3371e">nosources-source-map</span> 
+    - 好处：防止源码泄露，提高网站的安全性
+
+### 7 - 实际开发
+
+- 无需自己配置 webpack
+- 实际开发使用命令行工具（ <span style="color: #e3371e">CLI</span> ） <span style="color: #e3371e">一键生成</span> 所有 webpack 的项目
+- 开箱即用，程序员只需知道 webpack 中的基本概念即可
+
+### 拓展
+
+#### 1 - webpack 中 @ 的原理和好处
+
+表示文件路径时，建议使用 <span style="color: #e3371e">@</span> 代表  <span style="color: #0099dd">src 源代码目录</span> ，从外往里查找
+
+```
+​```
+src
+├ css
+├ images
+├ js
+│ └ test
+│	└ info.js
+│ index.html
+│ index.js
+│ msg.js
+└ another
+​```
+```
+
+```js
+// info.js 文件中
+// import msg from '../../msg.js'
+import msg form '@/msg.js'
+```
+
+##### 1.1 - 配置 @
+
+在 `webpack.config.js` 中  <span style="color: #e3371e">resolve 节点</span> 
+
+```js
+resolve: {
+	alias: {
+        // 告诉 webpack，@ 符号代表 src 这一层目录
+		'@': path.join(__dirname, './src/')
+	}
+}
+```
+

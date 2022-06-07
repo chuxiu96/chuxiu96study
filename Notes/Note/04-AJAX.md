@@ -157,7 +157,7 @@ http协议常用的 4 种方法，用来完成数据的 增删改查 操作：
 
 # AJAX
 
-[视频教程](https://www.bilibili.com/video/BV1ji4y1876Y?p=1) (项目待做)  [视频教程2](https://www.bilibili.com/video/BV1of4y1v7tB?spm_id_from=333.1007.top_right_bar_window_history.content.click)
+[黑马Ajax](https://www.bilibili.com/video/BV1ji4y1876Y?p=1) (项目待做)  [动力节点Ajax](https://www.bilibili.com/video/BV1of4y1v7tB?spm_id_from=333.1007.top_right_bar_window_history.content.click) [尚硅谷Ajax](https://www.bilibili.com/video/BV1WC4y1b78y?spm_id_from=333.1007.top_right_bar_window_history.content.click)
 
 ## AJAX 简介
 
