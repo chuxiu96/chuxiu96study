@@ -1,0 +1,11 @@
+@charset    "UTF-8";
+/**
+*   @desc  change index.html style 
+*   @author chuxiu
+*   @date  2022-06-11
+*/
+
+* {
+    margin: 0;
+    padding: 0;
+}

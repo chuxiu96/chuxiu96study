@@ -14,6 +14,8 @@
 - JavaScript语言核心针对文本、数组、日期和正则表达式的操作定义了很少的API
     - API 中不包含输入输出功能，输入输出功能由宿主环境（host environment，如web浏览器）提供
 
+
+
 ### 2 - JavaScript 语言核心
 
 - JavaScript 注释、直接量、unicode 字符集、标识符和保留字、分号
@@ -41,6 +43,8 @@ JavaScript 程序是用 <span style="color: #e3371e">Unicode</span> 字符集编
 - <span style="color: #e3371e">JavaScript</span> 是<span style="color: #e3371e">区分大小写</span> 的语言，<span style="color: #0099dd">关键字</span>、<span style="color: #0099dd">变量</span>、<span style="color: #0099dd">函数名</span>和所有的<span style="color: #0099dd">标识符</span>（identiier）都必须采取一致的大小写形式
 - <span style="color: #e3371e">HTML</span> <span style="color: #49bf51">严格意义上</span>是<span style="color: #e3371e">区分大小写</span> 的，但因浏览器强大的纠错能力，不严格的大小写仍能正确解析渲染
 
+
+
 #### 1.2 - 空格、换行符和格式控制符
 
 - 空格、换行符
@@ -65,6 +69,8 @@ JavaScript 程序是用 <span style="color: #e3371e">Unicode</span> 字符集编
         ```javascript
         "café" === "caf\u00e9"	// true
         ```
+
+
 
 #### 1.3 - 标准化
 
@@ -94,6 +100,8 @@ JavaScript 支持两种格式的注释
 */
 ```
 
+
+
 ### 3 - 直接量
 
 <span style="color: #e3371e">直接量</span> （literal），就是程序中<span style="color: #e3371e">直接使用的数据值</span> 
@@ -106,6 +114,8 @@ true			//	布尔值
 /javascript/gi	//	正则表达式直接量（用作模式匹配）
 null			//	空
 ```
+
+
 
 ### 4 - 标识符和保留字
 
@@ -121,12 +131,16 @@ null			//	空
     - 以便 JavaScript 正确区分标识符和数字，数字不允许作为首字符出现
 - 处于可移植性和易书写的考虑，通常只使用 ASCⅡ <span style="color: #0099dd">字母</span> 和 <span style="color: #0099dd">数字</span> 书写标识符
 
+
+
 #### 4.2 - 保留字
 
 和其他任何语言一样，JavaScript 保留了一些标识符为自己所用
 
 - JavaScript 把一些标识符拿出来用作自己的关键字，因此，就不能在程序中用这些关键字来做标识符了
 - 一些当前语言版本并未使用，但在未来版本可能会用到的关键字，也作为保留字
+
+
 
 ### 5 - 可选的分号
 
@@ -140,6 +154,8 @@ null			//	空
 
 - 使用分号明确标记语句的结束，即时并不完全需要使用分号
 - 省略任何可以省略的分号，只在不得不用的情况下使用分号
+
+
 
 #### 5.2 - JavaScript 中可选分号的细节
 
@@ -163,6 +179,8 @@ var a; a = 3; console.log(a)
 /******************************/
 ```
 
+
+
 #### 5.3 - 若选择尽量不加分号的代码风格
 
 - 请勿以  <span style="color: #e3371e">[</span>  、 <span style="color: #e3371e">(</span>  、 <span style="color: #e3371e">`</span>  开始新的一行
@@ -181,7 +199,28 @@ const nums = [1, 2, 3]
 nums.forEach(bar)
 ```
 
-（未完）
+**两个例外**：
+
+- `return`、`break` 和 `continue` 语句和稍后的表达式之间不能有换行
+
+    ```js
+    return
+    ture;
+    
+    // JS 解析为 return;true;
+    ```
+
+- "++"和"--"做后缀表达式，应与表达式位于同一行，否则，表达式行尾将填补分号，同时，"++"和"--"会作为下一行代码的前缀操作符
+
+    ```js
+    x
+    ++
+    y
+    
+    // JS 解析为 x; ++y
+    ```
+
+
 
 ## 三、类型、值和变量
 
@@ -242,6 +281,8 @@ JavaScript 解释器由自己的内存管理机制，可自动对内存进行垃
         - 在函数内声明的变量
         - 只在函数内可见
 
+
+
 ### 3.1 - 数字
 
 与其他编程语言不同，JavaScript <span style="color: #e3371e">不区分整数值和浮点数值</span> 
@@ -273,6 +314,8 @@ JavaScript 解释器由自己的内存管理机制，可自动对内存进行垃
 0377	//	对应十进制数	255
 ```
 
+
+
 #### 3.1.2 - 浮点型直接量
 
 浮点型直接量可以含有小数点
@@ -286,6 +329,8 @@ JavaScript 解释器由自己的内存管理机制，可自动对内存进行垃
 6.02e23		// 6.02×10²³
 1.47E-32
 ```
+
+
 
 #### 3.1.3 - 算术运算符
 
@@ -311,6 +356,8 @@ Math.ceil(.6)	//	1.0
 Math.floor(.6)	//	0.0
 ```
 
+
+
 ##### 3.1.3.1 - 溢出、下溢、除以零
 
 JavaScript 的算术运算在 <span style="color: #e3371e">溢出</span> （overflow）、 <span style="color: #e3371e">下溢</span> （underflow）或 <span style="color: #e3371e">被零整除时</span> 不会报错
@@ -323,6 +370,8 @@ JavaScript 的算术运算在 <span style="color: #e3371e">溢出</span> （over
 - 被零整除
     - 不报错，返回 `Infinity` 或 `-Infinity`
     - 例外，`0 / 0` 是无意义的，返回 `NaN`
+
+
 
 ##### 3.1.3.2 - Infinity 和 NaN
 
@@ -339,6 +388,8 @@ x == NaN	// 无法判断 x 是否是 NaN
 x != x		// 可以判断。当且仅当 x 是 NaN 时，结果为 true 
 ```
 
+
+
 ###### 负零值的特殊
 
 负零值与正零值 <span style="color: #e3371e">相等</span> ，作为除数时不相等
@@ -349,6 +400,8 @@ var negz = -0		//	负零值
 zero === negz		//	=> true:正零值和负零值相等
 1/zero === 1/negz	//	=> false:正无穷大和负无穷大不相等
 ```
+
+
 
 #### 3.1.4 - 二进制浮点数和四舍五入错误
 
@@ -364,6 +417,8 @@ x == .1			//	=> false
 // JavaScript真是运行环境中，0.3 - 0.2 = 0.099 999 999 999 999 98
 y == .1			//	=> true
 ```
+
+
 
 #### 3.1.5 - 日期和时间
 
@@ -388,6 +443,8 @@ JavaScript 语言核心中包括  <span style="color: #e3371e">Date()</span> 构
             console.log(later.getMinutes());		//  =>      0
             console.log(later.getMilliseconds());	//  => 0
 ```
+
+
 
 ### 3.2 - 字符串
 
@@ -423,6 +480,8 @@ HTML、JavaScript都可使用单引号和双引号来界定字符串，因此，
 <button onclick="alert('出岫')">点我</button>
 ```
 
+
+
 #### 3.2.2 - 转义字符
 
 JavaScript 字符串中，反斜线 <span style="color: #e3371e">（ \ ）</span> 有特殊用途，反斜线负号加一个字符，就不再表示它们的字面含义了。
@@ -438,6 +497,8 @@ JavaScript 字符串中，反斜线 <span style="color: #e3371e">（ \ ）</span
 |    \r    |    回车符（\u000D）    |
 |    \"    |    双引号（\u0022）    |
 |    \'    | 撇号或单引号（\u0027） |
+
+
 
 #### 3.2.3 - 字符串的使用
 
@@ -471,6 +532,8 @@ JavaScript 字符串中，反斜线 <span style="color: #e3371e">（ \ ）</span
                 console.log(s.indexOf('l', 3))	//  => 3：在位置 3 之后，'l'首次出现的位置
                 console.log(s.split(','))		//  => ['hello', 'world'] 分割成子串
     ```
+
+
 
 #### 3.2.4 - 模式匹配
 
@@ -516,6 +579,8 @@ JavaScript 定义了 <span style="color: #e3371e">RegExp()</span> 构造函数�
 
      <span style="color: #ab04d9">所有其他值</span> 被转化为  <span style="color: #ab04d9">true</span> 
 
+
+
 #### 3.3.1 - 三个重要的布尔运算符
 
 - &&
@@ -527,6 +592,8 @@ JavaScript 定义了 <span style="color: #e3371e">RegExp()</span> 构造函数�
 - !
     - 逻辑非（NOT）操作
     - 一元运算符，对操作数取反
+
+
 
 ### 3.4 - null 和 undefined
 
@@ -562,6 +629,8 @@ console.log(null === undefined);    //  => false
 - 转化为布尔值时，都是假值
 - 想将它们赋值给变量或属性时，给函数传参时，最佳选择是使用 null
 
+
+
 ### 3.5 - 全局对象
 
 全局对象的属性是全局定义的符号，JavaScript 程序可以直接使用
@@ -584,6 +653,8 @@ var global = this	// 定义一个引用全局对象的全局变量
     - Window 对象定义了核心全局属性，同时也针对 Web 浏览器和客户端 JavaScript 定义了一少部分其他全局属性
 - 初次创建时，全局对象定义了 JavaScript 中所有的预定义全局值。这个特殊对象同样包含了为程序定义的全局值
 - 如果代码声明了一个全局变量，这个全局变量就是全局对象的一个属性
+
+
 
 ### 3.6 - 包装对象
 
@@ -615,6 +686,8 @@ console.log(t)	// => undefined
 
 - 通常，包装对象被看作一种实现细节，不用特别关注
 - 字符串、数字和布尔值的属性都是只读的，并不能定义新属性，需明白它们时有别于对象的
+
+
 
 ### 3.7 - 不可变的原始值和可变的对象引用
 
@@ -682,6 +755,8 @@ console.log(t)	// => undefined
                     }
                     console.log(a == b)    		//  => false
         ```
+
+
 
 ### 3.8 - 类型转换
 
@@ -783,6 +858,8 @@ n.toPrecision(10)		// "1.23456.7890"
     ParseFloat("$")			// => NaN：非法，数字不能以'$'开始
     ```
 
+
+
 #### 3.8.2 - 隐式类型转换
 
  JavaScript 中的某些运算符会做隐式的类型转换
@@ -810,6 +887,8 @@ n.toPrecision(10)		// "1.23456.7890"
     ```
     5 - "1"		// => 4
     ```
+
+
 
 #### 3.8.3 - 对象转化为原始值
 
@@ -853,6 +932,8 @@ n.toPrecision(10)		// "1.23456.7890"
     d.valueOf()			// => 1653877964762
     ```
 
+
+
 ### 3.9 - 变量声明
 
 - <span style="color: #e3371e">使用</span> 一个变量之 <span style="color: #e3371e">前</span> 应当 <span style="color: #e3371e">先声明</span> ，变量使用关键字 var 来声明
@@ -885,6 +966,8 @@ n.toPrecision(10)		// "1.23456.7890"
 
     - 动态语言：运行期间才去作类型检查的语言，永远不用给任何变量指定数据类型；动态语言会在第一次赋值个变量时，在内部将数据类型记录下来
     - 静态语言：数据类型在编译期间检查，编程时，要声明所有变量的数据类型
+
+
 
 ### 3.10 - 变量作用域
 
@@ -935,6 +1018,8 @@ n.toPrecision(10)		// "1.23456.7890"
                 checkscope()               		// => nested
     ```
 
+
+
 #### 3.10.1 - 函数作用域和声明提前
 
 在一些类C语言中，花括号内每段代码都具有各自作用域，变量在声明它们的代码段外是不可见的，我们称为 <span style="color: #e3371e">块级作用域</span> （block scope）。
@@ -970,10 +1055,14 @@ f()
 
 解析：由于函数作用域的特性，局部变量在整个函数体始终有定义，函数体内局部变量遮盖了同名全局变量；程序执行至 var 语句是时候，函数变量才会被真正赋值，之前由于“提升”出于已声明未赋值的状态，输出结果为"undefined"
 
+
+
 ##### 代码风格——变量声明位置
 
 - 通常，在具有块级作用域的编程语言中，在狭小的作用域里让变量声明和使用变量的代码尽可能靠近彼此，这是一个非常不错的编程习惯
 - 由于 JavaScript 没有块级作用域，因此一些程序员特意将变量声明放在函数体顶部，而非靠近使用变量之处，这使得他们的源代码非常清晰地反映了真是的变量作用域
+
+
 
 #### 3.10.2 - 作为属性的变量
 
@@ -1004,6 +1093,8 @@ JavaScript 中 <span style="color: #e3371e">局部变量</span> 当做跟 <span 
 - JavaScript 允许 this 关键字来引用全局对象
 - 却没有方法引用局部变量中存放的对象。这种存放局部变量的对象的特有性质，是一种对我们不可见的内部实现
 
+
+
 #### 3.10.3 - 作用域链
 
 若将局部变量看作自定义实现的对象的属性，可换个角度来解读变量作用域。
@@ -1022,6 +1113,8 @@ JavaScript 中 <span style="color: #e3371e">局部变量</span> 当做跟 <span 
 
 - 定义一个函数时，实际上保存一个作用域链。调用此函数时，创建一个新的对象来保存它的局部变量，并将这个对象添加至保存的那个作用域链上，同时创建一个新的更长的表示函数调用作用域的链
 - 对嵌套函数来说，每次调用外部函数的时候，作用域链都是不同的，内部函数在每次定义的时候都由微妙的差别——在每次调用外部函数时，内部函数的代码都是相同的，而且关联这段代码的作用域链也不相同
+
+
 
 ## 4 - 表达式和运算符
 
@@ -1044,6 +1137,8 @@ this		// 返回“当前”对象
 sum			// 返回 sum 的值
 undefined	// undefined 是全局变量，和 null 不同，它不是一个关键字
 ```
+
+
 
 ### 4.2 - 对象和数组的初始化表达式
 
@@ -1081,6 +1176,8 @@ undefined	// undefined 是全局变量，和 null 不同，它不是一个关键
     			   "lowerRight": {x: p.x + side, y: p.y + side}};
     ```
 
+
+
 ### 4.3 - 函数定义表达式
 
 函数定义表达式定义一个  JavaScript 函数，表达式的值是这个新定义的函数
@@ -1090,6 +1187,8 @@ var myFunction = function() {
 	// code
 }
 ```
+
+
 
 ### 4.4 - 属性访问表达式
 
@@ -1117,6 +1216,8 @@ a[0].x		// => 1
     - 运算结果不是对象或数组，会转化为对象
     - 对象表达式后跟随句号和标识符，查找并返回标识符所指定属性的值
     - 对象表达式后跟随方括号，计算方括号内的表达式并将其转换为字符串
+
+
 
 ### 4.5 - 调用表达式
 
@@ -1150,6 +1251,8 @@ a[0].x		// => 1
 
 - 方法调用中，执行函数体时，作为属性访问主题的对象和数组便是其调用方法内 this 的指向
 
+
+
 ### 4.6 - 对象创建表达式
 
  <span style="color: #e3371e">对象创建表达式</span> （object creation expression）创建一个对象并调用一个函数（称作 <span style="color: #e3371e">构造函数</span> ）初始化新对象的属性。和函数调用表达式非常相似，只不过对象创建表达式之前多了个关键字  <span style="color: #e3371e">new</span> 。
@@ -1166,6 +1269,8 @@ new Object
 new Date
 ```
 
+
+
 ### 4.7 - 运算符概述
 
 运算符用于 <span style="color: #e3371e">算术表达式</span> 、 <span style="color: #e3371e">比较表达式</span> 、 <span style="color: #e3371e">逻辑表达式</span> 、 <span style="color: #e3371e">赋值表达式</span> 
@@ -1175,6 +1280,8 @@ new Date
 
 [JavaScript 运算符表](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Operator_Precedence)
 
+
+
 #### 4.7.1 - 操作数个数
 
 运算符按其 <span style="color: #e3371e">操作数的个数</span> 进行分类
@@ -1182,6 +1289,8 @@ new Date
 -  <span style="color: #0099dd">大多数</span> 运算符时一个 <span style="color: #0099dd">二元运算符</span> ，将两个表达式合并成一个稍复杂表达式
 -  JavaScript 同样支持 <span style="color: #0099dd">一元运算符</span> ，将一个表达式转换为另一个稍复杂的表达式
 -  JavaScript 支持一个 <span style="color: #0099dd">三元表达式</span> ， <span style="color: #ab04d9">条件判断运算符</span> " <span style="color: #e3371e">? :</span> "，它将三个表达式合并称一个表达式
+
+
 
 #### 4.7.2 - 操作数类型和结果类型
 
@@ -1192,12 +1301,16 @@ new Date
     - " + "运算符可对数字进行加法运算，也可对字符串作连接
     - " < "运算符可对不同数字进行大小值的比较，也可比较字符在字母表中的次序先后
 
+
+
 #### 4.7.3 - 左值
 
 左值（lvalue）指“表达式只能出现在赋值运算符的左侧”
 
 -  JavaScript 中，变量、对象属性、数组元素 均是左值
 - ECMAScript 规范允许内置函数返回一个左值，但自定义函数不能返回左值
+
+
 
 #### 4.7.4 - 运算符的副作用
 
@@ -1209,6 +1322,8 @@ new Date
     -  <span style="color: #e3371e">delete 运算符</span> ：删除一个属性就像（不完全一样）给这个属性赋值 undefined
 
 - 函数体或构造函数内运用了这些运算符并产生了副作用时，我们说函数调用表达式和对象创建表达式是有副作用的
+
+
 
 #### 4.7.5 - 运算符优先级
 
@@ -1225,11 +1340,15 @@ new Date
                 console.log(num);		// => 10
     ```
 
+
+
 #### 4.7.6 - 运算符的结合性
 
 结合性指定了在多个具有同样优先级的运算符表达式中的运算顺序
 
 -  <span style="color: #e3371e">一元操作符</span> （new、typeof、void、delete、await、幂（**））、 <span style="color: #e3371e">赋值</span> 、 <span style="color: #e3371e">三元表达式运算符</span> 都具有从右至作的结合性
+
+
 
 #### 4.7.7 - 运算顺序
 
@@ -1257,6 +1376,8 @@ new Date
     // step4，计算 a++ + a
     // step5，将上一步的值赋值给 b
     ```
+
+
 
 ### 4.8- 算术表达式
 
@@ -1303,6 +1424,8 @@ true + true		// => 2：布尔值转化为数字后做加法
     1 + 2 + " 出岫"	  // => "3 出岫"
     1 +（2 + " 出岫"）	 // => "12 出岫"
     ```
+
+
 
 #### 4.8.2 - 一元算术运算符
 
@@ -1360,6 +1483,8 @@ true + true		// => 2：布尔值转化为数字后做加法
 - 与"++"相同，也分" <span style="color: #0099dd">前置递减</span> "和" <span style="color: #0099dd">后置递减</span> "
 - 当递减运算符在操作数右侧时，运算符和操作数之间不能有换行符
 
+
+
 #### 4.8.3 - 位运算符
 
 位运算符可对由数字表示的 <span style="color: #e3371e">二进制数据</span> 进行更低层级的 <span style="color: #e3371e">换位运算</span> 
@@ -1387,3 +1512,4 @@ true + true		// => 2：布尔值转化为数字后做加法
 带符号右移（ <span style="color: #e3371e">>></span> ）
 
 无符号右移（ <span style="color: #e3371e">>>></span> ）
+

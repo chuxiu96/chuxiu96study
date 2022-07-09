@@ -61,7 +61,12 @@
 ### 2.1 - npm
 
 ```sh
-$ npm install axios
+$ npm install axios -S
+```
+
+```js
+// 需要使用 axios 的文件中导入，例如 main.js
+import axios from 'axios'
 ```
 
 ### 2.2 - CDN
@@ -476,6 +481,7 @@ axios.get('/user/12345')
 #### 4.3.1 - 全局 axios 默认值
 
 ```js
+// main.js 文件中全局配置
 axios.defaults.baseURL = 'https://api.example.com';
 axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
